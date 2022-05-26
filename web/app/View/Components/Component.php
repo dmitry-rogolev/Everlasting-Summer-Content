@@ -8,8 +8,13 @@ abstract class Component extends BaseComponent
 {
     protected string $theme;
 
-    protected function __construct()
+    /**
+     * Конструктор
+     *
+     * @param ?string $theme Тема шаблона
+     */
+    protected function __construct(?string $theme = null)
     {
-        $this->theme = session("theme", config("view.theme_default"));
+        $this->theme = $theme ?? session("theme", config("view.theme_default"));
     }
 }
