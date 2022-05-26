@@ -4,18 +4,7 @@
     <body class="background height-100">
         <div class="container-fluid">
             <div class="row flex-column align-items-center">
-                <header class="col-12 max-width-xl">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12 my-2 px-0">
-                                <x-body.header.menu />
-                            </div>
-                            <div class="col-12 mb-2 px-0">
-                                <x-body.header.breadcrumbs />
-                            </div>
-                        </div>
-                    </div>
-                </header>
+                <x-body.header theme="{{ $theme }}" class="col-12 max-width-xl" />
                 <main class="col-12 max-width-xl">
                     <div class="container-fluid">
                         <div class="row">
