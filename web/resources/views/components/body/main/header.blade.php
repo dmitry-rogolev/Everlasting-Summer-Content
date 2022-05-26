@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid {{ $class }}" style="{{ $style }}">
     <div class="row justify-content-between">
         <div class="col-2 p-0">
             @if ($referer !== "")

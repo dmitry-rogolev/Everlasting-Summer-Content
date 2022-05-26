@@ -1,4 +1,4 @@
-<nav class="{{ $class }}" aria-label="breadcrumb">
+<nav class="{{ $class }}" style="{{ $style }}" aria-label="breadcrumb">
     <ol class="breadcrumb mb-0 shadow-lg {{ 'bg-' . $theme }}">
         @foreach($breadcrumbs as $name => $link)
             @if ($name !== $breadcrumbs->keys()->last())

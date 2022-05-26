@@ -16,12 +16,14 @@ class Header extends Component
      * @param ?string $theme Тема шаблона
      * @param ?string $referer Ссылка на предыдущую страницу
      * @param ?string $header Заголовок страницы
+     * @param ?string $class Дополнительные классы блока
+     * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
-    public function __construct(?string $theme = null, ?string $header = null, ?string $referer = null)
+    public function __construct(?string $header = null, ?string $referer = null, ?string $theme = null, ?string $class = null, ?string $style = null)
     {
-        parent::__construct($theme);
+        parent::__construct($theme, $class, $style);
 
         $this->header = $header;
         $this->referer = $referer;
@@ -37,6 +39,8 @@ class Header extends Component
         return view('components.body.main.header', 
         [
             "theme" => $this->theme, 
+            "class" => $this->class, 
+            "style" => $this->style, 
             "header" => $this->header, 
             "referer" => $this->referer, 
         ]);

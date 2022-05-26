@@ -18,12 +18,13 @@ class Menu extends Component
      * 
      * @param ?string $theme Тема шаблона
      * @param ?string $class Классы блока
+     * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
-    public function __construct(?string $theme = null, ?string $class = null)
+    public function __construct(?string $theme = null, ?string $class = null, ?string $style = null)
     {
-        parent::__construct($theme, $class);
+        parent::__construct($theme, $class, $style);
 
         $this->name = config("app.name");
 
@@ -46,6 +47,7 @@ class Menu extends Component
         [
             "theme" => $this->theme, 
             "class" => $this->class, 
+            "style" => $this->style, 
             "links" => $this->links, 
             "themes" => $this->themes, 
         ]);

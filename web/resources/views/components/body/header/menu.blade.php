@@ -1,4 +1,4 @@
-<nav class="navbar {{ 'navbar-' . $theme }} {{ 'bg-' . $theme }} navbar-expand-md rounded shadow-lg {{ $class }}">
+<nav style="{{ $style }}" class="navbar {{ 'navbar-' . $theme }} {{ 'bg-' . $theme }} navbar-expand-md rounded shadow-lg {{ $class }}">
     <a class="navbar-brand" href="{{ url('/') }}">{{ $name }}</a>
     <button 
         class="navbar-toggler" 

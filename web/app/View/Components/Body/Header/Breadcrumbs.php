@@ -14,12 +14,13 @@ class Breadcrumbs extends Component
      * 
      * @param ?string $theme Тема шаблона
      * @param ?string $class Классы блока
+     * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
-    public function __construct(?string $theme = null, ?string $class = null)
+    public function __construct(?string $theme = null, ?string $class = null, ?string $style = null)
     {
-        parent::__construct($theme, $class);
+        parent::__construct($theme, $class, $style);
 
         $this->breadcrumbs = new Collection([
             "Главная" => url("/"), 
@@ -37,6 +38,7 @@ class Breadcrumbs extends Component
         [
             "theme" => $this->theme, 
             "class" => $this->class, 
+            "style" => $this->style, 
             "breadcrumbs" => $this->breadcrumbs, 
         ]);
     }
