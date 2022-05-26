@@ -1,0 +1,75 @@
+html {
+    font-size: 14px;
+    user-select: none;
+    cursor: default;
+    height: 100%;
+}
+body {
+    font-family: "Ubuntu", sans-serif;
+}
+
+.background {
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-attachment: fixed;
+}
+.height-100 {
+    height: 100%;
+}
+.width-100 {
+    width: 100%;
+}
+.max-width-xl {
+    max-width: 1200px;
+}
+.back {
+    width: 2rem;
+    height: 2rem;
+}
+.ticket {
+    box-sizing: border-box;
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+    border-radius: 15px;
+    border-width: 5px;
+    border-style: solid;
+    cursor: pointer;
+}
+
+@media (min-width: 0px)
+{
+    html {
+        font-size: 18px;
+    }
+    .ticket {
+        min-width: 270px;
+        max-width: 270px; 
+        height: 270px;
+    }
+}
+@media (min-width: 576px)
+{
+
+}
+@media (min-width: 768px)
+{
+    html {
+        font-size: 14px;
+    }
+}
+@media (min-width: 992px)
+{
+    html {
+        font-size: 13px;
+    }
+}
+@media (min-width: 1200px)
+{
+    .ticket {
+        min-width: 279px;
+        max-width: 279px; 
+        height: 279px;
+    }
+}

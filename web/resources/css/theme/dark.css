@@ -1,0 +1,18 @@
+.background {
+    background-image: url("../../images/background-dark.png");
+}
+.background-albugo {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.bg-dark {
+    background-color: #343a40ec !important;
+}
+.border-dark {
+    border-color: #343a40ec !important;
+}
+.ticket:hover .bg-dark-hover {
+    background-color: #383f46ec !important;
+}
+.ticket.border-dark-hover:hover {
+    border-color: #383f46ec !important;
+}

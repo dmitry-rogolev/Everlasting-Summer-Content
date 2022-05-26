@@ -15,4 +15,7 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('postcss-import'),
     require('tailwindcss'),
     require('autoprefixer'),
-]);
+])
+.postCss("resources/css/application.css", "public/css")
+.postCss("resources/css/theme/light.css", "public/css/theme")
+.postCss("resources/css/theme/dark.css", "public/css/theme");
