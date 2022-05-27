@@ -54,6 +54,22 @@
                     @endforeach
                 </div>
             </li>
+            @if (Route::has("login"))
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/dashboard') }}">Профиль</a>
+                    </li>
+                @else 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Вход</a>
+                    </li>
+                    @if (Route::has("register"))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
+                        </li>
+                    @endif
+                @endauth
+            @endif
         </ul>
     </div>
 </nav>
