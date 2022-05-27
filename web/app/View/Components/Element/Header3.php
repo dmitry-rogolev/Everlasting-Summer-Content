@@ -1,28 +1,32 @@
 <?php
 
-namespace App\View\Components\Body\Header;
+namespace App\View\Components\Element;
 
 use App\View\Components\Component;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
-class Breadcrumbs extends Component
+class Header3 extends Component
 {
-    protected Collection $breadcrumbs;
+    protected string $name;
+
+    protected Collection $inversionThemes;
 
     /**
      * Create a new component instance.
      * 
-     * @param ?string $breadcrumbs Название коллекции хлебных крошек в кеше
+     * @param ?string $name Заголовок
+     * @param ?string $inversionThemes Название коллекции инвертированных тем в кеше
      * @param ?string $theme Тема шаблона
      * @param ?string $id Идентификатор
-     * @param ?string $class Классы блока
+     * @param ?string $class Дополнительные классы блока
      * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
     public function __construct(
-        ?string $breadcrumbs = null, 
+        ?string $name = null, 
+        ?string $inversionThemes = null, 
         ?string $theme = null, 
         ?string $id = null, 
         ?string $class = null, 
@@ -31,26 +35,29 @@ class Breadcrumbs extends Component
     {
         parent::__construct($theme, $id, $class, $style);
 
-        $this->breadcrumbs = 
+        $this->name = $name ?? "";
+
+        $this->inversionThemes = 
         (
-            $breadcrumbs && 
-            Cache::has($breadcrumbs) && 
+            $inversionThemes && 
+            Cache::has($inversionThemes) && 
             (
-                Cache::get($breadcrumbs) instanceof Collection || 
-                is_array(Cache::get($breadcrumbs))
+                Cache::get($inversionThemes) instanceof Collection || 
+                is_array(Cache::get($inversionThemes))
             )
         )
         ? 
         (
-            is_array(Cache::get($breadcrumbs))
+            is_array(Cache::get($inversionThemes)) 
             ? 
-            new Collection(Cache::get($breadcrumbs)) 
+            new Collection(Cache::get($inversionThemes)) 
             : 
-            Cache::get($breadcrumbs)
+            Cache::get($inversionThemes)
         )
         : 
         new Collection([
-            "Главная" => url("/"), 
+            "light" => "dark", 
+            "dark" => "light", 
         ]);
     }
 
@@ -61,13 +68,14 @@ class Breadcrumbs extends Component
      */
     public function render()
     {
-        return view('components.body.header.breadcrumbs', 
+        return view('components.element.header3', 
         [
             "theme" => $this->theme, 
             "id" => $this->id, 
             "class" => $this->class, 
             "style" => $this->style, 
-            "breadcrumbs" => $this->breadcrumbs, 
+            "name" => $this->name, 
+            "inversion_themes" => $this->inversionThemes, 
         ]);
     }
 }

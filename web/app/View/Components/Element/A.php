@@ -3,34 +3,38 @@
 namespace App\View\Components\Element;
 
 use App\View\Components\Component;
-use Illuminate\Support\Collection;
 
-class Header extends Component
+class A extends Component
 {
     protected string $name;
 
-    protected Collection $inversionThemes;
+    protected string $href;
 
     /**
      * Create a new component instance.
      * 
-     * @param ?string $name Заголовок
+     * @param ?string $name Текст ссылки
+     * @param ?string $href Url
      * @param ?string $theme Тема шаблона
+     * @param ?string $id Идентификатор
      * @param ?string $class Дополнительные классы блока
      * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
-    public function __construct(?string $name = null, ?string $theme = null, ?string $class = null, ?string $style = null)
+    public function __construct(
+        ?string $name = null, 
+        ?string $href = null, 
+        ?string $theme = null, 
+        ?string $id = null,
+        ?string $class = null, 
+        ?string $style = null
+    )
     {
-        parent::__construct($theme, $class, $style);
+        parent::__construct($theme, $id, $class, $style);
 
         $this->name = $name ?? "";
-
-        $this->inversionThemes = new Collection([
-            "lisht" => "dark", 
-            "dark" => "light", 
-        ]);
+        $this->href = $href ?? "";
     }
 
     /**
@@ -40,13 +44,14 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.element.header', 
+        return view('components.element.a', 
         [
             "theme" => $this->theme, 
+            "id" => $this->id, 
             "class" => $this->class, 
             "style" => $this->style, 
             "name" => $this->name, 
-            "inversion_themes" => $this->inversionThemes, 
+            "href" => $this->href, 
         ]);
     }
 }

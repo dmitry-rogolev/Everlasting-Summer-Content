@@ -13,14 +13,15 @@ class Button extends Component
      * 
      * @param ?string $name Имя кнопки
      * @param ?string $theme Тема шаблона
+     * @param ?string $id Идентификатор
      * @param ?string $class Дополнительные классы блока
      * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
-    public function __construct(?string $name = null, ?string $theme = null, ?string $class = null, ?string $style = null)
+    public function __construct(?string $name = null, ?string $theme = null, ?string $id = null, ?string $class = null, ?string $style = null)
     {
-        parent::__construct($theme, $class, $style);
+        parent::__construct($theme, $id, $class, $style);
 
         $this->name = $name ?? "";
     }
@@ -35,6 +36,7 @@ class Button extends Component
         return view('components.element.button', 
         [
             "theme" => $this->theme, 
+            "id" => $this->id, 
             "class" => $this->class, 
             "style" => $this->style, 
             "name" => $this->name, 

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\View\Components\Body;
+namespace App\View\Components\Element;
 
 use App\View\Components\Component;
 
-class Header extends Component
+class Section extends Component
 {
     /**
      * Create a new component instance.
      * 
      * @param ?string $theme Тема шаблона
      * @param ?string $id Идентификатор
-     * @param ?string $class Классы для блока
+     * @param ?string $class Дополнительные классы блока
      * @param ?string $style Дополнительные стили блока
      *
      * @return void
@@ -28,7 +28,7 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.body.header', 
+        return view('components.element.section', 
         [
             "theme" => $this->theme, 
             "id" => $this->id, 

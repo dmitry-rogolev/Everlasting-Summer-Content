@@ -1,32 +1,29 @@
 <?php
 
-namespace App\View\Components\Body\Main;
+namespace App\View\Components\Element;
 
 use App\View\Components\Component;
 
-class Header extends Component
+class Flex extends Component
 {
-    protected string $header;
-
-    protected string $referer;
+    protected string $flex;
 
     /**
      * Create a new component instance.
      * 
+     * @param ?string $flex Классы для флекс-боксов
      * @param ?string $theme Тема шаблона
-     * @param ?string $referer Ссылка на предыдущую страницу
-     * @param ?string $header Заголовок страницы
+     * @param ?string $id Идентификатор
      * @param ?string $class Дополнительные классы блока
      * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
-    public function __construct(?string $header = null, ?string $referer = null, ?string $theme = null, ?string $class = null, ?string $style = null)
+    public function __construct(?string $flex = null, ?string $theme = null, ?string $id = null, ?string $class = null, ?string $style = null)
     {
-        parent::__construct($theme, $class, $style);
+        parent::__construct($theme, $id, $class, $style);
 
-        $this->header = $header;
-        $this->referer = $referer;
+        $this->flex = $flex ?? "";
     }
 
     /**
@@ -36,13 +33,13 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.body.main.header', 
+        return view('components.element.flex', 
         [
             "theme" => $this->theme, 
+            "id" => $this->id, 
             "class" => $this->class, 
             "style" => $this->style, 
-            "header" => $this->header, 
-            "referer" => $this->referer, 
+            "flex" => $this->flex, 
         ]);
     }
 }

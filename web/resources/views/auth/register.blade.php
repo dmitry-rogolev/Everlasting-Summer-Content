@@ -1,3 +1,23 @@
+<x-layout>
+    
+    <x-slot:title>
+        {{ $title }}
+    </x-slot:title>
+    <x-slot:theme>
+        {{ $theme }}
+    </x-slot:theme>
+
+    <body class="background height-100">
+        <div class="background-albugo height-100">
+            <div class="container-fluid">
+                <div class="row flex-column align-items-center">
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+
+</x-layout>
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">

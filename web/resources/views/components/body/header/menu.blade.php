@@ -1,5 +1,5 @@
-<nav style="{{ $style }}" class="navbar {{ 'navbar-' . $theme }} {{ 'bg-' . $theme }} navbar-expand-md rounded shadow-lg {{ $class }}">
-    <a class="navbar-brand" href="{{ url('/') }}">{{ $name }}</a>
+<section id="{{ $id }}" class="navbar {{ 'navbar-' . $theme }} {{ 'bg-' . $theme }} navbar-expand-md rounded shadow-lg {{ $class }}" style="{{ $style }}">
+    <a class="navbar-brand" href="{{ $url }}">{{ $name }}</a>
     <button 
         class="navbar-toggler" 
         type="button" 
@@ -54,7 +54,7 @@
                     @endforeach
                 </div>
             </li>
-            @if (Route::has("login"))
+            @if ($login && Route::has("login"))
                 @auth
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/dashboard') }}">Профиль</a>
@@ -72,4 +72,4 @@
             @endif
         </ul>
     </div>
-</nav>
+</section>
