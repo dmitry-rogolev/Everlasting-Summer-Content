@@ -2,7 +2,7 @@
 <html lang="ru">
     <x-head theme="{{ $theme }}" />
     <body class="background height-100">
-        <div class="container-fluid">
+        <div class="container-fluid background-albugo height-100">
             <div class="row flex-column align-items-center">
                 <x-body.header theme="{{ $theme }}" class="col-12 max-width-xl" />
                 <main class="col-12 max-width-xl">
