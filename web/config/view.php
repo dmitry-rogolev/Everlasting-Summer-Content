@@ -41,6 +41,9 @@ return [
     // Имя темы по умолчанию
     "theme_default" => env("THEME_DEFAULT", "light"), 
 
+    // Корневая папка для тем (относительно папки public/)
+    "theme_directory" => env("THEME_DIRECTORY", "css/theme"), 
+
 
     #########################################
     #       КОНФИГУРАЦИЯ HEAD ШАБЛОНА       #

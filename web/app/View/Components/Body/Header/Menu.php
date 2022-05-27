@@ -48,6 +48,7 @@ class Menu extends Component
             "theme" => $this->theme, 
             "class" => $this->class, 
             "style" => $this->style, 
+            "name" => $this->name, 
             "links" => $this->links, 
             "themes" => $this->themes, 
         ]);

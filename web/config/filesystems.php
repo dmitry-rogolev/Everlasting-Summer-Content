@@ -56,6 +56,12 @@ return [
             'throw' => false,
         ],
 
+        "theme" => [
+            "driver" => "local", 
+            "root" => public_path("css/theme"), 
+            "throw" => false, 
+        ], 
+
     ],
 
     /*

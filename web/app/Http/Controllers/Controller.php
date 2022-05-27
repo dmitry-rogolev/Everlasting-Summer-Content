@@ -19,11 +19,9 @@ class Controller extends BaseController
 
     public function __construct(?string $title = null, ?string $theme = null)
     {
-        parent::__construct();
-
         $this->title = $title ?? "";
         
-        if (Storage::exists("../../public/css/theme/" . $theme . ".css"))
+        if (Storage::disk("theme")->exists($theme . ".css"))
         {
             session()->put("theme", $theme);
         }
@@ -32,7 +30,7 @@ class Controller extends BaseController
 
     protected function theme(Request $request)
     {
-        if ($request->has("theme") && Storage::exists("../../public/css/theme/" . $request->get("theme") . ".css"))
+        if ($request->has("theme") && Storage::disk("theme")->exists($request->get("theme") . ".css"))
         {
             session()->put("theme", $request->get("theme"));
         }
