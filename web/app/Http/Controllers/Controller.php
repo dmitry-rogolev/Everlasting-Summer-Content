@@ -8,6 +8,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class Controller extends BaseController
 {
@@ -16,6 +18,10 @@ class Controller extends BaseController
     protected string $title;
 
     protected string $theme;
+
+    protected Collection $themes;
+
+    protected Collection $inversionThemes;
 
     public function __construct(?string $title = null, ?string $theme = null)
     {
@@ -26,6 +32,11 @@ class Controller extends BaseController
             session()->put("theme", $theme);
         }
         $this->theme = session("theme", config("view.theme_default"));
+        $this->themes = config("view.themes");
+        $this->inversionThemes = config("view.inversion_themes");
+
+        Cache::put("themes", $this->themes);
+        Cache::put("inversion_themes", $this->inversionThemes);
     }
 
     protected function theme(Request $request)

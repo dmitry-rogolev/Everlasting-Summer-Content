@@ -1,4 +1,4 @@
-<section id="{{ $id }}" class="{{ $class }}" style="{{ $style }}" aria-label="breadcrumb">
+<section {{ $attributes }} aria-label="breadcrumb">
     <ol class="breadcrumb mb-0 shadow-lg {{ 'bg-' . $theme }}">
         @foreach($breadcrumbs as $name => $link)
             @if ($name !== $breadcrumbs->keys()->last())

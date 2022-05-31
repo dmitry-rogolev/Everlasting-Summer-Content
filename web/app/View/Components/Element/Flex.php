@@ -13,15 +13,12 @@ class Flex extends Component
      * 
      * @param ?string $flex Классы для флекс-боксов
      * @param ?string $theme Тема шаблона
-     * @param ?string $id Идентификатор
-     * @param ?string $class Дополнительные классы блока
-     * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
-    public function __construct(?string $flex = null, ?string $theme = null, ?string $id = null, ?string $class = null, ?string $style = null)
+    public function __construct(?string $flex = null, ?string $theme = null)
     {
-        parent::__construct($theme, $id, $class, $style);
+        parent::__construct($theme);
 
         $this->flex = $flex ?? "";
     }
@@ -36,9 +33,8 @@ class Flex extends Component
         return view('components.element.flex', 
         [
             "theme" => $this->theme, 
-            "id" => $this->id, 
-            "class" => $this->class, 
-            "style" => $this->style, 
+            "themes" => $this->themes, 
+            "inversion_themes" => $this->inversionThemes, 
             "flex" => $this->flex, 
         ]);
     }

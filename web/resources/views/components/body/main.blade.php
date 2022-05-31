@@ -1,3 +1,3 @@
-<main id="{{ $id }}" class="{{ $class }}" style="{{ $style }}">
+<main {{ $attributes }}>
     {{ $slot }}
 </main>

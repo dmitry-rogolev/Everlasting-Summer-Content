@@ -13,45 +13,15 @@ class Breadcrumbs extends Component
     /**
      * Create a new component instance.
      * 
-     * @param ?string $breadcrumbs Название коллекции хлебных крошек в кеше
      * @param ?string $theme Тема шаблона
-     * @param ?string $id Идентификатор
-     * @param ?string $class Классы блока
-     * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
-    public function __construct(
-        ?string $breadcrumbs = null, 
-        ?string $theme = null, 
-        ?string $id = null, 
-        ?string $class = null, 
-        ?string $style = null
-    )
+    public function __construct(?string $theme = null)
     {
-        parent::__construct($theme, $id, $class, $style);
+        parent::__construct($theme);
 
-        $this->breadcrumbs = 
-        (
-            $breadcrumbs && 
-            Cache::has($breadcrumbs) && 
-            (
-                Cache::get($breadcrumbs) instanceof Collection || 
-                is_array(Cache::get($breadcrumbs))
-            )
-        )
-        ? 
-        (
-            is_array(Cache::get($breadcrumbs))
-            ? 
-            new Collection(Cache::get($breadcrumbs)) 
-            : 
-            Cache::get($breadcrumbs)
-        )
-        : 
-        new Collection([
-            "Главная" => url("/"), 
-        ]);
+        $this->breadcrumbs = Cache::pull("breadcrumbs");
     }
 
     /**
@@ -64,9 +34,8 @@ class Breadcrumbs extends Component
         return view('components.body.header.breadcrumbs', 
         [
             "theme" => $this->theme, 
-            "id" => $this->id, 
-            "class" => $this->class, 
-            "style" => $this->style, 
+            "themes" => $this->themes, 
+            "inversion_themes" => $this->inversionThemes, 
             "breadcrumbs" => $this->breadcrumbs, 
         ]);
     }

@@ -1,4 +1,4 @@
-<meta charset="{{ $charset ?? config('view.charset', 'utf-8') }}" />
+<meta charset="{{ $charset }}" />
 <meta name="viewport" content="{{ $viewport }}" />
 <meta name="keywords" content="{{ $keywords }}" />
 <meta name="description" content="{{ $description }}" />

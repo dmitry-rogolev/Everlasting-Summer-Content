@@ -10,15 +10,12 @@ class Section extends Component
      * Create a new component instance.
      * 
      * @param ?string $theme Тема шаблона
-     * @param ?string $id Идентификатор
-     * @param ?string $class Дополнительные классы блока
-     * @param ?string $style Дополнительные стили блока
      *
      * @return void
      */
-    public function __construct(?string $theme = null, ?string $id = null, ?string $class = null, ?string $style = null)
+    public function __construct(?string $theme = null)
     {
-        parent::__construct($theme, $id, $class, $style);
+        parent::__construct($theme);
     }
 
     /**
@@ -31,9 +28,8 @@ class Section extends Component
         return view('components.element.section', 
         [
             "theme" => $this->theme, 
-            "id" => $this->id, 
-            "class" => $this->class, 
-            "style" => $this->style, 
+            "themes" => $this->themes, 
+            "inversion_themes" => $this->inversionThemes, 
         ]);
     }
 }

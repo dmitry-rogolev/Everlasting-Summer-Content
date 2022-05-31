@@ -1,3 +1,3 @@
-<nav id="{{ $id }}" class="{{ $class }}" style="{{ $style }}">
+<nav {{ $attributes }}>
     {{ $slot }}
 </nav>

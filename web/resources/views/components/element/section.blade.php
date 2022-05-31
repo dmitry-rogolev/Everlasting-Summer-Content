@@ -1,3 +1,3 @@
-<section id="{{ $id }}" class="{{ $class }}" style="{{ $style }}">
+<section {{ $attributes }}>
     {{ $slot }}
 </section>

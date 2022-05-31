@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class ContentController extends Controller
 {
@@ -26,5 +27,7 @@ class ContentController extends Controller
         $this->header = $header;
         $this->referer = $referer;
         $this->breadcrumbs = $breadcrumbs;
+
+        Cache::put("breadcrumbs", $this->breadcrumbs);
     }
 }

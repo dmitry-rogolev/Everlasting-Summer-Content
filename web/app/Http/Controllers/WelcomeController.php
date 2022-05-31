@@ -25,6 +25,7 @@ class WelcomeController extends ContentController
             "header" => $this->header, 
             "referer" => $this->referer, 
             "theme" => $this->theme, 
+            "breadcrumbs" => $this->breadcrumbs, 
         ]);
     }
 }

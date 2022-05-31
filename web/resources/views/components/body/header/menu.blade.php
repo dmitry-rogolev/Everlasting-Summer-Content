@@ -1,4 +1,4 @@
-<section id="{{ $id }}" class="navbar {{ 'navbar-' . $theme }} {{ 'bg-' . $theme }} navbar-expand-md rounded shadow-lg {{ $class }}" style="{{ $style }}">
+<section class="navbar {{ 'navbar-' . $theme }} {{ 'bg-' . $theme }} navbar-expand-md rounded shadow-lg" {{ $attributes }}>
     <a class="navbar-brand" href="{{ $url }}">{{ $name }}</a>
     <button 
         class="navbar-toggler" 
@@ -49,8 +49,8 @@
                     Тема
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @foreach ($themes as $name => $url)
-                        <a class="dropdown-item" href="{{ $url }}">{{ $name }}</a>
+                    @foreach ($themes as $name => $theme)
+                        <a class="dropdown-item" href="{{ url()->current() . '/?theme=' . $theme }}">{{ $name }}</a>
                     @endforeach
                 </div>
             </li>

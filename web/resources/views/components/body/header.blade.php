@@ -1,3 +1,3 @@
-<header id="{{ $id }}" class="{{ $class }}" style="{{ $style }}">
+<header {{ $attributes }}>
     {{ $slot }}
 </header>

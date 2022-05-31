@@ -1,3 +1,3 @@
-<body id="{{ $id }}" class="{{ $class }}" style="height: 100%; {{ $style }}">
+<body style="height: 100%;" {{ $attributes }}>
     {{ $slot }}
 </body>
