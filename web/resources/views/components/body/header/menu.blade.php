@@ -12,29 +12,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            @foreach ($links as $link)
-                @if (is_null($link->get("dropdowns")))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url($link->get('path') . $link->get('uri')) }}">{{ $link->get('name') }}</a>
-                    </li>
+            @foreach ($navigations as $navigation)
+                @if (is_null($navigation->sub))
+                    <x-element.nav-item name="{{ $navigation->name }}" url="{{ url($navigation->path) }}" />    
                 @else 
-                    <li class="nav-item dropdown">
-                        <a 
-                            class="nav-link dropdown-toggle" 
-                            href="" 
-                            id="navbarDropdown" 
-                            role="button" 
-                            data-toggle="dropdown" 
-                            aria-haspopup="true" 
-                            aria-expanded="false">
-                            {{ $link->get("name") }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @foreach ($link->get('dropdowns') as $drowdown)
-                                <a class="dropdown-item" href="{{ url($drowdown->get('path') . $drowdown->get('uri')) }}">{{ $drowdown->get('name') }}</a>
-                            @endforeach
-                        </div>
-                    </li>
+                    <x-element.dropdown name="{{ $navigation->name }}">
+                        @foreach ($navigation->sub as $sub)
+                            <x-element.dropdown-item url="{{ url($sub->path) }}">
+                                {{ $sub->name }}
+                            </x-element.dropdown-item>
+                        @endforeach
+                    </x-element.dropdown>
                 @endif
             @endforeach
             <li class="nav-item dropdown">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Navigation;
 
 class ContentController extends Controller
 {
@@ -29,5 +30,7 @@ class ContentController extends Controller
         $this->breadcrumbs = $breadcrumbs;
 
         Cache::put("breadcrumbs", $this->breadcrumbs);
+
+        Navigation::cache();
     }
 }
