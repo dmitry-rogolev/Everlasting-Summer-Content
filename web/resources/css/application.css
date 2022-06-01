@@ -15,6 +15,12 @@ body {
     background-attachment: fixed;
 }
 
+.h-max {
+    height: 100%;
+}
+.w-max {
+    height: 100%;
+}
 .max-width-xl {
     max-width: 1200px;
 }
