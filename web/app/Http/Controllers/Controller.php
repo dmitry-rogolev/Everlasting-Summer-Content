@@ -41,7 +41,7 @@ class Controller extends BaseController
         if ($request->has("theme") && Storage::disk("theme")->exists($request->get("theme") . ".css"))
         {
             session()->put("theme", $request->get("theme"));
+            $this->theme = session("theme");
         }
-        $this->theme = session("theme");
     }
 }

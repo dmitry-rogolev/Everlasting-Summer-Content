@@ -29,6 +29,31 @@ body {
     max-width: 1200px;
 }
 
+.cursor-default {
+    cursor: default !important;
+}
+.cursor-pointer {
+    cursor: pointer !important;
+}
+.cursor-help {
+    cursor: help !important;
+}
+.cursor-not-allowed {
+    cursor: not-allowed !important;
+}
+.cursor-text {
+    cursor: text !important;
+}
+.cursor-vertical-text {
+    cursor: vertical-text !important;
+}
+.cursor-progress {
+    cursor: progress !important;
+}
+.cursor-wait {
+    cursor: wait !important;
+}
+
 @media (min-width: 0px)
 {
     html {

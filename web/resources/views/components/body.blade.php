@@ -1,3 +1,3 @@
-<body class="h-100 {{ $class }}" {{ $attributes }}>
+<body class="vh-100 {{ $class }}" {{ $attributes }}>
     {{ $slot }}
 </body>

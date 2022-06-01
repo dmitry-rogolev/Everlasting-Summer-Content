@@ -30,7 +30,7 @@
                                 </x-element.div>
                                 <x-element.div class="col-2 p-0">
                                     @if ($header && is_string($header))
-                                        <x-element.flex class="justify-content-center">
+                                        <x-element.flex flex="justify-content-center">
                                             <x-element.header3>
                                                 {{ $header }}
                                             </x-element.header3>

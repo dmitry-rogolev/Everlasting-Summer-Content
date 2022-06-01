@@ -2,12 +2,13 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-body>
         <x-element.background>
-            <x-element.flex flex="flex-column align-items-center justify-content-center h-100" style="height: 100%;">
+            <x-element.flex flex="flex-column align-items-center justify-content-center vh-100">
                 <x-element.div class="col-xl-5 col-lg-6 col-md-7 col-sm-9 col-11 px-0">
                     <x-element.flex flex="flex-column">
                         <x-body.header>
                             <x-element.a 
-                                class="d-block p-3 text-center text-decoration-none {{ 'bg-' . $theme }} {{ 'text-' . $inversion_themes->get($theme) }}"
+                                href="{{ url('/') }}"
+                                class="d-block p-3 text-center shadow-lg {{ 'bg-' . $theme }} cursor-pointer text-decoration-none {{ 'text-' . $inversion_themes->get($theme) }}"
                                 style="border-top-left-radius: 15px; border-top-right-radius: 15px;"
                                 >
                                 <x-element.h1 class="mb-0">
