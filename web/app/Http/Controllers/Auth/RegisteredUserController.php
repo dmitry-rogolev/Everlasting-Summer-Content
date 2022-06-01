@@ -13,6 +13,11 @@ use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Display the registration view.
      *
@@ -20,7 +25,10 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        return view('auth.register', 
+        [
+            "title" => $this->title, 
+        ]);
     }
 
     /**
