@@ -16,11 +16,11 @@ class Dropdown extends Component
      *
      * @return void
      */
-    public function __construct(string $name = "", string $theme = "")
+    public function __construct(?string $name = null)
     {
-        parent::__construct($theme);
+        parent::__construct();
 
-        $this->name = $name;
+        $this->name = $name ?? "";
         $this->id = Str::random(10);
     }
 

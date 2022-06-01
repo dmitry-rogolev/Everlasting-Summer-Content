@@ -12,14 +12,12 @@ class Breadcrumbs extends Component
 
     /**
      * Create a new component instance.
-     * 
-     * @param ?string $theme Тема шаблона
      *
      * @return void
      */
-    public function __construct(?string $theme = null)
+    public function __construct()
     {
-        parent::__construct($theme);
+        parent::__construct();
 
         $this->breadcrumbs = Cache::pull("breadcrumbs");
     }

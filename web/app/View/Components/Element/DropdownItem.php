@@ -13,9 +13,9 @@ class DropdownItem extends Component
      *
      * @return void
      */
-    public function __construct(string $url = "", string $theme = "")
+    public function __construct(?string $url = null)
     {
-        parent::__construct($theme);
+        parent::__construct();
 
         $this->url = $url;
     }

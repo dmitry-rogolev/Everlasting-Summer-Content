@@ -42,14 +42,13 @@ class Head extends Component
      * Create a new component instance.
      * 
      * @param ?string $title Название страницы
-     * @param ?string $theme Тема шаблона
      *
      * @return void
      */
-    public function __construct(?string $title = null, ?string $theme = null)
+    public function __construct(?string $title = null)
     {
-        parent::__construct($theme);
-
+        parent::__construct();
+        
         $this->title = $title ?? config("view.title");
         $this->charset = config("view.charset");
         $this->viewport = config("view.viewport");

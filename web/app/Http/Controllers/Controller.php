@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Theme;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,26 +18,12 @@ class Controller extends BaseController
 
     protected string $title;
 
-    protected string $theme;
-
-    protected Collection $themes;
-
-    protected Collection $inversionThemes;
-
-    public function __construct(?string $title = null, ?string $theme = null)
+    public function __construct(?string $title = null)
     {
-        $this->title = $title ?? "";
-        
-        if (Storage::disk("theme")->exists($theme . ".css"))
-        {
-            session()->put("theme", $theme);
-        }
-        $this->theme = session("theme", config("view.theme_default"));
-        $this->themes = config("view.themes");
-        $this->inversionThemes = config("view.inversion_themes");
+        $this->title = $title ?? config("view.title");
 
-        Cache::put("themes", $this->themes);
-        Cache::put("inversion_themes", $this->inversionThemes);
+        Cache::flush();
+        Theme::cache();
     }
 
     protected function theme(Request $request)
@@ -45,6 +32,5 @@ class Controller extends BaseController
         {
             session()->put("theme", $request->get("theme"));
         }
-        $this->theme = session("theme", config("view.theme_default"));
     }
 }

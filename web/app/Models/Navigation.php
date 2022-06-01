@@ -15,11 +15,11 @@ class Navigation extends Model
         return $this->hasMany(SubNavigation::class);
     }
 
-    public function scopeCache()
+    public static function cache()
     {
-        Cache::remember("navigation", config("cache.keep"), function()
+        if (!Cache::has("navigations"))
         {
-            return Navigation::with("sub")->get();
-        });
+            Cache::add("navigations", Navigation::with("sub")->get(), config("cache.keep"));
+        }
     }
 }

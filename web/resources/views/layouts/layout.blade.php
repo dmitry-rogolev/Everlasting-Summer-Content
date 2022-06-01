@@ -1,5 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <x-head theme="{{ $theme }}" title="{{ $title }}" />
+    <x-head title="{{ $title }}" />
     {{ $slot }}
 </html>

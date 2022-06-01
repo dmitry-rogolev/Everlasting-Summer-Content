@@ -12,13 +12,12 @@ class Flex extends Component
      * Create a new component instance.
      * 
      * @param ?string $flex Классы для флекс-боксов
-     * @param ?string $theme Тема шаблона
      *
      * @return void
      */
-    public function __construct(?string $flex = null, ?string $theme = null)
+    public function __construct(?string $flex = null)
     {
-        parent::__construct($theme);
+        parent::__construct();
 
         $this->flex = $flex ?? "";
     }

@@ -15,8 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            NavigationSeeder::class, 
-            SubNavigationSeeder::class, 
+            // NavigationSeeder::class, 
+            // SubNavigationSeeder::class, 
+            ThemeSeeder::class, 
         ]);
     }
 }

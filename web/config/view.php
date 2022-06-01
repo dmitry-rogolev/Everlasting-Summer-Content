@@ -46,18 +46,6 @@ return [
     // Корневая папка для тем (относительно папки public/)
     "theme_directory" => env("THEME_DIRECTORY", "css/theme"), 
 
-    // Список тем
-    "themes" => new Collection([
-        "Светлая" => "light", 
-        "Темная" => "dark", 
-    ]), 
-
-    // Список инвертированных тем
-    "inversion_themes" => new Collection([
-        "light" => "dark", 
-        "dark" => "light", 
-    ]), 
-
 
     #########################################
     #       КОНФИГУРАЦИЯ HEAD ШАБЛОНА       #

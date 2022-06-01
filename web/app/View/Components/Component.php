@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Theme;
 use Illuminate\View\Component as BaseComponent;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -16,13 +17,14 @@ abstract class Component extends BaseComponent
 
     /**
      * Конструктор
-     *
-     * @param ?string $theme Тема шаблона
      */
-    protected function __construct(?string $theme = null)
+    protected function __construct()
     {
-        $this->theme = $theme ?? session("theme", config("view.theme_default"));
-        $this->themes = Cache::get("themes", config("view.themes"));
-        $this->inversionThemes = Cache::get("inversion_themes", config("view.inversion_themes"));
+        $this->theme = session("theme", config("view.theme_default"));
+
+        Theme::cache();
+
+        $this->themes = Cache::get("themes");
+        $this->inversionThemes = Cache::get("inversion_themes");
     }
 }

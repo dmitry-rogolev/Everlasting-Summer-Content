@@ -23,25 +23,23 @@ class Menu extends Component
      * @param ?string $name Название меню
      * @param ?string $url Ссылка названия меню
      * @param ?string $login Показ ссылок авторизации (true, false)
-     * @param ?string $theme Тема шаблона
      *
      * @return void
      */
     public function __construct(
         ?string $name = null, 
         ?string $url = null, 
-        ?string $login = null, 
-        ?string $theme = null, 
+        ?string $login = null
     )
     {
-        parent::__construct($theme);
+        parent::__construct();
 
         $this->name = $name ? $name : config("app.name");
         $this->url = $url ? $url : url("/");
         $this->login = $login && $login === "true";
 
-        if (!Cache::has("navigation")) Navigation::cache();
-        $this->navigations = Cache::get("navigation");
+        Navigation::cache();
+        $this->navigations = Cache::get("navigations");
     }
 
     /**

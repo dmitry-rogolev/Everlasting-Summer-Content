@@ -15,9 +15,9 @@ class NavItem extends Component
      *
      * @return void
      */
-    public function __construct(string $name = "", string $url = "", string $theme = "")
+    public function __construct(?string $name = null, ?string $url = null)
     {
-        parent::__construct($theme);
+        parent::__construct();
 
         $this->name = $name;
         $this->url = $url;
