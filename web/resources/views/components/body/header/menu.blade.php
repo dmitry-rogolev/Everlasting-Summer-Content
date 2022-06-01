@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             @foreach ($navigations as $navigation)
-                @if (is_null($navigation->sub))
+                @if ($navigation->sub->isEmpty())
                     <x-element.nav-item name="{{ $navigation->name }}" url="{{ url($navigation->path) }}" />    
                 @else 
                     <x-element.dropdown name="{{ $navigation->name }}">

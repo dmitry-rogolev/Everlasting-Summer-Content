@@ -10,35 +10,16 @@ class Navigation extends Model
 {
     use HasFactory;
 
-    public function scopeParents($query)
+    public function sub()
     {
-        return $query->whereList(1);
-    }
-
-    public function scopeList($query, $list)
-    {
-        return $query->whereList($list);
-    }
-
-    public function scopeSub()
-    {
-        if (isset($this->sub) && !empty($this->sub))
-        {
-            $this->sub = $this->list($this->sub)->get()->each(function($item)
-            {
-                $item->sub();
-            });
-        }
+        return $this->hasMany(SubNavigation::class);
     }
 
     public function scopeCache()
     {
         Cache::remember("navigation", config("cache.keep"), function()
         {
-            return Navigation::parents()->get()->each(function($item)
-            {
-                $item->sub();
-            });
+            return Navigation::with("sub")->get();
         });
     }
 }

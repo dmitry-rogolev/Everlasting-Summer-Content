@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('navigations', function (Blueprint $table) {
+        Schema::create('sub_navigations', function (Blueprint $table) {
             $table->id();
             $table->string("name")->nullable();
             $table->string("path")->nullable();
             $table->string("uri")->nullable();
+            $table->bigInteger("navigation_id");
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('navigations');
+        Schema::dropIfExists('sub_navigations');
     }
 };

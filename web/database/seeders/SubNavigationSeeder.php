@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use DateTime;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use DateTime;
 
-class NavigationSeeder extends Seeder
+class SubNavigationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,21 +16,23 @@ class NavigationSeeder extends Seeder
      */
     public function run()
     {
-        DB::table("navigations")->insert([
+        DB::table("sub_navigations")->insert([
             [
-                "name" => "О проекте", 
-                "path" => "description", 
+                "name" => "test1", 
+                "path" => "test/test1", 
                 "uri" => null, 
+                "navigation_id" => 2, 
                 "created_at" => new DateTime("now"), 
                 "updated_at" => new DateTime("now"), 
             ], 
             [
-                "name" => "test", 
-                "path" => null, 
+                "name" => "test2", 
+                "path" => "test/test2", 
                 "uri" => null, 
+                "navigation_id" => 2, 
                 "created_at" => new DateTime("now"), 
                 "updated_at" => new DateTime("now"), 
-            ], 
+            ],  
         ]);
     }
 }
