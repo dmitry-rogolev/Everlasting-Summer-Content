@@ -6,6 +6,3 @@
         </x-element.form.label>
     @endif
 </div>
-<script>
-    $("{{ $id }}").prop("indeterminate", true);
-</script>

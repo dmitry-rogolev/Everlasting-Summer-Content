@@ -5,7 +5,7 @@
 @endif
 <input {{ $attributes }} class="form-control {{ $class }}" id="{{ $id }}" @if ($small) aria-describedby="{{ $aria }}" @endif />
 @if ($small)
-    <x-element.form.small id="{{ $aria }}" class="form-text text-muted">
+    <x-element.small id="{{ $aria }}" class="form-text text-muted">
         {{ $small }}
-    </x-element.form.small>
+    </x-element.small>
 @endif

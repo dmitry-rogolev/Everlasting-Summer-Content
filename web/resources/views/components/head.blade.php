@@ -30,12 +30,14 @@
     src="{{ $jq }}" 
     integrity="{{ $jq_integrity }}" 
     crossorigin="anonymous" 
+    type="text/javascript" 
     defer>
 </script>
 <script 
     src="{{ $js_bs }}"
     integrity="{{ $js_bs_integrity }}"
     crossorigin="anonymous"
+    type="text/javascript" 
     defer>
 </script>
 <title>{{ $title }}</title>
