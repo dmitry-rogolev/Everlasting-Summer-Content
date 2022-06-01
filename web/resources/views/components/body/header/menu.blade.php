@@ -1,4 +1,4 @@
-<section class="navbar {{ 'navbar-' . $theme }} {{ 'bg-' . $theme }} navbar-expand-md rounded shadow-lg" {{ $attributes }}>
+<section class="navbar {{ 'navbar-' . $theme }} {{ 'bg-' . $theme }} navbar-expand-md rounded shadow-lg {{ $class }}" {{ $attributes }}>
     <a class="navbar-brand" href="{{ $url }}">{{ $name }}</a>
     <button 
         class="navbar-toggler" 

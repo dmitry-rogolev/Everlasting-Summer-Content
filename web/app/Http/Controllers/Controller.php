@@ -20,6 +20,10 @@ class Controller extends BaseController
 
     protected string $theme;
 
+    protected Collection $themes;
+
+    protected Collection $inversionThemes;
+
     public function __construct(?string $title = null)
     {
         $this->title = $title ?? config("view.title");
@@ -27,6 +31,9 @@ class Controller extends BaseController
 
         Cache::flush();
         Theme::cache();
+
+        $this->themes = Cache::get("themes");
+        $this->inversionThemes = Cache::get("inversion_themes");
     }
 
     protected function theme(Request $request)

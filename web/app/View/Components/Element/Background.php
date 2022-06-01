@@ -8,19 +8,16 @@ class Background extends Component
 {
     protected string $class;
 
-    protected string $style;
-
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(?string $class = null, ?string $style = null)
+    public function __construct(?string $class = null)
     {
         parent::__construct();
 
         $this->class = $class ?? "";
-        $this->style = $style ?? "";
     }
 
     /**
@@ -36,7 +33,6 @@ class Background extends Component
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
             "class" => $this->class, 
-            "style" => $this->style, 
         ]);
     }
 }

@@ -29,6 +29,8 @@ class RegisteredUserController extends Controller
         [
             "title" => $this->title, 
             "theme" => $this->theme, 
+            "themes" => $this->themes, 
+            "inversion_themes" => $this->inversionThemes, 
         ]);
     }
 

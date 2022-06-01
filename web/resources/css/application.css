@@ -14,16 +14,6 @@ body {
     background-position: center center;
     background-attachment: fixed;
 }
-
-.h-max {
-    height: 100%;
-}
-.w-max {
-    height: 100%;
-}
-.max-width-xl {
-    max-width: 1200px;
-}
 .ticket {
     box-sizing: border-box;
     background-size: cover; 
@@ -33,6 +23,10 @@ body {
     border-width: 5px;
     border-style: solid;
     cursor: pointer;
+}
+
+.max-width-xl {
+    max-width: 1200px;
 }
 
 @media (min-width: 0px)

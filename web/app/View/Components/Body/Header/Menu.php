@@ -17,6 +17,8 @@ class Menu extends Component
 
     protected bool $login;
 
+    protected string $class;
+
     /**
      * Create a new component instance.
      * 
@@ -29,7 +31,8 @@ class Menu extends Component
     public function __construct(
         ?string $name = null, 
         ?string $url = null, 
-        ?string $login = null
+        ?string $login = null, 
+        ?string $class = null, 
     )
     {
         parent::__construct();
@@ -37,6 +40,7 @@ class Menu extends Component
         $this->name = $name ? $name : config("app.name");
         $this->url = $url ? $url : url("/");
         $this->login = $login && $login === "true";
+        $this->class = $class ?? "";
 
         Navigation::cache();
         $this->navigations = Cache::get("navigations");
@@ -58,6 +62,7 @@ class Menu extends Component
             "url" => $this->url, 
             "navigations" => $this->navigations, 
             "login" => $this->login, 
+            "class" => $this->class, 
         ]);
     }
 }
