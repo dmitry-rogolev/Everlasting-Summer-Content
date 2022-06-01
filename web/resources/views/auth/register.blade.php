@@ -5,7 +5,7 @@
             <x-element.flex flex="flex-column align-items-center justify-content-center vh-100">
                 <x-element.div class="col-xl-5 col-lg-6 col-md-7 col-sm-9 col-11 px-0">
                     <x-element.flex flex="flex-column">
-                        <x-body.header>
+                        <x-body.header class="col-12 px-0">
                             <x-element.a 
                                 href="{{ url('/') }}"
                                 class="d-block p-3 text-center shadow-lg {{ 'bg-' . $theme }} cursor-pointer text-decoration-none {{ 'text-' . $inversion_themes->get($theme) }}"
@@ -16,6 +16,11 @@
                                 </x-element.h1>
                             </x-element.a>
                         </x-body.header>
+                        <x-body.main class="col-12 px-0">
+                            <x-element.form method="POST" action="{{ route('register') }}">
+                                
+                            </x-element.form>
+                        </x-body.main>
                     </x-element.flex>
                 </x-element.div>
             </x-element.flex>
