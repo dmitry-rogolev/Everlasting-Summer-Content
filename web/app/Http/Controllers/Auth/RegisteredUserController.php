@@ -28,6 +28,7 @@ class RegisteredUserController extends Controller
         return view('auth.register', 
         [
             "title" => $this->title, 
+            "theme" => $this->theme, 
         ]);
     }
 

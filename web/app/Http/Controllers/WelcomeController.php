@@ -21,6 +21,7 @@ class WelcomeController extends ContentController
         $this->theme($request);
 
         return view("welcome", [
+            "theme" => $this->theme, 
             "title" => $this->title, 
             "header" => $this->header, 
             "referer" => $this->referer, 

@@ -1,5 +1,5 @@
-<div class="background height-100" {{ $attributes }}>
-    <div class="background-albugo height-100">
+<div class="background {{ $class }}" style="height: 100%; {{ $style }}" {{ $attributes }}>
+    <div class="background-albugo" style="height: 100%">
         {{ $slot }}
     </div>
 </div>

@@ -11,17 +11,20 @@ class Dropdown extends Component
 
     protected string $id;
 
+    protected string $class;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(?string $name = null)
+    public function __construct(?string $name = null, ?string $class = null)
     {
         parent::__construct();
 
         $this->name = $name ?? "";
         $this->id = Str::random(10);
+        $this->class = $class ?? "";
     }
 
     /**
@@ -38,6 +41,7 @@ class Dropdown extends Component
             "inversion_themes" => $this->inversionThemes, 
             "name" => $this->name, 
             "id" => $this->id, 
+            "class" => $this->class, 
         ]);
     }
 }

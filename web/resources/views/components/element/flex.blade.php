@@ -1,4 +1,4 @@
-<div class="container-fluid" {{ $attributes }}>
+<div class="container-fluid {{ $class }}" {{ $attributes }}>
     <div class="row {{ $flex }}">
         {{ $slot }}
     </div>

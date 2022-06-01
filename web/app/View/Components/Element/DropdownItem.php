@@ -8,16 +8,19 @@ class DropdownItem extends Component
 {
     protected string $url;
 
+    protected string $class;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(?string $url = null)
+    public function __construct(?string $url = null, ?string $class = null)
     {
         parent::__construct();
 
-        $this->url = $url;
+        $this->url = $url ?? "";
+        $this->class = $class ?? "";
     }
 
     /**
@@ -33,6 +36,7 @@ class DropdownItem extends Component
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
             "url" => $this->url, 
+            "class" => $this->class, 
         ]);
     }
 }

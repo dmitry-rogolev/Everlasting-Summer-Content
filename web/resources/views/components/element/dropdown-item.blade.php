@@ -1,1 +1,1 @@
-<a class="dropdown-item" href="{{ $url }}" {{ $attributes }}>{{ $slot }}</a>
+<a class="dropdown-item {{ $class }}" href="{{ $url }}" {{ $attributes }}>{{ $slot }}</a>

@@ -6,14 +6,18 @@ use App\View\Components\Component;
 
 class Header3 extends Component
 {
+    protected string $class;
+
     /**
      * Create a new component instance.
      * 
      * @return void
      */
-    public function __construct()
+    public function __construct(?string $class = null)
     {
         parent::__construct();
+
+        $this->class = $class ?? "";
     }
 
     /**
@@ -28,6 +32,7 @@ class Header3 extends Component
             "theme" => $this->theme, 
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
+            "class" => $this->class, 
         ]);
     }
 }

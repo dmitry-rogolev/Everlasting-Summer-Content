@@ -1,4 +1,4 @@
-<li class="nav-item dropdown" {{ $attributes }}>
+<li class="nav-item dropdown {{ $class }}" {{ $attributes }}>
     <a 
         class="nav-link dropdown-toggle" 
         href="" 

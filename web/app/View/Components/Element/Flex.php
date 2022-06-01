@@ -8,6 +8,8 @@ class Flex extends Component
 {
     protected string $flex;
 
+    protected string $class;
+
     /**
      * Create a new component instance.
      * 
@@ -15,11 +17,12 @@ class Flex extends Component
      *
      * @return void
      */
-    public function __construct(?string $flex = null)
+    public function __construct(?string $flex = null, ?string $class = null)
     {
         parent::__construct();
 
         $this->flex = $flex ?? "";
+        $this->class = $class ?? "";
     }
 
     /**
@@ -35,6 +38,7 @@ class Flex extends Component
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
             "flex" => $this->flex, 
+            "class" => $this->class, 
         ]);
     }
 }

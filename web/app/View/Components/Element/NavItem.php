@@ -9,18 +9,21 @@ class NavItem extends Component
     protected string $name;
 
     protected string $url;
+
+    protected string $class;
     
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(?string $name = null, ?string $url = null)
+    public function __construct(?string $name = null, ?string $url = null, ?string $class = null)
     {
         parent::__construct();
 
         $this->name = $name;
         $this->url = $url;
+        $this->class = $class;
     }
 
     /**
@@ -37,6 +40,7 @@ class NavItem extends Component
             "theme" => $this->theme, 
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
+            "class" => $this->class, 
         ]);
     }
 }
