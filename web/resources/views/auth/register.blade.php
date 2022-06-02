@@ -19,7 +19,7 @@
                         <x-body.main class="col-12 {{ 'bg-' . $theme }}">
                             <x-element.form method="POST" action="{{ route('register') }}">
                                 <x-element.form.group>
-                                    <x-element.form.custom.custom-switch label="label" />
+                                    <x-element.form.custom.range label="label" />
                                 </x-element.form.group>
                             </x-element.form>
                         </x-body.main>
