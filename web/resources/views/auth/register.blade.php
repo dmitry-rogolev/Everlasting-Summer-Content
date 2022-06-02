@@ -19,7 +19,7 @@
                         <main class="col-12 {{ 'bg-' . $theme }}">
                             <form method="POST" action="{{ route('register') }}">
                                 <x-element.form.group>
-                                    <x-element.form.file label="label" />
+                                    <x-element.form.plaintext label="label" small="small" value="value" />
                                 </x-element.form.group>
                             </form>
                         </main>
