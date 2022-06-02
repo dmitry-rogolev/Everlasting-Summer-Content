@@ -5,14 +5,14 @@ namespace App\View\Components\Element\Form;
 use App\View\Components\Component;
 use Illuminate\Support\Str;
 
-class Select extends Component
+class Textarea extends Component
 {
     protected string $id;
 
     protected string $label;
 
     protected string $class;
-    
+
     /**
      * Create a new component instance.
      *
@@ -34,7 +34,7 @@ class Select extends Component
      */
     public function render()
     {
-        return view('components.element.form.select', 
+        return view('components.element.form.textarea', 
         [
             "theme" => $this->theme, 
             "themes" => $this->themes, 
