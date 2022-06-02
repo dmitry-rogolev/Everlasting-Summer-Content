@@ -19,9 +19,7 @@
                         <main class="col-12 {{ 'bg-' . $theme }}">
                             <form method="POST" action="{{ route('register') }}">
                                 <x-element.form.group>
-                                    <x-element.form.col>
-                                        
-                                    </x-element.form.col>
+                                    
                                 </x-element.form.group>
                             </form>
                         </main>
