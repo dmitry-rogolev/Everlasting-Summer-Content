@@ -19,7 +19,7 @@
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
                             <h4 class="mb-0 text-center text-{{ $inversion_themes->get($theme) }}">Регистрация</h4>
                             @if ($errors->any())
-                                <div>
+                                <div class="my-3">
                                     @foreach ($errors->all() as $error)
                                         <x-element.alert class="alert-danger">
                                             {{ $error }}
@@ -32,16 +32,16 @@
                                     @csrf
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input class="form-control-lg bg-{{ $theme }}" label="Имя" name="name" placeholder="Имя" :value="old('name')" required autofocus autocomplete="off" accesskey="n" tabindex="1" />
+                                    <x-element.form.input class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" label="Имя" name="name" placeholder="Имя" :value="old('name')" required autofocus autocomplete="off" accesskey="n" tabindex="1" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }}" name="email" label="Электронная почта" placeholder="Электронная почта" :value="old('email')" required autocomplete="off" accesskey="e" tabindex="2" />
+                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="Электронная почта" placeholder="Электронная почта" :value="old('email')" required autocomplete="off" accesskey="e" tabindex="2" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }}" name="password" label="Пароль" placeholder="Пароль" required autocomplete="off" accesskey="p" tabindex="3" />
+                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="Пароль" placeholder="Пароль" required autocomplete="off" accesskey="p" tabindex="3" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }}" name="password_confirmation" label="Подтверждение пароля" placeholder="Подтверждение пароля" required autocomplete="off" accesskey="c" tabindex="4" />
+                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password_confirmation" label="Подтверждение пароля" placeholder="Подтверждение пароля" required autocomplete="off" accesskey="c" tabindex="4" />
                                 </x-element.form.group>
                                 <x-element.form.group class="text-center">
                                     <a href="{{ route('login') }}">Уже зарегистрированны?</a>
