@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Element;
+namespace App\View\Components\Element\Form;
 
 use App\View\Components\Component;
 
@@ -27,7 +27,7 @@ class Button extends Component
      */
     public function render()
     {
-        return view('components.element.button', 
+        return view('components.element.form.button', 
         [
             "theme" => $this->theme, 
             "themes" => $this->themes, 

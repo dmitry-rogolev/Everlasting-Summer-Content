@@ -13,9 +13,13 @@ use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
+    protected string $header;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->header = config("app.name");
     }
 
     /**
@@ -23,11 +27,14 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
+        $this->theme($request);
+
         return view('auth.register', 
         [
             "title" => $this->title, 
+            "header" => $this->header, 
             "theme" => $this->theme, 
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 

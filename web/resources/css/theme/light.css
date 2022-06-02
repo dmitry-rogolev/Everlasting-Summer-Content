@@ -5,14 +5,18 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 .bg-light {
-    background-color: #eeeeeef3 !important;
+    background-color: #eeeeeee5 !important;
+}
+.btn-light {
+    background-color: #eeeeeee5 !important;
+    border-color: #eeeeeee5 !important;
 }
 .ticket:hover .bg-light-hover {
-    background-color: #d6d6d6f3 !important;
+    background-color: #d6d6d6ec !important;
 }
 .ticket.border-light-hover:hover {
-    border-color: #d6d6d6f3 !important;
+    border-color: #d6d6d6ec !important;
 }
 .border-light {
-    border-color: #eeeeeef3 !important;
+    border-color: #eeeeeeec !important;
 }

@@ -27,8 +27,7 @@ class Controller extends BaseController
     public function __construct(?string $title = null)
     {
         $this->title = $title ?? config("view.title");
-        $this->theme = session("theme", config("view.theme_default"));
-
+        
         Cache::flush();
         Theme::cache();
 
@@ -41,7 +40,7 @@ class Controller extends BaseController
         if ($request->has("theme") && Storage::disk("theme")->exists($request->get("theme") . ".css"))
         {
             session()->put("theme", $request->get("theme"));
-            $this->theme = session("theme");
         }
+        $this->theme = session("theme", config("view.theme_default"));
     }
 }

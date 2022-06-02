@@ -21,9 +21,9 @@
                                     @if ($referer && is_string($referer))
                                         <x-element.flex>
                                             <a href="{{ $referer }}">
-                                                <x-element.button title="Назад">
+                                                <x-element.form.button class="btn-lg btn-{{ $theme }}" title="Назад">
                                                     &lt;
-                                                </x-element.button>
+                                                </x-element.form.button>
                                             </a>
                                         </x-element.flex>
                                     @endif
@@ -40,9 +40,9 @@
                                 <div class="col-2 p-0">
                                     <x-element.flex flex="justify-content-end">
                                         <a href="{{ url()->current() . '/download/all' }}">
-                                            <x-element.button title="Скачать все">
+                                            <x-element.form.button class="btn-lg btn-{{ $theme }}" title="Скачать все">
                                                 &#10515;
-                                            </x-element.button>
+                                            </x-element.form.button>
                                         </a>
                                     </x-element.flex>
                                 </div>

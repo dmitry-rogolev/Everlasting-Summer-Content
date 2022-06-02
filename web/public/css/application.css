@@ -60,7 +60,7 @@ body {
 @media (min-width: 0px)
 {
     html {
-        font-size: 18px;
+        font-size: 16px;
     }
     .ticket {
         min-width: 270px;
