@@ -18,6 +18,15 @@
                         </header>
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
                             <h4 class="mb-0 text-center text-{{ $inversion_themes->get($theme) }}">Регистрация</h4>
+                            @if ($errors->any())
+                                <div>
+                                    @foreach ($errors->all() as $error)
+                                        <x-element.alert class="alert-danger">
+                                            {{ $error }}
+                                        </x-element.alert>
+                                    @endforeach
+                                </div>
+                            @endif
                             <form method="POST" action="{{ route('register') }}">
                                 <x-element.form.group>
                                     @csrf
