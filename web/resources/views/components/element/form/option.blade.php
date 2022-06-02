@@ -1,3 +1,0 @@
-<option {{ $attributes }}>
-    {{ $slot }}
-</option>

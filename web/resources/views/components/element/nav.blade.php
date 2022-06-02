@@ -1,3 +1,0 @@
-<nav {{ $attributes }}>
-    {{ $slot }}
-</nav>

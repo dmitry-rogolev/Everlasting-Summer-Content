@@ -1,3 +1,0 @@
-<section {{ $attributes }}>
-    {{ $slot }}
-</section>
