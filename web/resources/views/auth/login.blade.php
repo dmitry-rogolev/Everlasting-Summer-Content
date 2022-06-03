@@ -19,15 +19,7 @@
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
                             <h4 class="mb-0 text-center text-{{ $inversion_themes->get($theme) }}">Вход</h4>
                             <x-auth.session-status />
-                            @if ($errors->any())
-                                <div class="my-3">
-                                    @foreach ($errors->all() as $error)
-                                        <x-element.alert class="alert-danger">
-                                            {{ $error }}
-                                        </x-element.alert>
-                                    @endforeach
-                                </div>
-                            @endif
+                            <x-auth.error />
                             <form method="POST" action="{{ route('login') }}">
                                 <x-element.form.group>
                                     @csrf
