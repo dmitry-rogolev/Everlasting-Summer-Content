@@ -10,14 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct(config("view.title"));
+    }
+    
     /**
      * Display the login view.
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('auth.login');
+        $this->theme($request);
+
+        return view('auth.login', 
+        [
+            "theme" => $this->theme, 
+            "themes" => $this->themes, 
+            "inversion_themes" => $this->inversionThemes, 
+            "title" => $this->title, 
+        ]);
     }
 
     /**
