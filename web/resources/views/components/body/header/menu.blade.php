@@ -41,7 +41,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-element.dropdown-item url="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
-                                Выход
+                                Выйти
                             </x-element.dropdown-item>
                         </form>
                     </x-element.dropdown>

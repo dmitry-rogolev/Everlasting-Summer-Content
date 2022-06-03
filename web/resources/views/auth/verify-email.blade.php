@@ -1,39 +1,52 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-        </div>
-
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-            </div>
-        @endif
-
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
-
-                <div>
-                    <x-button>
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
+<x-layout>
+    <x-slot:title>{{ $title }}</x-slot:title>
+    <x-body>
+        <x-element.background>
+            <x-element.flex flex="align-items-center justify-content-center vh-100">
+                <div class="col-xl-4 col-lg-5 col-md-7 col-sm-10 col-11 px-0 py-3">
+                    <x-element.flex flex="flex-column" class="{{ 'bg-' . $theme }} shadow-lg pb-3" style="border-radius: 20px;">
+                        <header class="col-12 px-0">
+                            <a 
+                                href="{{ url('/') }}"
+                                class="d-block p-3 text-center cursor-pointer text-decoration-none {{ 'text-' . $inversion_themes->get($theme) }}"
+                                style="border-top-left-radius: 20px; border-top-right-radius: 20px;"
+                                >
+                                <h2 class="mb-0">
+                                    {{ $header }}
+                                </h2>
+                            </a>
+                        </header>
+                        <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
+                            <p>
+                                Спасибо, что зарегистрировались! Прежде чем приступить к работе, не могли бы вы подтвердить свой адрес электронной почты, перейдя по ссылке, которую мы только что отправили вам по электронной почте? Если вы не получили электронное письмо, мы с радостью вышлем вам другое. 
+                            </p>
+                            @if (session('status') == 'verification-link-sent')
+                                <p>
+                                    Новая ссылка для подтверждения была отправлена на адрес электронной почты, который вы указали при регистрации.
+                                </p>
+                            @endif
+                            <x-element.flex flex="flex-sm-row flex-column align-items-center justify-content-sm-between justify-content-center">
+                                <form method="POST" action="{{ route('verification.send') }}">
+                                    <x-element.form.group>
+                                        @csrf
+                                    </x-element.form.group>
+                                    <x-element.form.group>
+                                        <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="1">
+                                            Отправить письмо еще раз
+                                        </x-element.form.button>
+                                    </x-element.form.group>
+                                </form>
+                                <form class="mt-sm-0 mt-3" method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}" tabindex="2" onclick="event.preventDefault();this.closest('form').submit();">
+                                        Выйти
+                                    </a>
+                                </form>
+                            </x-element.flex>
+                        </main>
+                    </x-element.flex>
                 </div>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
-                </button>
-            </form>
-        </div>
-    </x-auth-card>
-</x-guest-layout>
+            </x-element.flex>
+        </x-element.background>
+    </x-body>
+</x-layout>

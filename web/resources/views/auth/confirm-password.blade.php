@@ -21,7 +21,7 @@
                                 Это защищенная область приложения. Пожалуйста, подтвердите свой пароль, прежде чем продолжить. 
                             </p>
                             <x-auth.error />
-                            <form method="POST" action="{{ route('password.email') }}">
+                            <form method="POST">
                                 <x-element.form.group>
                                     @csrf
                                 </x-element.form.group>
