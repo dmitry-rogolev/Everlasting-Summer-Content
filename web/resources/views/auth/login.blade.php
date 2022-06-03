@@ -18,11 +18,7 @@
                         </header>
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
                             <h4 class="mb-0 text-center text-{{ $inversion_themes->get($theme) }}">Вход</h4>
-                            @if (session("status"))
-                                <x-element.alert class="alert-info">
-                                    {{ session("status") }}
-                                </x-element.alert>
-                            @endif
+                            <x-auth.session-status />
                             @if ($errors->any())
                                 <div class="my-3">
                                     @foreach ($errors->all() as $error)
