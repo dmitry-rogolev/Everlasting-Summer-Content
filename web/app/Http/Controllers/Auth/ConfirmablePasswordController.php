@@ -10,14 +10,32 @@ use Illuminate\Validation\ValidationException;
 
 class ConfirmablePasswordController extends Controller
 {
+    protected string $header;
+
+    public function __construct()
+    {
+        parent::__construct(config("view.title"));
+
+        $this->header = config("app.name");
+    }
+
     /**
      * Show the confirm password view.
      *
      * @return \Illuminate\View\View
      */
-    public function show()
+    public function create(Request $request)
     {
-        return view('auth.confirm-password');
+        $this->theme($request);
+        
+        return view('auth.confirm-password', 
+        [
+            "title" => $this->title, 
+            "header" => $this->header, 
+            "theme" => $this->theme, 
+            "themes" => $this->themes, 
+            "inversion_themes" => $this->inversionThemes, 
+        ]);
     }
 
     /**
