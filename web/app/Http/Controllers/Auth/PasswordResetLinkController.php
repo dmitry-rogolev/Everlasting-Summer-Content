@@ -16,14 +16,16 @@ class PasswordResetLinkController extends Controller
 
         $this->header = config("app.name");
     }
-    
+
     /**
      * Display the password reset link request view.
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
+        $this->theme($request);
+
         return view('auth.forgot-password', 
         [
             "theme" => $this->theme, 
