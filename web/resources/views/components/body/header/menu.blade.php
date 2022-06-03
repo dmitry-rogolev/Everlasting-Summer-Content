@@ -25,37 +25,34 @@
                     </x-element.dropdown>
                 @endif
             @endforeach
-            <li class="nav-item dropdown">
-                <a 
-                    class="nav-link dropdown-toggle" 
-                    href="" 
-                    id="navbarDropdown" 
-                    role="button" 
-                    data-toggle="dropdown" 
-                    aria-haspopup="true" 
-                    aria-expanded="false">
-                    Тема
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @foreach ($themes as $name => $theme)
-                        <a class="dropdown-item" href="{{ url()->current() . '/?theme=' . $theme }}">{{ $name }}</a>
-                    @endforeach
-                </div>
-            </li>
+            <x-element.dropdown name="Тема">
+                @foreach ($themes as $name => $theme)
+                    <x-element.dropdown-item url="{{ url()->current() . '/?theme=' . $theme }}">
+                        {{ $name }}
+                    </x-element.dropdown-item>
+                @endforeach
+            </x-element.dropdown>
             @if ($login && Route::has("login"))
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/dashboard') }}">Профиль</a>
-                    </li>
+                    <x-element.dropdown name="{{ Auth::user()->name }}">
+                        <x-element.dropdown-item url="{{ route('profile') }}">
+                            Профиль
+                        </x-element.dropdown-item>
+                        <x-element.dropdown-item url="">
+                            Выход
+                        </x-element.dropdown-item>
+                    </x-element.dropdown>
                 @else 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Вход</a>
-                    </li>
-                    @if (Route::has("register"))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
-                        </li>
-                    @endif
+                    <x-element.dropdown name="Профиль">
+                        <x-element.dropdown-item url="{{ route('login') }}">
+                            Вход
+                        </x-element.dropdown-item>
+                        @if (Route::has("register"))
+                            <x-element.dropdown-item url="{{ route('register') }}">
+                                Регистрация
+                            </x-element.dropdown-item>
+                        @endif
+                    </x-element.dropdown>
                 @endauth
             @endif
         </ul>

@@ -20,10 +20,9 @@ class ContentController extends Controller
         ?string $header = null, 
         ?string $referer = null, 
         ?Collection $breadcrumbs = null, 
-        ?string $theme = null, 
     )
     {
-        parent::__construct($title, $theme);
+        parent::__construct($title);
 
         $this->header = $header;
         $this->referer = $referer;
