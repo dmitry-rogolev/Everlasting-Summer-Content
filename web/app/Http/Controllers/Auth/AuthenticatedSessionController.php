@@ -10,11 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
+    protected string $header;
+
     public function __construct()
     {
         parent::__construct(config("view.title"));
+
+        $this->header = config("app.name");
     }
-    
+
     /**
      * Display the login view.
      *
@@ -30,6 +34,7 @@ class AuthenticatedSessionController extends Controller
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
             "title" => $this->title, 
+            "header" => $this->header, 
         ]);
     }
 
