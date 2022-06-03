@@ -36,7 +36,7 @@
                                     <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password_confirmation" label="Подтверждение пароля" placeholder="Подтверждение пароля" required autocomplete="off" accesskey="c" tabindex="4" />
                                 </x-element.form.group>
                                 <x-element.form.group class="text-center">
-                                    <a href="{{ route('login') }}">Уже зарегистрированны?</a>
+                                    <a href="{{ route('login') }}" tabindex="6">Уже зарегистрированны?</a>
                                 </x-element.form.group>
                                 <x-element.form.group class="text-center">
                                     <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="5">

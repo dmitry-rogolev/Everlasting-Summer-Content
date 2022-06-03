@@ -35,11 +35,11 @@
                                 </x-element.form.group>
                                 @if (Route::has('password.request'))
                                     <x-element.form.group class="text-center">
-                                        <a href="{{ route('password.request') }}">Забыли пароль?</a>
+                                        <a href="{{ route('password.request') }}" tabindex="5">Забыли пароль?</a>
                                     </x-element.form.group>
                                 @endif
                                 <x-element.form.group class="text-center">
-                                    <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="5">
+                                    <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="4">
                                         Войти
                                     </x-element.form.button>
                                 </x-element.form.group>
