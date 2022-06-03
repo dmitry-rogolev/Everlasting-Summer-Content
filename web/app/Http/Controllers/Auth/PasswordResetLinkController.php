@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Password;
 
 class PasswordResetLinkController extends Controller
 {
+    protected string $header;
+
+    public function __construct()
+    {
+        parent::__construct(config("view.title"));
+
+        $this->header = config("app.name");
+    }
+    
     /**
      * Display the password reset link request view.
      *
@@ -15,7 +24,14 @@ class PasswordResetLinkController extends Controller
      */
     public function create()
     {
-        return view('auth.forgot-password');
+        return view('auth.forgot-password', 
+        [
+            "theme" => $this->theme, 
+            "themes" => $this->themes, 
+            "inversion_themes" => $this->inversionThemes, 
+            "title" => $this->title, 
+            "header" => $this->header, 
+        ]);
     }
 
     /**
