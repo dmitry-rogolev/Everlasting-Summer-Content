@@ -38,9 +38,12 @@
                         <x-element.dropdown-item url="{{ route('profile') }}">
                             Профиль
                         </x-element.dropdown-item>
-                        <x-element.dropdown-item url="">
-                            Выход
-                        </x-element.dropdown-item>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-element.dropdown-item url="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
+                                Выход
+                            </x-element.dropdown-item>
+                        </form>
                     </x-element.dropdown>
                 @else 
                     <x-element.dropdown name="Профиль">
