@@ -9,6 +9,8 @@ class SubNavigation extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function Nav()
     {
         return $this->belongsTo(Navigation::class);

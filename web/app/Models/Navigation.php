@@ -10,6 +10,8 @@ class Navigation extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function sub()
     {
         return $this->hasMany(SubNavigation::class);

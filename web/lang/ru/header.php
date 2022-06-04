@@ -9,13 +9,6 @@ return [
 
     ], 
 
-    "pages" => [
-
-        "welcome" => "Главная", 
-        "profile" => "Профиль", 
-
-    ], 
-
     "download-all" => "Скачать все", 
     "back" => "Назад", 
 

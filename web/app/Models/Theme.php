@@ -11,6 +11,8 @@ class Theme extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public static function cache()
     {
         if (!Cache::has("themes"))
@@ -18,7 +20,7 @@ class Theme extends Model
             $themes = new Collection();
             foreach (Theme::all() as $theme)
             {
-                $themes->put($theme->name, $theme->theme);
+                $themes->put(__("theme." . $theme->name), $theme->name);
             }
             Cache::add("themes", $themes, config("cache.keep"));
         }

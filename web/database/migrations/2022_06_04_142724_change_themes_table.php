@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table("themes", function(Blueprint $table)
         {
-            $table->dropColumn("name");
+            $table->dropTimestamps();
         });
     }
 
@@ -28,7 +28,7 @@ return new class extends Migration
     {
         Schema::table("themes", function(Blueprint $table)
         {
-            $table->string("name")->after("id");
+            $table->timestamps();
         });
     }
 };

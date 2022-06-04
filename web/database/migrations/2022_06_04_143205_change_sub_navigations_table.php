@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table("themes", function(Blueprint $table)
+        Schema::table("sub_navigations", function(Blueprint $table)
         {
-            $table->dropColumn("name");
+            $table->dropTimestamps();
         });
     }
 
@@ -26,9 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table("themes", function(Blueprint $table)
+        Schema::table("sub_navigations", function(Blueprint $table)
         {
-            $table->string("name")->after("id");
+            $table->timestamps();
         });
     }
 };
