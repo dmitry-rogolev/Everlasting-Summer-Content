@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", [ WelcomeController::class, "show" ])
     ->name("welcome");
 
-Route::get('/profile', [ ProfileController::class, "create" ])
+Route::get('/profile', [ ProfileController::class, "show" ])
     ->middleware(['auth'])
     ->name('profile');
 

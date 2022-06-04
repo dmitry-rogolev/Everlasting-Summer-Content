@@ -1,4 +1,5 @@
 <x-layout>
+    <x-slot:lang>{{ $lang }}</x-slot:lang>
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-body>
         <x-element.background>
@@ -18,7 +19,7 @@
                         <section class="col-12 px-0">
                             <x-element.flex flex="justify-content-between">
                                 <div class="col-2 p-0">
-                                    @if ($referer && is_string($referer))
+                                    @if ($referer)
                                         <x-element.flex>
                                             <a href="{{ $referer }}">
                                                 <x-element.form.button class="btn-lg btn-{{ $theme }}" title="{{ __('header.back') }}">
@@ -29,7 +30,7 @@
                                     @endif
                                 </div>
                                 <div class="col-2 p-0">
-                                    @if ($header && is_string($header))
+                                    @if ($header)
                                         <x-element.flex flex="justify-content-center">
                                             <x-element.header3>
                                                 {{ $header }}

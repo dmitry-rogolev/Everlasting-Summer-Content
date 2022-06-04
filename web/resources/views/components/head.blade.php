@@ -40,4 +40,4 @@
     type="text/javascript" 
     defer>
 </script>
-<title>{{ $title }}</title>
+<title>{!! $title !!}</title>

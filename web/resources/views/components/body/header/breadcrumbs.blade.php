@@ -3,11 +3,11 @@
         @foreach($breadcrumbs as $name => $link)
             @if ($name !== $breadcrumbs->keys()->last())
                 <li class="breadcrumb-item">
-                    <a href="{{ $link }}">{{ $name }}</a>
+                    <a href="{{ $link }}">{!! $name !!}</a>
                 </li>
             @else 
                 <li class="breadcrumb-item active" aria-current="page">
-                    {{ $name }}
+                    {!! $name !!}
                 </li>
             @endif
         @endforeach

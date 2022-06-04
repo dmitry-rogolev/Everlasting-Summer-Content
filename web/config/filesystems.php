@@ -62,6 +62,12 @@ return [
             "throw" => false, 
         ], 
 
+        "lang" => [
+            "driver" => "local", 
+            "root" => public_path("../lang"), 
+            "throw" => false, 
+        ], 
+
     ],
 
     /*

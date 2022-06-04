@@ -9,6 +9,13 @@ class SubNavigation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "name", 
+        "path", 
+        "uri", 
+        "navigation_id", 
+    ];
+
     public $timestamps = false;
 
     public function Nav()

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ $lang }}">
     <x-head title="{{ $title }}" />
     {{ $slot }}
 </html>

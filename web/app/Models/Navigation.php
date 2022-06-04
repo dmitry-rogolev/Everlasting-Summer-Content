@@ -10,6 +10,12 @@ class Navigation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "name", 
+        "path", 
+        "uri", 
+    ];
+
     public $timestamps = false;
 
     public function sub()

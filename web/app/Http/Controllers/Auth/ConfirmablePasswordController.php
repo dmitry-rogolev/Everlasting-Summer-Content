@@ -10,15 +10,6 @@ use Illuminate\Validation\ValidationException;
 
 class ConfirmablePasswordController extends Controller
 {
-    protected string $header;
-
-    public function __construct()
-    {
-        parent::__construct(config("view.title"));
-
-        $this->header = config("app.name");
-    }
-
     /**
      * Show the confirm password view.
      *
@@ -26,15 +17,17 @@ class ConfirmablePasswordController extends Controller
      */
     public function create(Request $request)
     {
-        $this->theme($request);
+        $this->settings($request);
         
         return view('auth.confirm-password', 
         [
-            "title" => $this->title, 
-            "header" => $this->header, 
             "theme" => $this->theme, 
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
+            "title" => $this->title, 
+            "lang" => $this->lang, 
+
+            "header" => config("app.name"), 
         ]);
     }
 

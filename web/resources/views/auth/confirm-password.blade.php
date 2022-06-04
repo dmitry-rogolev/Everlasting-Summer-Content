@@ -1,4 +1,5 @@
 <x-layout>
+    <x-slot:lang>{{ $lang }}</x-slot:lang>
     <x-slot:title>{{ $title }}</x-slot:title>
     <x-body>
         <x-element.background>

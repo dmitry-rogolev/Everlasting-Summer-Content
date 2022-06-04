@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // NavigationSeeder::class, 
             // SubNavigationSeeder::class, 
-            ThemeSeeder::class, 
+            // ThemeSeeder::class, 
+            LangSeeder::class, 
         ]);
     }
 }

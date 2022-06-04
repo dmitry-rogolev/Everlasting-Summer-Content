@@ -12,15 +12,6 @@ use Illuminate\Validation\Rules;
 
 class NewPasswordController extends Controller
 {
-    protected string $header;
-
-    public function __construct()
-    {
-        parent::__construct(config("view.title"));
-
-        $this->header = config("app.name");
-    }
-
     /**
      * Display the password reset view.
      *
@@ -29,16 +20,19 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request)
     {
-        $this->theme($request);
+        $this->settings($request);
 
         return view('auth.reset-password', 
         [
             'request' => $request, 
+            
             "theme" => $this->theme, 
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
             "title" => $this->title, 
-            "header" => $this->header, 
+            "lang" => $this->lang, 
+
+            "header" => config("app.name"), 
         ]);
     }
 

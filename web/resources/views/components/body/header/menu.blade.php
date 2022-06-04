@@ -19,7 +19,7 @@
                     <x-element.dropdown name="{{ $navigation->name }}">
                         @foreach ($navigation->sub as $sub)
                             <x-element.dropdown-item url="{{ url($sub->path) }}">
-                                {{ $sub->name }}
+                                {!! $sub->name !!}
                             </x-element.dropdown-item>
                         @endforeach
                     </x-element.dropdown>
@@ -28,7 +28,14 @@
             <x-element.dropdown name="{{ __('header.menu.theme') }}">
                 @foreach ($themes as $name => $theme)
                     <x-element.dropdown-item url="{{ url()->current() . '/?theme=' . $theme }}">
-                        {{ $name }}
+                        {!! $name !!}
+                    </x-element.dropdown-item>
+                @endforeach
+            </x-element.dropdown>
+            <x-element.dropdown name="{{ __('lang.lang') }}">
+                @foreach ($langs as $name => $lang)
+                    <x-element.dropdown-item url="{{ url()->current() . '/?lang=' . $lang }}">
+                        {!! $name !!}
                     </x-element.dropdown-item>
                 @endforeach
             </x-element.dropdown>
@@ -36,7 +43,7 @@
                 @auth
                     <x-element.dropdown name="{{ Auth::user()->name }}">
                         <x-element.dropdown-item url="{{ route('profile') }}">
-                            {{ __('header.menu.profile') }}
+                            {!! __('header.menu.profile') !!}
                         </x-element.dropdown-item>
                         <div class="dropdown-item cursor-pointer">
                             <x-element.form.logout />
@@ -45,11 +52,11 @@
                 @else 
                     <x-element.dropdown name="{{ __('header.menu.profile') }}">
                         <x-element.dropdown-item url="{{ route('login') }}">
-                            {{ __('auth.login.login') }}
+                            {!! __('auth.login.login') !!}
                         </x-element.dropdown-item>
                         @if (Route::has("register"))
                             <x-element.dropdown-item url="{{ route('register') }}">
-                                {{ __('auth.register.registration') }}
+                                {!! __('auth.register.registration') !!}
                             </x-element.dropdown-item>
                         @endif
                     </x-element.dropdown>

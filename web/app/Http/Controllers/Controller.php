@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lang;
+use App\Models\Navigation;
 use App\Models\Theme;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -10,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 
 class Controller extends BaseController
@@ -24,15 +27,18 @@ class Controller extends BaseController
 
     protected Collection $inversionThemes;
 
-    public function __construct(?string $title = null)
-    {
-        $this->title = $title ?? config("view.title");
-        
-        Cache::flush();
-        Theme::cache();
+    protected string $lang;
 
-        $this->themes = Cache::get("themes");
-        $this->inversionThemes = Cache::get("inversion_themes");
+    public function __construct()
+    {
+        Cache::flush();
+    }
+
+    protected function settings(Request $request, string $title = null)
+    {
+        $this->lang($request);
+        $this->theme($request);
+        $this->title($title);
     }
 
     protected function theme(Request $request)
@@ -42,5 +48,24 @@ class Controller extends BaseController
             session()->put("theme", $request->get("theme"));
         }
         $this->theme = session("theme", config("view.theme_default"));
+        Theme::cache();
+        $this->themes = Cache::get("themes");
+        $this->inversionThemes = Cache::get("inversion_themes");
+    }
+
+    protected function lang(Request $request)
+    {
+        if ($request->has("lang") && Storage::disk("lang")->exists($request->get("lang")))
+        {
+            session()->put("lang", $request->get("lang"));
+        }
+        $this->lang = session("lang", config("app.locale"));
+        App::setLocale(session("lang", config("app.locale")));
+        Lang::cache();
+    }
+
+    protected function title(string $title = null)
+    {
+        $this->title = $title ? $title . " | " . config("view.title") : config("view.title");
     }
 }

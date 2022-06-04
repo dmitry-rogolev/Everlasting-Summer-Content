@@ -21,9 +21,6 @@ abstract class Component extends BaseComponent
     protected function __construct()
     {
         $this->theme = session("theme", config("view.theme_default"));
-
-        Theme::cache();
-
         $this->themes = Cache::get("themes");
         $this->inversionThemes = Cache::get("inversion_themes");
     }

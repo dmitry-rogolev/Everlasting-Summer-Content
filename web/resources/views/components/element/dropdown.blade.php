@@ -7,7 +7,7 @@
         data-toggle="dropdown" 
         aria-haspopup="true" 
         aria-expanded="false">
-        {{ $name }}
+        {!! $name !!}
     </a>
     <div class="dropdown-menu" aria-labelledby="{{ $id }}">
         {{ $slot }}

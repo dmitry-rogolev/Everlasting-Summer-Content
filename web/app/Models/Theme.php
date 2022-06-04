@@ -11,6 +11,11 @@ class Theme extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "name", 
+        "inversion", 
+    ];
+
     public $timestamps = false;
 
     public static function cache()
@@ -31,7 +36,7 @@ class Theme extends Model
             $inversion_themes = new Collection();
             foreach ($all as $theme)
             {
-                $inversion_themes->put($theme->theme, $all->where("id", $theme->inversion)->values()->get(0)->theme);
+                $inversion_themes->put($theme->name, $all->where("id", $theme->inversion)->values()->get(0)->name);
             }
             Cache::add("inversion_themes", $inversion_themes, config("cache.keep"));
         }

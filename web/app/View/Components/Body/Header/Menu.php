@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Body\Header;
 
+use App\Models\Lang;
 use App\Models\Navigation;
 use App\View\Components\Component;
 use Illuminate\Support\Collection;
@@ -18,6 +19,8 @@ class Menu extends Component
     protected bool $login;
 
     protected string $class;
+
+    protected Collection $langs;
 
     /**
      * Create a new component instance.
@@ -41,9 +44,8 @@ class Menu extends Component
         $this->url = $url ? $url : url("/");
         $this->login = $login && $login === "true";
         $this->class = $class ?? "";
-
-        Navigation::cache();
         $this->navigations = Cache::get("navigations");
+        $this->langs = Cache::get("langs");
     }
 
     /**
@@ -63,6 +65,7 @@ class Menu extends Component
             "navigations" => $this->navigations, 
             "login" => $this->login, 
             "class" => $this->class, 
+            "langs" => $this->langs, 
         ]);
     }
 }
