@@ -18,7 +18,7 @@
                         </header>
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
                             <p>
-                                Забыли свой пароль? Нет проблем. Просто сообщите нам свой адрес электронной почты и мы вышлем вам на нее письмо с ссылкой для сброса пароля.
+                                {{ __('auth.forgot-password.text') }}
                             </p>
                             <x-auth.session-status />
                             <x-auth.error />
@@ -27,11 +27,11 @@
                                     @csrf
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="Электронная почта" placeholder="Электронная почта" :value="old('email')" required autocomplete="off" accesskey="e" autofocus tabindex="1" />
+                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" autofocus tabindex="1" />
                                 </x-element.form.group>
                                 <x-element.form.group class="text-center mt-4">
                                     <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="2">
-                                        Отправить письмо
+                                        {{ __('auth.forgot-password.send') }}
                                     </x-element.form.button>
                                 </x-element.form.group>
                             </form>

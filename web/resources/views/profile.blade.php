@@ -21,7 +21,7 @@
                                     @if ($referer && is_string($referer))
                                         <x-element.flex>
                                             <a href="{{ $referer }}">
-                                                <x-element.form.button class="btn-lg btn-{{ $theme }}" title="Назад">
+                                                <x-element.form.button class="btn-lg btn-{{ $theme }}" title="{{ __('header.back') }}">
                                                     &lt;
                                                 </x-element.form.button>
                                             </a>

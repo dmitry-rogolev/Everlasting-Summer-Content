@@ -18,11 +18,11 @@
                         </header>
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
                             <p>
-                                Спасибо, что зарегистрировались! Прежде чем приступить к работе, не могли бы вы подтвердить свой адрес электронной почты, перейдя по ссылке, которую мы только что отправили вам по электронной почте? Если вы не получили электронное письмо, мы с радостью вышлем вам другое. 
+                                {{ __('auth.verify-email.thanks') }}
                             </p>
                             @if (session('status') == 'verification-link-sent')
                                 <p>
-                                    Новая ссылка для подтверждения была отправлена на адрес электронной почты, который вы указали при регистрации.
+                                    {{ __('auth.verify-email.sent') }}
                                 </p>
                             @endif
                             <x-element.flex flex="flex-sm-row flex-column align-items-center justify-content-sm-between justify-content-center">
@@ -32,16 +32,11 @@
                                     </x-element.form.group>
                                     <x-element.form.group>
                                         <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="1">
-                                            Отправить письмо еще раз
+                                            {{ __('auth.verify-email.send') }}
                                         </x-element.form.button>
                                     </x-element.form.group>
                                 </form>
-                                <form class="mt-sm-0 mt-3" method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <a href="{{ route('logout') }}" tabindex="2" onclick="event.preventDefault();this.closest('form').submit();">
-                                        Выйти
-                                    </a>
-                                </form>
+                                <x-element.form.logout class="mt-sm-0 mt-3 cursor-pointer" />
                             </x-element.flex>
                         </main>
                     </x-element.flex>

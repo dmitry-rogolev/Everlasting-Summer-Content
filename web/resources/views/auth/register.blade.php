@@ -17,30 +17,30 @@
                             </a>
                         </header>
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
-                            <h4 class="mb-0 text-center text-{{ $inversion_themes->get($theme) }}">Регистрация</h4>
+                            <h4 class="mb-0 text-center text-{{ $inversion_themes->get($theme) }}">{{ __("auth.register.registration") }}</h4>
                             <x-auth.error />
                             <form method="POST" action="{{ route('register') }}">
                                 <x-element.form.group>
                                     @csrf
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" label="Имя" name="name" placeholder="Имя" :value="old('name')" required autofocus autocomplete="off" accesskey="n" tabindex="1" />
+                                    <x-element.form.input class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" label="{{ __('auth.name') }}" name="name" placeholder="{{ __('auth.name') }}" :value="old('name')" required autofocus autocomplete="off" accesskey="n" tabindex="1" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="Электронная почта" placeholder="Электронная почта" :value="old('email')" required autocomplete="off" accesskey="e" tabindex="2" />
+                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" tabindex="2" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="Пароль" placeholder="Пароль" required autocomplete="off" accesskey="p" tabindex="3" />
+                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="{{ __('auth.password') }}" placeholder="{{ __('auth.password') }}" required autocomplete="off" accesskey="p" tabindex="3" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password_confirmation" label="Подтверждение пароля" placeholder="Подтверждение пароля" required autocomplete="off" accesskey="c" tabindex="4" />
+                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password_confirmation" label="{{ __('auth.confirm') }}" placeholder="{{ __('auth.confirm') }}" required autocomplete="off" accesskey="c" tabindex="4" />
                                 </x-element.form.group>
                                 <x-element.form.group class="text-center">
-                                    <a href="{{ route('login') }}" tabindex="6">Уже зарегистрированны?</a>
+                                    <a href="{{ route('login') }}" tabindex="6">{{ __('auth.register.registered') }}</a>
                                 </x-element.form.group>
                                 <x-element.form.group class="text-center">
                                     <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="5">
-                                        Зарегистрироваться
+                                        {{ __('auth.register.register') }}
                                     </x-element.form.button>
                                 </x-element.form.group>
                             </form>

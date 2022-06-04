@@ -25,7 +25,7 @@
                     </x-element.dropdown>
                 @endif
             @endforeach
-            <x-element.dropdown name="Тема">
+            <x-element.dropdown name="{{ __('header.menu.theme') }}">
                 @foreach ($themes as $name => $theme)
                     <x-element.dropdown-item url="{{ url()->current() . '/?theme=' . $theme }}">
                         {{ $name }}
@@ -36,23 +36,20 @@
                 @auth
                     <x-element.dropdown name="{{ Auth::user()->name }}">
                         <x-element.dropdown-item url="{{ route('profile') }}">
-                            Профиль
+                            {{ __('header.menu.profile') }}
                         </x-element.dropdown-item>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-element.dropdown-item onclick="event.preventDefault();this.closest('form').submit();">
-                                Выйти
-                            </x-element.dropdown-item>
-                        </form>
+                        <div class="dropdown-item cursor-pointer">
+                            <x-element.form.logout />
+                        </div>
                     </x-element.dropdown>
                 @else 
-                    <x-element.dropdown name="Профиль">
+                    <x-element.dropdown name="{{ __('header.menu.profile') }}">
                         <x-element.dropdown-item url="{{ route('login') }}">
-                            Вход
+                            {{ __('auth.login.login') }}
                         </x-element.dropdown-item>
                         @if (Route::has("register"))
                             <x-element.dropdown-item url="{{ route('register') }}">
-                                Регистрация
+                                {{ __('auth.register.registration') }}
                             </x-element.dropdown-item>
                         @endif
                     </x-element.dropdown>

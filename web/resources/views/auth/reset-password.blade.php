@@ -26,17 +26,17 @@
                                     <x-element.form.input type="hidden" name="token" value="{{ $request->route('token') }}" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="Электронная почта" placeholder="Электронная почта" :value="old('email')" required autocomplete="off" accesskey="e" tabindex="1" />
+                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" tabindex="1" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="Новый пароль" placeholder="Новый пароль" required autocomplete="off" accesskey="p" tabindex="2" />
+                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="{{ __('auth.reset-password.new-password') }}" placeholder="{{ __('auth.reset-password.new-password') }}" required autocomplete="off" accesskey="p" tabindex="2" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password_confirmation" label="Подтверждение пароля" placeholder="Подтверждение пароля" required autocomplete="off" accesskey="c" tabindex="3" />
+                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password_confirmation" label="{{ __('auth.confirm') }}" placeholder="{{ __('auth.confirm') }}" required autocomplete="off" accesskey="c" tabindex="3" />
                                 </x-element.form.group>
                                 <x-element.form.group class="text-center mt-4">
                                     <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="5">
-                                        Сбросить пароль
+                                        {{ __('auth.reset-password.reset') }}
                                     </x-element.form.button>
                                 </x-element.form.group>
                             </form>

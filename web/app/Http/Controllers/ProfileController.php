@@ -10,10 +10,10 @@ class ProfileController extends ContentController
     public function __construct()
     {
         $breadcrumbs = new Collection([
-            "Главная" => route("welcome"), 
-            "Профиль" => route("profile"), 
+            __("header.pages.welcome") => route("welcome"), 
+            __("header.pages.profile") => route("profile"), 
         ]);
-        parent::__construct(config("view.title"), "Профиль", url("/"), $breadcrumbs);
+        parent::__construct(config("view.title"), __("header.pages.profile"), url("/"), $breadcrumbs);
     }
 
     public function create(Request $request)

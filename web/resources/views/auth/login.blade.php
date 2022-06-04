@@ -17,7 +17,7 @@
                             </a>
                         </header>
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
-                            <h4 class="mb-0 text-center text-{{ $inversion_themes->get($theme) }}">Вход</h4>
+                            <h4 class="mb-0 text-center text-{{ $inversion_themes->get($theme) }}">{{ __('auth.login.login') }}</h4>
                             <x-auth.session-status />
                             <x-auth.error />
                             <form method="POST" action="{{ route('login') }}">
@@ -25,22 +25,22 @@
                                     @csrf
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="Электронная почта" placeholder="Электронная почта" :value="old('email')" required autocomplete="off" accesskey="e" autofocus tabindex="1" />
+                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" autofocus tabindex="1" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="Пароль" placeholder="Пароль" required autocomplete="off" accesskey="p" tabindex="2" />
+                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="{{ __('auth.password') }}" placeholder="{{ __('auth.password') }}" required autocomplete="off" accesskey="p" tabindex="2" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.custom.checkbox name="remember" label="Запомните меня" tabindex="3" />
+                                    <x-element.form.custom.checkbox name="remember" label="{{ __('auth.login.remember') }}" tabindex="3" />
                                 </x-element.form.group>
                                 @if (Route::has('password.request'))
                                     <x-element.form.group class="text-center">
-                                        <a href="{{ route('password.request') }}" tabindex="5">Забыли пароль?</a>
+                                        <a href="{{ route('password.request') }}" tabindex="5">{{ __('auth.login.forgot') }}</a>
                                     </x-element.form.group>
                                 @endif
                                 <x-element.form.group class="text-center">
                                     <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="4">
-                                        Войти
+                                        {{ __('auth.login.enter') }}
                                     </x-element.form.button>
                                 </x-element.form.group>
                             </form>

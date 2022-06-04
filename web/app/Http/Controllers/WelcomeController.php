@@ -10,10 +10,10 @@ class WelcomeController extends ContentController
     public function __construct()
     {
         $breadcrumbs = new Collection([
-            "Главная" => url("/"), 
+            __("header.pages.welcome") => url("/"), 
         ]);
 
-        parent::__construct(config("view.title"), "Главная", "", $breadcrumbs);
+        parent::__construct(config("view.title"), __("header.pages.welcome"), "", $breadcrumbs);
     }
 
     public function show(Request $request)
