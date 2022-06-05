@@ -17,13 +17,11 @@ class ThemeSeeder extends Seeder
     {
         DB::table("themes")->insert([
             [
-                "name" => "Светлая", 
-                "theme" => "light",
+                "name" => "light",
                 "inversion" => 2,  
             ], 
             [
-                "name" => "Темная", 
-                "theme" => "dark", 
+                "name" => "dark", 
                 "inversion" => 1, 
             ], 
         ]);

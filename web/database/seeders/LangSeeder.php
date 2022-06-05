@@ -22,6 +22,15 @@ class LangSeeder extends Seeder
             [
                 "name" => "ru", 
             ], 
+            [
+                "name" => "ua", 
+            ], 
+            [
+                "name" => "by", 
+            ], 
+            [
+                "name" => "kz", 
+            ], 
         ]);
     }
 }
