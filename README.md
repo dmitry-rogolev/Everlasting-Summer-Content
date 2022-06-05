@@ -32,62 +32,78 @@ Email: drogolev@internet.ru
 
 Вконтакте: https://vk.com/dmitryrogolev
 
+## Перед установкой
+
+Перед установкой вам необходимо иметь следующее программное обеспечение: 
+
+1. Сервер и база данных;
+2. git
+3. composer
+4. php
+
 ## Инструкция по установке
 
-    1. Клонируйте репозиторий 
+1. Клонируйте репозиторий 
 
-    git clone https://github.com/dmitry-rogolev/Everlasting-Summer-Content.git 
+        git clone https://github.com/dmitry-rogolev/Everlasting-Summer-Content.git 
 
-    2. Перейдите в каталог web
+2. Перейдите в каталог web
 
-    cd web
+        cd web
 
-    3. Установите зависимости с помощью composer
+3. Установите зависимости с помощью composer
 
-    composer install
+        composer install
 
-    4. Создайте файл .env и скопируйте в него содержимое из файла .env.example в каталоге web
+4. Создайте файл .env и скопируйте в него содержимое из файла .env.example в каталоге web
 
-    5. Файл .env - это файл конфигурации приложения. Измените необходимые константы по необходимости. 
+5. Файл .env - это файл конфигурации приложения. Измените необходимые константы по необходимости. 
 
-    6. Выполните миграцию таблиц в базу данных 
+6. Выполните миграцию таблиц в базу данных 
 
-    php artisan migrate
+        php artisan migrate
 
-    7. Заполните таблицы необходимыми данными 
+7. Заполните таблицы необходимыми данными 
 
-    php artisan db:seed
+        php artisan db:seed
 
-    8. Запустите приложение 
+8. Запустите приложение 
 
-    php artisan serve
+        php artisan serve
+
+## Перед работой 
+
+Перед работой вам необходимо следующее программное обеспечение: 
+
+1. npm
+2. nodejs
 
 ## Инструкция по работе 
 
-    1. Перейдите в каталог web
+1. Перейдите в каталог web
 
-    cd web
+        cd web
 
-    2. Запустите приложение 
+2. Запустите приложение 
 
-    php artisan serve
+        php artisan serve
 
-    3. Откройте новый терминал
+3. Откройте новый терминал
 
-    4. Перейдите в каталог web
+4. Перейдите в каталог web
 
-    cd web
+        cd web
 
-    5. Установите Laravel Mix
+5. Установите Laravel Mix
 
-    npm install
+        npm install
 
-    5. Запустите компиляцию CSS и JavaScript
+5. Запустите компиляцию CSS и JavaScript
 
-    npm run watch
+        npm run watch
 
-    6. Откройте новый терминал
+6. Откройте новый терминал
 
-    7. Перейдите в каталог web
+7. Перейдите в каталог web
 
-    cd web
+        cd web
