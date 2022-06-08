@@ -46,8 +46,10 @@
                     </x-element.flex>
                 </header>
                 <main class="col-12 max-width-xl">
-                    <x-element.flex flex="flex-column">
+                    <x-element.flex>
+                        <x-element.ticket style="height: 250px; width: 250px;">
 
+                        </x-element.ticket>
                     </x-element.flex>
                 </main>
             </x-element.flex>

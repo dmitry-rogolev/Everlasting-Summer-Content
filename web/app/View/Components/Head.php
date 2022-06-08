@@ -66,7 +66,7 @@ class Head extends Component
         $this->jsBs = config("view.js_bs");
         $this->jsBsIntegrity = config("view.js_bs_integrity");
 
-        $this->themeLink = url(config("view.theme_directory") . "/" . $this->theme . ".css");
+        $this->themeLink = url(config("theme.directory") . "/" . $this->theme . ".css");
     }
 
     /**

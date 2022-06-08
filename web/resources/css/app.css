@@ -15,14 +15,12 @@ body {
     background-attachment: fixed;
 }
 .ticket {
-    box-sizing: border-box;
     background-size: cover; 
     background-repeat: no-repeat; 
     background-position: center center; 
     border-radius: 15px;
     border-width: 5px;
     border-style: solid;
-    cursor: pointer;
 }
 
 .max-width-xl {
@@ -83,11 +81,6 @@ body {
     html {
         font-size: 16px;
     }
-    .ticket {
-        min-width: 270px;
-        max-width: 270px; 
-        height: 270px;
-    }
 }
 @media (min-width: 576px)
 {
@@ -107,9 +100,5 @@ body {
 }
 @media (min-width: 1200px)
 {
-    .ticket {
-        min-width: 279px;
-        max-width: 279px; 
-        height: 279px;
-    }
+
 }

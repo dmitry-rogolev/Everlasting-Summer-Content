@@ -20,7 +20,7 @@ abstract class Component extends BaseComponent
      */
     protected function __construct()
     {
-        $this->theme = session("theme", config("view.theme_default"));
+        $this->theme = session("theme", config("theme.default"));
         $this->themes = Cache::get("themes");
         $this->inversionThemes = Cache::get("inversion_themes");
     }

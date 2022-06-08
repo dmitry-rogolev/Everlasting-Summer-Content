@@ -1,5 +1,5 @@
 .background {
-    background-image: url(/images/background-light.png?71a0a45cf5b480f00bc5fc532866b7ae);
+    background-image: url(/images/background.light.theme.png?71a0a45cf5b480f00bc5fc532866b7ae);
 }
 .background-albugo {
     background-color: rgba(0, 0, 0, 0.4);
@@ -7,17 +7,17 @@
 .bg-light {
     background-color: #eeeeeee5 !important;
 }
+.bg-light-hover:hover {
+    background-color: #d6d6d6ec !important;
+}
+.border-light {
+    border-color: #eeeeeee5 !important;
+}
+.border-light-hover:hover {
+    border-color: #d6d6d6ec !important;
+}
 .btn-light {
     background-color: #eeeeeee5 !important;
     border-color: #eeeeeee5 !important;
-}
-.ticket:hover .bg-light-hover {
-    background-color: #d6d6d6ec !important;
-}
-.ticket.border-light-hover:hover {
-    border-color: #d6d6d6ec !important;
-}
-.border-light {
-    border-color: #eeeeeeec !important;
 }
 

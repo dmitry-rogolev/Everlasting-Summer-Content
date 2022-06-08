@@ -47,7 +47,7 @@ class Controller extends BaseController
         {
             session()->put("theme", $request->get("theme"));
         }
-        $this->theme = session("theme", config("view.theme_default"));
+        $this->theme = session("theme", config("theme.default"));
         Theme::cache();
         $this->themes = Cache::get("themes");
         $this->inversionThemes = Cache::get("inversion_themes");

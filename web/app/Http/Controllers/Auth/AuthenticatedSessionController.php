@@ -54,7 +54,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $theme = session("theme", config("view.theme_default"));
+        $theme = session("theme", config("theme.default"));
         $lang = session("lang", config("app.locale"));
 
         Auth::guard('web')->logout();
