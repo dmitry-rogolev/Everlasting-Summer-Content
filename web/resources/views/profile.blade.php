@@ -48,7 +48,7 @@
                 <main class="col-12 max-width-xl">
                     <x-element.flex class="mt-3" flex="justify-content-center">
                         <div>
-                            <form action="{{ route('profile') }}" method="POST">
+                            <form action="{{ route('profile.avatar') }}" method="POST" enctype="muilipart/form-data">
                                 <x-element.form.group class="mb-0">
                                     @csrf
                                 </x-element.form.group>

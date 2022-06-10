@@ -18,8 +18,17 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", [ WelcomeController::class, "show" ])
     ->name("welcome");
 
-Route::get('/profile', [ ProfileController::class, "show" ])
+Route::get("profile", [ ProfileController::class, "show" ])
     ->middleware(['auth'])
-    ->name('profile');
+    ->name("profile");
+
+Route::prefix("profile")
+    ->middleware(["auth"])
+    ->name("profile.")
+    ->group(function()
+    {
+        Route::post("avatar", [ ProfileController::class, "store" ])
+            ->name("avatar");
+    });
 
 require __DIR__.'/auth.php';
