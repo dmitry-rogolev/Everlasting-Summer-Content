@@ -3,6 +3,17 @@
 return [
 
     "welcome" => "Головний", 
-    "profile" => "Профіль", 
+    
+    "profile" => [
+
+        "header" => "Профіль", 
+
+        "avatar" => [
+            
+            "header" => "Аватар", 
+
+        ], 
+
+    ], 
 
 ];

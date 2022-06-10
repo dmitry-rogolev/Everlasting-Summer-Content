@@ -4,17 +4,12 @@
 .background-albugo {
     background-color: rgba(255, 255, 255, 0.15);
 }
-
-.bg-dark {
-    background-color: #343a40ec !important;
+.no-photo {
+    background-image: url("../../images/no-photo.dark.theme.png");
 }
-.bg-dark-hover:hover {
-    background-color: #383f46ec !important;
+.no-photo-click {
+    background-image: url("../../images/no-photo.hover.dark.theme.png");
 }
-
-.border-dark {
-    border-color: #343a40ec !important;
-}
-.border-dark-hover:hover {
-    border-color: #383f46ec !important;
+.no-photo-hover:hover {
+    background-image: url("../../images/no-photo.hover.dark.theme.png");
 }

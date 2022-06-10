@@ -1,3 +1,287 @@
+.custom-file-input:lang(ru) ~ .custom-file-label::after {
+    content: "Загрузить файл";
+}
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+    content: "Upload a file";
+}
+.custom-file-input:lang(by) ~ .custom-file-label::after {
+    content: "Загрузіць файл";
+}
+.custom-file-input:lang(kz) ~ .custom-file-label::after {
+    content: "Файлды жүктеу";
+}
+.custom-file-input:lang(ua) ~ .custom-file-label::after {
+    content: "Завантажити файл";
+}
+.cursor-default, .cursor-default * {
+    cursor: default !important;
+}
+.cursor-pointer, .cursor-pointer * {
+    cursor: pointer !important;
+}
+.cursor-help, .cursor-help * {
+    cursor: help !important;
+}
+.cursor-not-allowed, .cursor-not-allowed * {
+    cursor: not-allowed !important;
+}
+.cursor-text, .cursor-text * {
+    cursor: text !important;
+}
+.cursor-vertical-text, .cursor-vertical-text * {
+    cursor: vertical-text !important;
+}
+.cursor-progress, .cursor-progress * {
+    cursor: progress !important;
+}
+.cursor-wait, .cursor-wait * {
+    cursor: wait !important;
+}
+.cursor-col-resize, .cursor-col-resize * {
+    cursor: col-resize !important;
+}
+.cursor-row-resize, .cursor-row-resize * {
+    cursor: row-resize !important;
+}
+.cursor-zoom-in, .cursor-zoom-in * {
+    cursor: zoom-in !important;
+}
+.cursor-zoom-out, .cursor-zoom-out * {
+    cursor: zoom-out !important;
+}
+.cursor-move, .cursor-move * {
+    cursor: move !important;
+}
+.cursor-all-scroll, .cursor-all-scroll * {
+    cursor: all-scroll !important;
+}
+.cursor-crosshair, .cursor-crosshair * {
+    cursor: crosshair !important;
+}
+.cursor-cell, .cursor-cell * {
+    cursor: cell !important;
+}
+.background {
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-attachment: fixed;
+}
+.bg-primary {
+    background-color: #007bffe5 !important;
+}
+.bg-primary-click {
+    background-color: #0069d9e5 !important;
+}
+.bg-primary-hover:hover {
+    background-color: #0069d9e5 !important;
+}
+.bg-secondary {
+    background-color: #6c757de5 !important;
+}
+.bg-secondary-click {
+    background-color: #5a6268e5 !important;
+}
+.bg-secondary-hover:hover {
+    background-color: #5a6268e5 !important;
+}
+.bg-success {
+    background-color: #28a745e5 !important;
+}
+.bg-success-click {
+    background-color: #218838e5 !important;
+}
+.bg-success-hover:hover {
+    background-color: #218838e5 !important;
+}
+.bg-danger {
+    background-color: #dc3545e5 !important;
+}
+.bg-danger-click {
+    background-color: #c82333e5 !important;
+}
+.bg-danger-hover:hover {
+    background-color: #c82333e5 !important;
+}
+.bg-warning {
+    background-color: #ffc107e5 !important;
+}
+.bg-warning-click {
+    background-color: #e0a800e5 !important;
+}
+.bg-warning-hover:hover {
+    background-color: #e0a800e5 !important;
+}
+.bg-info {
+    background-color: #17a2b8e5 !important;
+}
+.bg-info-click {
+    background-color: #138496e5 !important;
+}
+.bg-info-hover:hover {
+    background-color: #138496e5 !important;
+}
+.bg-light {
+    background-color: #eeeeeee5 !important;
+}
+.bg-light-click {
+    background-color: #d6d6d6ec !important;
+}
+.bg-light-hover:hover {
+    background-color: #d6d6d6ec !important;
+}
+.bg-dark {
+    background-color: #343a40ec !important;
+}
+.bg-dark-click {
+    background-color: #383f46ec !important;
+}
+.bg-dark-hover:hover {
+    background-color: #383f46ec !important;
+}
+.border-primary {
+    border-color: #007bffe5 !important;
+}
+.border-primary-click {
+    border-color: #0062cce5 !important;
+}
+.border-primary-hover:hover {
+    border-color: #0062cce5 !important;
+}
+.border-secondary {
+    border-color: #6c757de5 !important;
+}
+.border-secondary-click {
+    border-color: #545b62e5 !important;
+}
+.border-secondary-hover:hover {
+    border-color: #545b62e5 !important;
+}
+.border-success {
+    border-color: #28a745e5 !important;
+}
+.border-success-click {
+    border-color: #1e7e34e5 !important;
+}
+.border-success-hover:hover {
+    border-color: #1e7e34e5 !important;
+}
+.border-danger {
+    border-color: #dc3545e5 !important;
+}
+.border-danger-click {
+    border-color: #bd2130e5 !important;
+}
+.border-danger-hover:hover {
+    border-color: #bd2130e5 !important;
+}
+.border-warning {
+    border-color: #ffc107e5 !important;
+}
+.border-warning-click {
+    border-color: #ffc107e5 !important;
+}
+.border-warning-hover:hover {
+    border-color: #ffc107e5 !important;
+}
+.border-info {
+    border-color: #17a2b8e5 !important;
+}
+.border-info-click {
+    border-color: #117a8be5 !important;
+}
+.border-info-hover:hover {
+    border-color: #117a8be5 !important;
+}
+.border-light {
+    border-color: #eeeeeee5 !important;
+}
+.border-light-click {
+    border-color: #d6d6d6e5 !important;
+}
+.border-light-hover:hover {
+    border-color: #d6d6d6e5 !important;
+}
+.border-dark {
+    border-color: #343a40e5 !important;
+}
+.border-dark-click {
+    border-color: #383f46e5 !important;
+}
+.border-dark-hover:hover {
+    border-color: #383f46e5 !important;
+}
+.border-white {
+    border-color: #ffffffe5 !important;
+}
+.border-white-click {
+    border-color: #eeeeeee5 !important;
+}
+.border-white-hover:hover {
+    border-color: #eeeeeee5 !important;
+}
+.btn-primary {
+    background-color: #007bffe5 !important;
+    border-color: #007bffe5 !important;
+}
+.btn-primary:hover {
+    background-color: #0069d9e5 !important;
+    border-color: #0062cce5 !important;
+}
+.btn-secondary {
+    background-color: #6c757de5 !important;
+    border-color: #6c757de5 !important;
+}
+.btn-secondary:hover {
+    background-color: #5a6268e5 !important;
+    border-color: #545b62e5 !important;
+}
+.btn-success {
+    background-color: #28a745e5 !important;
+    border-color: #28a745e5 !important;
+}
+.btn-success:hover {
+    background-color: #218838e5 !important;
+    border-color: #1e7e34e5 !important;
+}
+.btn-danger {
+    background-color: #dc3545e5 !important;
+    border-color: #dc3545e5 !important;
+}
+.btn-danger:hover {
+    background-color: #c82333e5 !important;
+    border-color: #bd2130e5 !important;
+}
+.btn-warning {
+    background-color: #ffc107e5 !important;
+    border-color: #ffc107e5 !important;
+}
+.btn-warning:hover {
+    background-color: #e0a800e5 !important;
+    border-color: #d39e00e5 !important;
+}
+.btn-info {
+    background-color: #17a2b8e5 !important;
+    border-color: #17a2b8e5 !important;
+}
+.btn-info:hover {
+    background-color: #138496e5 !important;
+    border-color: #117a8be5 !important;
+}
+.btn-light {
+    background-color: #f8f9fae5 !important;
+    border-color: #f8f9fae5 !important;
+    background-color: #e2e6eae5 !important;
+    border-color: #dae0e5e5 !important;
+}
+.btn-dark {
+    background-color: #343a40e5 !important;
+    border-color: #343a40e5 !important;
+}
+.btn-dark:hover {
+    background-color: #23272be5 !important;
+    border-color: #1d2124e5 !important;
+}
 html {
     font-size: 14px;
     -webkit-user-select: none;
@@ -10,14 +294,8 @@ html {
 body {
     font-family: "Ubuntu", sans-serif;
 }
-.background {
-    background-size: cover;
-    background-repeat: no-repeat; 
-    background-position: center center;
-    background-attachment: fixed;
-}
 .ticket {
-    background-size: cover; 
+    background-size: 60% 60%; 
     background-repeat: no-repeat; 
     background-position: center center; 
     border-radius: 15px;
@@ -26,54 +304,6 @@ body {
 }
 .max-width-xl {
     max-width: 1200px;
-}
-.cursor-default {
-    cursor: default !important;
-}
-.cursor-default * {
-    cursor: default !important;
-}
-.cursor-pointer {
-    cursor: pointer !important;
-}
-.cursor-pointer * {
-    cursor: pointer !important;
-}
-.cursor-help {
-    cursor: help !important;
-}
-.cursor-help * {
-    cursor: help !important;
-}
-.cursor-not-allowed {
-    cursor: not-allowed !important;
-}
-.cursor-not-allowed * {
-    cursor: not-allowed !important;
-}
-.cursor-text {
-    cursor: text !important;
-}
-.cursor-text * {
-    cursor: text !important;
-}
-.cursor-vertical-text {
-    cursor: vertical-text !important;
-}
-.cursor-vertical-text * {
-    cursor: vertical-text !important;
-}
-.cursor-progress {
-    cursor: progress !important;
-}
-.cursor-progress * {
-    cursor: progress !important;
-}
-.cursor-wait {
-    cursor: wait !important;
-}
-.cursor-wait * {
-    cursor: wait !important;
 }
 @media (min-width: 0px)
 {

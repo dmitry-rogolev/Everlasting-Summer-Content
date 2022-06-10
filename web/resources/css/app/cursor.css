@@ -1,0 +1,48 @@
+.cursor-default, .cursor-default * {
+    cursor: default !important;
+}
+.cursor-pointer, .cursor-pointer * {
+    cursor: pointer !important;
+}
+.cursor-help, .cursor-help * {
+    cursor: help !important;
+}
+.cursor-not-allowed, .cursor-not-allowed * {
+    cursor: not-allowed !important;
+}
+.cursor-text, .cursor-text * {
+    cursor: text !important;
+}
+.cursor-vertical-text, .cursor-vertical-text * {
+    cursor: vertical-text !important;
+}
+.cursor-progress, .cursor-progress * {
+    cursor: progress !important;
+}
+.cursor-wait, .cursor-wait * {
+    cursor: wait !important;
+}
+.cursor-col-resize, .cursor-col-resize * {
+    cursor: col-resize !important;
+}
+.cursor-row-resize, .cursor-row-resize * {
+    cursor: row-resize !important;
+}
+.cursor-zoom-in, .cursor-zoom-in * {
+    cursor: zoom-in !important;
+}
+.cursor-zoom-out, .cursor-zoom-out * {
+    cursor: zoom-out !important;
+}
+.cursor-move, .cursor-move * {
+    cursor: move !important;
+}
+.cursor-all-scroll, .cursor-all-scroll * {
+    cursor: all-scroll !important;
+}
+.cursor-crosshair, .cursor-crosshair * {
+    cursor: crosshair !important;
+}
+.cursor-cell, .cursor-cell * {
+    cursor: cell !important;
+}

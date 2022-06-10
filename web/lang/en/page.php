@@ -3,6 +3,17 @@
 return [
 
     "welcome" => "Main", 
-    "profile" => "Profile", 
+    
+    "profile" => [
+
+        "header" => "Profile", 
+
+        "avatar" => [
+            
+            "header" => "Avatar", 
+
+        ], 
+
+    ], 
 
 ];

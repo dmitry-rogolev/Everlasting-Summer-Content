@@ -1,3 +1,10 @@
+@import url("app/lang.css");
+@import url("app/cursor.css");
+@import url("app/background.css");
+@import url("app/background/color.css");
+@import url("app/border/color.css");
+@import url("app/button/color.css");
+
 html {
     font-size: 14px;
     user-select: none;
@@ -8,14 +15,8 @@ body {
     font-family: "Ubuntu", sans-serif;
 }
 
-.background {
-    background-size: cover;
-    background-repeat: no-repeat; 
-    background-position: center center;
-    background-attachment: fixed;
-}
 .ticket {
-    background-size: cover; 
+    background-size: 60% 60%; 
     background-repeat: no-repeat; 
     background-position: center center; 
     border-radius: 15px;
@@ -25,55 +26,6 @@ body {
 
 .max-width-xl {
     max-width: 1200px;
-}
-
-.cursor-default {
-    cursor: default !important;
-}
-.cursor-default * {
-    cursor: default !important;
-}
-.cursor-pointer {
-    cursor: pointer !important;
-}
-.cursor-pointer * {
-    cursor: pointer !important;
-}
-.cursor-help {
-    cursor: help !important;
-}
-.cursor-help * {
-    cursor: help !important;
-}
-.cursor-not-allowed {
-    cursor: not-allowed !important;
-}
-.cursor-not-allowed * {
-    cursor: not-allowed !important;
-}
-.cursor-text {
-    cursor: text !important;
-}
-.cursor-text * {
-    cursor: text !important;
-}
-.cursor-vertical-text {
-    cursor: vertical-text !important;
-}
-.cursor-vertical-text * {
-    cursor: vertical-text !important;
-}
-.cursor-progress {
-    cursor: progress !important;
-}
-.cursor-progress * {
-    cursor: progress !important;
-}
-.cursor-wait {
-    cursor: wait !important;
-}
-.cursor-wait * {
-    cursor: wait !important;
 }
 
 @media (min-width: 0px)

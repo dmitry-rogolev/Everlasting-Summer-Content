@@ -3,6 +3,17 @@
 return [
 
     "welcome" => "Басты бет", 
-    "profile" => "Профиль", 
+    
+    "profile" => [
+
+        "header" => "Профиль", 
+
+        "avatar" => [
+            
+            "header" => "Аватар", 
+
+        ], 
+
+    ], 
 
 ];
