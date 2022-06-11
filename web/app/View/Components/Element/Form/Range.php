@@ -22,7 +22,7 @@ class Range extends Component
     {
         parent::__construct();
 
-        $this->id = Str::random(10);
+        $this->id = id();
         $this->label = $label ?? "";
         $this->class = $class ?? "";
     }

@@ -23,7 +23,7 @@ class Dropdown extends Component
         parent::__construct();
 
         $this->name = $name ?? "";
-        $this->id = Str::random(10);
+        $this->id = id();
         $this->class = $class ?? "";
     }
 

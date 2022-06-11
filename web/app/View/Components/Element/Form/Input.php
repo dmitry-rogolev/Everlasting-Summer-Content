@@ -26,8 +26,8 @@ class Input extends Component
     {
         parent::__construct();
 
-        $this->id = Str::random(10);
-        $this->aria = Str::random(10);
+        $this->id = id();
+        $this->aria = id();
         $this->label = $label ?? "";
         $this->small = $small ?? "";
         $this->class = $class ?? "";

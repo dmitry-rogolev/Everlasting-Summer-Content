@@ -91,4 +91,14 @@ return [
     // Integrity Bootstrap JS
     "js_bs_integrity" => env("HEAD_JS_BS_INTEGRITY", "sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"),
     
+
+    #############################################
+    #   КОНФИГУРАЦИЯ ИДЕНТИФИКАТОРОВ ШАБЛОНА    #
+    #############################################
+
+    // Префикс идентификатора
+    "id_prefix" => env("ID_PREFIX", "id_"), 
+
+    // Длина идентификатора без префикса
+    "id_length" => env("ID_LENGTH", 40), 
 ];

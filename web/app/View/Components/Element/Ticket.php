@@ -6,18 +6,24 @@ use App\View\Components\Component;
 
 class Ticket extends Component
 {
+    protected string $image;
+
     protected string $class;
+
+    protected string $style;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(?string $class = null)
+    public function __construct(?string $image = null, ?string $class = null, ?string $style = null)
     {
         parent::__construct();
 
+        $this->image = $image ?? "";
         $this->class = $class ?? "";
+        $this->style = $style ?? "";
     }
 
     /**
@@ -33,6 +39,8 @@ class Ticket extends Component
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
             "class" => $this->class, 
+            "style" => $this->style, 
+            "image" => $this->image, 
         ]);
     }
 }

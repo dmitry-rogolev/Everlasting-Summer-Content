@@ -22,13 +22,8 @@ Route::get("profile", [ ProfileController::class, "show" ])
     ->middleware(['auth'])
     ->name("profile");
 
-Route::prefix("profile")
+Route::post("profile", [ ProfileController::class, "store" ])
     ->middleware(["auth"])
-    ->name("profile.")
-    ->group(function()
-    {
-        Route::post("avatar", [ ProfileController::class, "store" ])
-            ->name("avatar");
-    });
+    ->name("profile.avatar");
 
 require __DIR__.'/auth.php';
