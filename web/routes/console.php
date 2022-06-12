@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command("model:trashed", function()
+{
+    $this->comment("Удалено " . User::onlyTrashed()->where("deleted_at", "<=", now()->subYears(2))->get()->each(function($item)
+    {
+        $item->forceDelete();
+    })->count() . " устаревших моделей");
+});
