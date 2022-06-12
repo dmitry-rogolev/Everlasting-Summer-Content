@@ -143,22 +143,12 @@ class ProfileController extends Controller
 
         if (!Hash::check($request->old_password, $request->user()->password))
             back()->withErrors(["old_password" => __("auth.errors.password")]);
+        
+        $user = $request->user();
+        
+        $user->password = Hash::make($request->password);
+        $user->save();
 
-        $status = Password::reset(
-            $request->only('password', 'password_confirmation'), 
-            function ($user) use ($request)
-            {
-                $user->forceFill([
-                    "password" => Hash::make($request->password), 
-                    "remember_token" => Str::random(60), 
-                ])->save();
-
-                event(new PasswordReset($user));
-            }
-        );
-
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route("profile")->with("status", $status)
-                    : back();
+        return back();
     }
 }
