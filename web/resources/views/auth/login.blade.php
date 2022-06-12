@@ -26,10 +26,10 @@
                                     @csrf
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" autofocus tabindex="1" />
+                                    <x-element.form.input type="email" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" autofocus tabindex="1" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="{{ __('auth.password') }}" placeholder="{{ __('auth.password') }}" required autocomplete="off" accesskey="p" tabindex="2" />
+                                    <x-element.form.input type="password" name="password" label="{{ __('auth.password') }}" placeholder="{{ __('auth.password') }}" required autocomplete="off" accesskey="p" tabindex="2" />
                                 </x-element.form.group>
                                 <x-element.form.group>
                                     <x-element.form.custom.checkbox name="remember" label="{{ __('auth.login.remember') }}" tabindex="3" />

@@ -25,16 +25,16 @@
                                     @csrf
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" label="{{ __('auth.name') }}" name="name" placeholder="{{ __('auth.name') }}" :value="old('name')" required autofocus autocomplete="off" accesskey="n" tabindex="1" />
+                                    <x-element.form.input label="{{ __('auth.name') }}" name="name" placeholder="{{ __('auth.name') }}" :value="old('name')" required autofocus autocomplete="off" accesskey="n" tabindex="1" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="email" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" tabindex="2" />
+                                    <x-element.form.input type="email" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" tabindex="2" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="{{ __('auth.password') }}" placeholder="{{ __('auth.password') }}" required autocomplete="off" accesskey="p" tabindex="3" />
+                                    <x-element.form.input type="password" name="password" label="{{ __('auth.password') }}" placeholder="{{ __('auth.password') }}" required autocomplete="off" accesskey="p" tabindex="3" />
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password_confirmation" label="{{ __('auth.confirm') }}" placeholder="{{ __('auth.confirm') }}" required autocomplete="off" accesskey="c" tabindex="4" />
+                                    <x-element.form.input type="password" name="password_confirmation" label="{{ __('auth.confirm') }}" placeholder="{{ __('auth.confirm') }}" required autocomplete="off" accesskey="c" tabindex="4" />
                                 </x-element.form.group>
                                 <x-element.form.group class="text-center">
                                     <a href="{{ route('login') }}" tabindex="6">{{ __('auth.register.registered') }}</a>

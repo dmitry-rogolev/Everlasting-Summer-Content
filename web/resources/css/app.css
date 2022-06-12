@@ -24,6 +24,13 @@ body {
     border-style: solid;
 }
 
+.user-select-contain {
+    user-select: contain !important;
+}
+.user-select-text {
+    user-select: text !important;
+}
+
 .max-width-xl {
     max-width: 1200px;
 }
@@ -46,9 +53,7 @@ body {
 }
 @media (min-width: 992px)
 {
-    html {
-        font-size: 13px;
-    }
+    
 }
 @media (min-width: 1200px)
 {

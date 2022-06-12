@@ -19,22 +19,13 @@
                         </header>
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
                             <p>
-                                {{ __('auth.forgot-password.text') }}
+                                {{ __("page.profile.delete-text") }}
                             </p>
-                            <x-auth.session-status />
-                            <x-auth.error />
-                            <form method="POST" action="{{ route('password.email') }}">
-                                <x-element.form.group>
-                                    @csrf
-                                </x-element.form.group>
-                                <x-element.form.group>
-                                    <x-element.form.input type="email" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" autofocus tabindex="1" />
-                                </x-element.form.group>
-                                <x-element.form.group class="text-center mt-4">
-                                    <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="2">
-                                        {{ __('auth.forgot-password.send') }}
-                                    </x-element.form.button>
-                                </x-element.form.group>
+                            <form class="text-center" action="{{ route('profile.delete') }}" method="POST">
+                                @csrf 
+                                <x-element.form.button class="btn-danger" type="submit">
+                                    {{ __("page.profile.delete") }}
+                                </x-element.form.button>
                             </form>
                         </main>
                     </x-element.flex>

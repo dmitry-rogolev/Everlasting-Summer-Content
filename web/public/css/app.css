@@ -302,6 +302,18 @@ body {
     border-width: 5px;
     border-style: solid;
 }
+.user-select-contain {
+    -webkit-user-select: contain !important;
+       -moz-user-select: contain !important;
+        -ms-user-select: element !important;
+            user-select: contain !important;
+}
+.user-select-text {
+    -webkit-user-select: text !important;
+       -moz-user-select: text !important;
+        -ms-user-select: text !important;
+            user-select: text !important;
+}
 .max-width-xl {
     max-width: 1200px;
 }
@@ -323,9 +335,7 @@ body {
 }
 @media (min-width: 992px)
 {
-    html {
-        font-size: 13px;
-    }
+    
 }
 @media (min-width: 1200px)
 {

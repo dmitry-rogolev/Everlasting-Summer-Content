@@ -19,7 +19,7 @@
                         </header>
                         <main class="col-12 pt-3 text-{{ $inversion_themes->get($theme) }}">
                             <p>
-                                {{ __('auth.confirm-password.text') }} 
+                                {{ __('auth.сonfirm-password.text') }} 
                             </p>
                             <x-auth.error />
                             <form method="POST">
@@ -27,11 +27,11 @@
                                     @csrf
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="password" class="form-control-lg bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" name="password" label="{{ __('auth.password') }}" placeholder="{{ __('auth.password') }}" required autocomplete="off" accesskey="p" tabindex="1" />
+                                    <x-element.form.input type="password" name="password" label="{{ __('auth.password') }}" placeholder="{{ __('auth.password') }}" required autocomplete="off" accesskey="p" tabindex="1" />
                                 </x-element.form.group>
                                 <x-element.form.group class="text-center mt-4">
                                     <x-element.form.button type="submit" class="btn-lg btn-{{ $inversion_themes->get($theme) }}" tabindex="2">
-                                        {{ __('auth.confirm-password.confirm') }}
+                                        {{ __('auth.сonfirm-password.confirm') }}
                                     </x-element.form.button>
                                 </x-element.form.group>
                             </form>

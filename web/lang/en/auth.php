@@ -13,9 +13,13 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    "errors" => [
+
+        'failed' => 'These credentials do not match our records.',
+        'password' => 'The provided password is incorrect.',
+        'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+
+    ], 
 
     "register" => [
 
@@ -41,7 +45,7 @@ return [
 
     ], 
 
-    "donfirm-password" => [
+    "сonfirm-password" => [
         
         "text" => "This is a protected area of the application. Please confirm your password before proceeding.", 
         "confirm" => "Confirm", 
@@ -57,7 +61,7 @@ return [
 
     "verify-email" => [
 
-        "thanks" => "Thank you for registering! Before you get started, could you confirm your email address by clicking on the link we just sent you by email? If you have not received an email, we will be happy to send you another one.", 
+        "thanks" => "Before you get started, could you confirm your email address by clicking on the link we just sent you by email? If you have not received an email, we will be happy to send you another one.", 
         "sent" => "A new confirmation link has been sent to the email address you provided during registration.", 
         "send" => "Send the email again", 
 

@@ -9,10 +9,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword as ResetPassword;
+use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable
+class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail */
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles, CanResetPassword, Prunable;
 
     /**
      * The attributes that are mass assignable.
@@ -47,5 +51,16 @@ class User extends Authenticatable
     public function avatar()
     {
         return $this->hasOne(Avatar::class);
+    }
+
+    public function prunable()
+    {
+        return static::where("deleted_at", "<=", now()->minute());
+    }
+
+    public function pruning()
+    {
+        $avatar = $this->avatar;
+        !$avatar ?: Storage::disk("public")->delete("avatars/" . $this->id . "_" . $avatar->hash . "." . $avatar->extension);
     }
 }
