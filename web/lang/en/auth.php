@@ -15,9 +15,10 @@ return [
 
     "errors" => [
 
-        'failed' => 'These credentials do not match our records.',
-        'password' => 'The provided password is incorrect.',
-        'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+        "email" => "An account with such an email address has already been registered.", 
+        'failed' => "The transmitted data does not correspond to our records.",
+        'password' => "The specified password is incorrect.",
+        'throttle' => "Too many login attempts. Please try again in :seconds seconds.",
 
     ], 
 

@@ -36,6 +36,6 @@ class Unique implements Rule
      */
     public function message()
     {
-        return 'Аккаунт с такой электронной почтой уже зарегистрирован.';
+        return __("auth.errors.email");
     }
 }
