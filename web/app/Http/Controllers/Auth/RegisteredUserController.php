@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Rules\User as UserRules;
 
 class RegisteredUserController extends Controller
 {
@@ -46,7 +47,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', new UserRules\Unique()],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 

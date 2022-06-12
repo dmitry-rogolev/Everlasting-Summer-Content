@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
+use App\Rules\User;
 
 class ProfileController extends Controller
 {
@@ -121,7 +122,7 @@ class ProfileController extends Controller
     public function email(Request $request)
     {
         $request->validate([
-            "email" => [ "required", "string", "email", "max:255", "unique:users" ], 
+            "email" => [ "required", "string", "email", "max:255", new User\Unique() ], 
         ]);
 
         $user = $request->user();
