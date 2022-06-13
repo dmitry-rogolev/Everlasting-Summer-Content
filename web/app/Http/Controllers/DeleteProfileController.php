@@ -9,7 +9,7 @@ class DeleteProfileController extends Controller
 {
     public function show(Request $request)
     {
-        $this->settings($request);
+        $this->settings();
 
         return view('profile.delete', 
         [

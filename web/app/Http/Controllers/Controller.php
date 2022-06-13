@@ -34,18 +34,19 @@ class Controller extends BaseController
         Cache::flush();
     }
 
-    protected function settings(Request $request, string $title = null)
+    protected function settings(string $title = null, bool $nav = false)
     {
-        $this->lang($request);
-        $this->theme($request);
+        $this->lang();
+        $this->theme();
         $this->title($title);
+        if ($nav) $this->nav();
     }
 
-    protected function theme(Request $request)
+    protected function theme()
     {
-        if ($request->has("theme") && Storage::disk("theme")->exists($request->get("theme") . ".css"))
+        if (request()->has("theme") && Storage::disk("theme")->exists(request()->get("theme") . ".css"))
         {
-            session()->put("theme", $request->get("theme"));
+            session()->put("theme", request()->get("theme"));
         }
         $this->theme = session("theme", config("theme.default"));
         Theme::cache();
@@ -53,11 +54,11 @@ class Controller extends BaseController
         $this->inversionThemes = Cache::get("inversion_themes");
     }
 
-    protected function lang(Request $request)
+    protected function lang()
     {
-        if ($request->has("lang") && Storage::disk("lang")->exists($request->get("lang")))
+        if (request()->has("lang") && Storage::disk("lang")->exists(request()->get("lang")))
         {
-            session()->put("lang", $request->get("lang"));
+            session()->put("lang", request()->get("lang"));
         }
         $this->lang = session("lang", config("app.locale"));
         App::setLocale(session("lang", config("app.locale")));
@@ -67,5 +68,15 @@ class Controller extends BaseController
     protected function title(string $title = null)
     {
         $this->title = $title ? $title . " | " . config("view.title") : config("view.title");
+    }
+
+    protected function nav()
+    {
+        Navigation::cache();
+    }
+
+    protected function breadcrumbs(Collection $breadcrumbs)
+    {
+        Cache::put("breadcrumbs", $breadcrumbs);
     }
 }

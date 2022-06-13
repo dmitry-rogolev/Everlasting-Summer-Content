@@ -69,11 +69,11 @@
 }
 
 .bg-dark {
-    background-color: #343a40ec !important;
+    background-color: #343a40e5 !important;
 }
 .bg-dark-click {
-    background-color: #383f46ec !important;
+    background-color: #383f46e5 !important;
 }
 .bg-dark-hover:hover {
-    background-color: #383f46ec !important;
+    background-color: #383f46e5 !important;
 }

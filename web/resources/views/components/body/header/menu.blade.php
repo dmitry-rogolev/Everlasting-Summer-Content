@@ -43,7 +43,10 @@
                 @auth
                     <x-element.dropdown name="{{ Auth::user()->name }}">
                         <x-element.dropdown-item url="{{ route('profile') }}">
-                            {!! __('header.menu.profile') !!}
+                            {!! __("page.profile.header") !!}
+                        </x-element.dropdown-item>
+                        <x-element.dropdown-item url="{{ route('my-content') }}">
+                            {!! __("page.my-content.header") !!}
                         </x-element.dropdown-item>
                         <div class="dropdown-item cursor-pointer">
                             <x-element.form.logout />

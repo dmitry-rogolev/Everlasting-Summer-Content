@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avatar;
-use App\Models\Navigation;
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
@@ -20,16 +16,14 @@ class ProfileController extends Controller
 {
     public function show(Request $request)
     {
-        $this->settings($request);
-
-        Navigation::cache();
+        $this->settings(null, true);
 
         $breadcrumbs = new Collection([
             __("page.welcome") => route("welcome"), 
             __("page.profile.header") => route("profile"), 
         ]);
 
-        Cache::put("breadcrumbs", $breadcrumbs);
+        $this->breadcrumbs($breadcrumbs);
 
         $avatar = $request->user()->avatar;
 
@@ -67,6 +61,11 @@ class ProfileController extends Controller
                 "id" => id(), 
                 "labelledby" => id(), 
                 "header" => __("page.profile.changing-password"), 
+            ]), 
+            "my_content" => new Collection([
+                "header" => __("page.my-content.header"), 
+                "preview" => "../images/previews/default." . $this->theme . config("theme.extension"), 
+                "href" => route("my-content"), 
             ]), 
         ]);
     }

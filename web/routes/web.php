@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeleteProfileController;
+use App\Http\Controllers\MyContentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,9 @@ Route::middleware(["auth", "auth.session"])->group(function()
             ->middleware(["password.confirm"])
             ->name("delete");
     });
+
+    Route::get("my-content", [ MyContentController::class, "show" ])
+        ->name("my-content");
 });
 
 require __DIR__.'/auth.php';

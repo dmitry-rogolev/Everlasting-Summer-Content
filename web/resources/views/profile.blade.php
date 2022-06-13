@@ -175,6 +175,15 @@
                                 </x-element.flex>
                             </div>
                         </x-element.flex>
+                        <x-element.flex flex="justify-content-center">
+                            <div>
+                                <x-element.ticket class="m-2" style="width: 250px; height: 250px;" image="{{ $my_content->get('preview') }}" href="{{ $my_content->get('href') }}">
+                                    <x-element.ticket.name>
+                                        {{ $my_content->get('header') }}
+                                    </x-element.ticket.name>
+                                </x-element.ticket>
+                            </div>
+                        </x-element.flex>
                     </x-element.flex>
                 </main>
             </x-element.flex>

@@ -18,3 +18,10 @@
     background-color: #eeeeeee5 !important;
     border-color: #eeeeeee5 !important;
 }
+
+.ticket:hover {
+    border-color: #d6d6d6e5 !important;
+}
+.ticket:hover .name {
+    background-color: #d6d6d6ec !important;
+}

@@ -22,4 +22,10 @@ return [
 
     ], 
 
+    "my-content" => [
+
+        "header" => "My Content", 
+
+    ], 
+
 ];

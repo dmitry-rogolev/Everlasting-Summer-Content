@@ -13,4 +13,10 @@
 .no-photo-hover:hover {
     background-image: url(/images/no-photo.hover.dark.theme.png?7c274773395f5facf8349fe5bee61e09);
 }
+.ticket:hover {
+    border-color: #383f46e5 !important;
+}
+.ticket:hover .name {
+    background-color: #383f46e5 !important;
+}
 
