@@ -32,9 +32,9 @@
     }
 }
 
-@function img($name: "default", $theme: "light")
+@function img($path: "default", $theme: "light")
 {
-    @return url("../images/#{$name}.#{$theme}#{theme_extension}");
+    @return url("#{$path}.#{$theme}#{$theme_extension}");
 }
 
 // Replace `$search` with `$replace` in `$string`

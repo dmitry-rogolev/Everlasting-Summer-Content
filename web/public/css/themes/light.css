@@ -3,7 +3,7 @@
 }
 
 .background-albugo {
-  background-color: #0000005b;
+  background-color: #0000005b !important;
 }
 
 .no-photo {
@@ -19,9 +19,9 @@
 }
 
 .ticket:hover {
-  border-color: #cbd3da !important;
+  border-color: #e0e5e9 !important;
 }
 
 .ticket:hover .name {
-  background-color: #cbd3da !important;
+  background-color: #e0e5e9 !important;
 }

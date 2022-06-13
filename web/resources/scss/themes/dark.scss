@@ -4,19 +4,19 @@
 $theme: "dark";
 
 .background {
-    background-image: img("background", $theme);
+    background-image: img("../../images/background", $theme);
 }
 .background-albugo {
     background-color: #{$white}1c !important;
 }
 .no-photo {
-    background-image: img("no-photo", $theme);
+    background-image: img("../../images/no-photo", $theme);
 }
 .no-photo-click {
-    background-image: img("no-photo.hover", $theme);
+    background-image: img("../../images/no-photo.hover", $theme);
 }
 .no-photo-hover:hover {
-    background-image: img("no-photo.hover", $theme);
+    background-image: img("../../images/no-photo.hover", $theme);
 }
 
 .ticket:hover {
