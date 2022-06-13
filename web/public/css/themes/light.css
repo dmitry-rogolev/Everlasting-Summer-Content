@@ -19,9 +19,9 @@
 }
 
 .ticket:hover {
-  border-color: #e0e5e9 !important;
+  border-color: #cbd3da !important;
 }
 
 .ticket:hover .name {
-  background-color: #e0e5e9 !important;
+  background-color: #cbd3da !important;
 }

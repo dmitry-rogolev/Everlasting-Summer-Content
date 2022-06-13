@@ -20,8 +20,8 @@ $theme: "light";
 }
 
 .ticket:hover {
-    border-color: darken($light, $theme-color-interval) !important;
+    border-color: darken($light, 15%) !important;
 }
 .ticket:hover .name {
-    background-color: darken($light, $theme-color-interval) !important;
+    background-color: darken($light, 15%) !important;
 }
