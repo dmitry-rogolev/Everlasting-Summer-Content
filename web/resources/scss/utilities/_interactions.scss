@@ -1,0 +1,6 @@
+@each $value in $user-selects {
+    .user-select-#{$value} 
+    { 
+        user-select: $value !important; 
+    }
+}

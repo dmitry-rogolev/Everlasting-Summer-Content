@@ -1,0 +1,3 @@
+@each $cursor in $cursors {
+    @include cursor-variant(".cursor-#{$cursor}", $cursor);
+}

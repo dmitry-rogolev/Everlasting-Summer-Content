@@ -16,7 +16,7 @@ class EmailVerificationPromptController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $this->settings($request);
+        $this->settings();
 
         return $request->user()->hasVerifiedEmail()
                     ? redirect()->intended(RouteServiceProvider::HOME)

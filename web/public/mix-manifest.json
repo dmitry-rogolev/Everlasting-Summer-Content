@@ -1,11 +1,5 @@
 {
-    "/css/app/lang.css": "/css/app/lang.css",
-    "/css/app/cursor.css": "/css/app/cursor.css",
-    "/css/app/background.css": "/css/app/background.css",
-    "/css/theme/dark.css": "/css/theme/dark.css",
-    "/css/theme/light.css": "/css/theme/light.css",
-    "/css/app.css": "/css/app.css",
-    "/css/app/button/color.css": "/css/app/button/color.css",
-    "/css/app/border/color.css": "/css/app/border/color.css",
-    "/css/app/background/color.css": "/css/app/background/color.css"
+    "/css/themes/dark.css": "/css/themes/dark.css",
+    "/css/themes/light.css": "/css/themes/light.css",
+    "/css/app.css": "/css/app.css"
 }

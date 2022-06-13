@@ -1,0 +1,27 @@
+@import "../functions";
+@import "../variables";
+
+$theme: "light";
+
+.background {
+    background-image: img("background", $theme);
+}
+.background-albugo {
+    background-color: #{$black}5b !important;
+} 
+.no-photo {
+    background-image: img("no-photo", $theme);
+}
+.no-photo-click {
+    background-image: img("no-photo.hover", $theme);
+}
+.no-photo-hover:hover {
+    background-image: img("no-photo.hover", $theme);
+}
+
+.ticket:hover {
+    border-color: darken($light, $theme-color-interval) !important;
+}
+.ticket:hover .name {
+    background-color: darken($light, $theme-color-interval) !important;
+}

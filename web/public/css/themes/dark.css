@@ -1,0 +1,27 @@
+.background {
+  background-image: url(/images/background.dark.theme.png?acbdaca4f949f3570db720ae90550153);
+}
+
+.background-albugo {
+  background-color: #ffffff1c;
+}
+
+.no-photo {
+  background-image: url(/images/no-photo.dark.theme.png?a53333ec047e24d37a2a3995b772109e);
+}
+
+.no-photo-click {
+  background-image: url(/images/no-photo.hover.dark.theme.png?7c274773395f5facf8349fe5bee61e09);
+}
+
+.no-photo-hover:hover {
+  background-image: url(/images/no-photo.hover.dark.theme.png?7c274773395f5facf8349fe5bee61e09);
+}
+
+.ticket:hover {
+  border-color: #3f474e !important;
+}
+
+.ticket:hover .name {
+  background-color: #3f474e !important;
+}

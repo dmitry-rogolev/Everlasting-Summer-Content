@@ -11,57 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.postCss('resources/css/app.css', 'public/css', 
-[
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-])
-.postCss("resources/css/theme/light.css", "public/css/theme", 
-[
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-])
-.postCss("resources/css/theme/dark.css", "public/css/theme", 
-[
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-])
-.postCss("resources/css/app/background.css", "public/css/app", 
-[
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-])
-.postCss("resources/css/app/cursor.css", "public/css/app", 
-[
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-])
-.postCss("resources/css/app/lang.css", "public/css/app", 
-[
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-])
-.postCss("resources/css/app/background/color.css", "public/css/app/background", 
-[
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-])
-.postCss("resources/css/app/border/color.css", "public/css/app/border", 
-[
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-])
-.postCss("resources/css/app/button/color.css", "public/css/app/button", 
-[
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-]);
+// require('postcss-import'),
+// require('tailwindcss'),
+// require('autoprefixer'),
+
+mix.sass('resources/scss/app.scss', 'public/css')
+.sass("resources/scss/themes/light.scss", "public/css/themes")
+.sass("resources/scss/themes/dark.scss", "public/css/themes");

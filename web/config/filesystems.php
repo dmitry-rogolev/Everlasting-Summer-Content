@@ -58,7 +58,7 @@ return [
 
         "theme" => [
             "driver" => "local", 
-            "root" => public_path("css/theme"), 
+            "root" => public_path("css/themes"), 
             "throw" => false, 
         ], 
 

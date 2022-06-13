@@ -1,0 +1,27 @@
+.background {
+  background-image: url(/images/background.light.theme.png?71a0a45cf5b480f00bc5fc532866b7ae);
+}
+
+.background-albugo {
+  background-color: #0000005b;
+}
+
+.no-photo {
+  background-image: url(/images/no-photo.light.theme.png?b4b932607fbb1700c01dd211400f9f1e);
+}
+
+.no-photo-click {
+  background-image: url(/images/no-photo.hover.light.theme.png?a2cbc6527bf707b5075e4f3324084488);
+}
+
+.no-photo-hover:hover {
+  background-image: url(/images/no-photo.hover.light.theme.png?a2cbc6527bf707b5075e4f3324084488);
+}
+
+.ticket:hover {
+  border-color: #cbd3da !important;
+}
+
+.ticket:hover .name {
+  background-color: #cbd3da !important;
+}

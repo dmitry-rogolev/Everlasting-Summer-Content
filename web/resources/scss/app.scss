@@ -1,18 +1,26 @@
-@import url("app/lang.css");
-@import url("app/cursor.css");
-@import url("app/background.css");
-@import url("app/background/color.css");
-@import url("app/border/color.css");
-@import url("app/button/color.css");
+@import "functions";
+@import "variables";
+@import "mixins";
+@import "root";
+@import "buttons";
+@import "custom-forms";
+@import "utilities";
+
+@include cursor-variant("*", "default");
 
 html {
-    font-size: 14px;
     user-select: none;
-    cursor: default;
     height: 100%;
 }
+
 body {
     font-family: "Ubuntu", sans-serif;
+}
+.background {
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 .ticket {
@@ -23,14 +31,6 @@ body {
     border-width: 5px;
     border-style: solid;
 }
-
-.user-select-contain {
-    user-select: contain !important;
-}
-.user-select-text {
-    user-select: text !important;
-}
-
 .max-width-xl {
     max-width: 1200px;
 }
@@ -59,3 +59,4 @@ body {
 {
 
 }
+
