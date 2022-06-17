@@ -1,0 +1,1 @@
+<img class="img-fluid {{ $class }}" {{ $attributes }} /> 

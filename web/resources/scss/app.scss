@@ -6,11 +6,10 @@
 @import "custom-forms";
 @import "utilities";
 
-@include cursor-variant("*", "default");
-
 html {
     user-select: none;
     height: 100%;
+    cursor: default;
 }
 
 body {
@@ -24,12 +23,16 @@ body {
 }
 
 .ticket {
-    background-size: 60% 60%; 
+    background-size: cover;
     background-repeat: no-repeat; 
     background-position: center center; 
     border-radius: 15px;
     border-width: 5px;
     border-style: solid;
+}
+.ticket .name {
+    border-bottom-left-radius: 8.4px;
+    border-bottom-right-radius: 8.4px;
 }
 .max-width-xl {
     max-width: 1200px;

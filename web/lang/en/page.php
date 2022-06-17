@@ -14,7 +14,6 @@ return [
         "old-password" => "Old password", 
         "new-password" => "New password", 
         "confirm" => "Password Confirmation", 
-        "change" => "To change", 
         "change-password" => "Change Password", 
         "changing-password" => "Changing the password", 
         "delete" => "Delete Account", 
@@ -25,6 +24,20 @@ return [
     "my-content" => [
 
         "header" => "My Content", 
+        "add" => "Add Content", 
+        "name" => "Title", 
+
+    ], 
+
+    "content" => [
+
+        "rename" => "Rename", 
+        "renaming" => "Renaming", 
+        "remove" => "Remove", 
+        "removing" => "Removing", 
+        "remove-text" => "Are you sure you want to delete this content? It will be impossible to cancel this action!", 
+        "exists" => "Content with the title :title already exists.", 
+        "no-exists" => "Content with the title :title does not exist.", 
 
     ], 
 

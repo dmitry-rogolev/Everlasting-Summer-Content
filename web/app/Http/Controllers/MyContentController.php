@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class MyContentController extends Controller
 {
@@ -28,6 +31,49 @@ class MyContentController extends Controller
 
             "header" => __("page.my-content.header"), 
             "referer" => url("/"), 
+
+            "add" => new Collection([
+                "id" => id(), 
+                "labelledby" => id(), 
+                "header" => __("page.my-content.add"), 
+                "path" => 
+                    Storage::disk("image")->exists("previews/add." . $this->theme . config("theme.extension")) 
+                    ? "../images/previews/add." . $this->theme . config("theme.extension") 
+                    : "", 
+            ]), 
+
+            "contents" => $request->user()->contents()->orderBy("title")->get(), 
         ]);
+    }
+
+    public function add(Request $request)
+    {
+        $request->validate([
+            "title" => [ "max:255" ], 
+            "file" => [ "required", "file", "mimes:jpg,jpeg,png,gif", "max:51200" ], 
+        ]);
+
+        $file = $request->file("file");
+
+        $name = Str::of($file->getClientOriginalName())->beforeLast(".");
+
+        if ($request->title && $request->user()->contents()->whereTitle($request->title)->first())
+            return back()->withErrors(["title" => __("page.content.exists", [ "title" => $request->title ])]);
+        
+        if (!$request->title && $request->user()->contents()->whereTitle($name)->first()) 
+            return back()->withErrors(["title" => __("page.content.exists", [ "title" => $name ])]);
+
+        Content::create([
+            "title" => $request->title ?? $name, 
+            "name" => $name, 
+            "hash" => Str::of($file->hashName())->beforeLast("."), 
+            "extension" => $file->extension(), 
+            "type" => $file->getClientMimeType(), 
+            "user_id" => $request->user()->id, 
+        ]);
+
+        $file->storeAs("contents/" . $request->user()->id, $file->hashName(), "public");
+
+        return back();
     }
 }

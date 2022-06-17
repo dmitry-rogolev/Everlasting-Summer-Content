@@ -18,10 +18,10 @@ $theme: "dark";
 .no-photo-hover:hover {
     background-image: img("../../images/no-photo.hover", $theme);
 }
-
-.ticket:hover {
-    border-color: lighten($dark, 3%) !important;
+.no-preview {
+    background-image: img("../../images/previews/default", $theme);
 }
+
 .ticket:hover .name {
-    background-color: lighten($dark, 3%) !important;
+    background-color: darken($dark, $theme-color-interval) + #{$opacity-color} !important;
 }

@@ -18,10 +18,10 @@
   background-image: url(/images/no-photo.hover.dark.theme.png?7c274773395f5facf8349fe5bee61e09);
 }
 
-.ticket:hover {
-  border-color: #3b4248 !important;
+.no-preview {
+  background-image: url(/images/default.dark.theme.png?c26d1480ae1e6a813ff1a50ebb565074);
 }
 
 .ticket:hover .name {
-  background-color: #3b4248 !important;
+  background-color: #222629e5 !important;
 }

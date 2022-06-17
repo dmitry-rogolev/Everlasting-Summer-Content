@@ -51,10 +51,10 @@
                         <x-auth.error />
                         <x-element.flex flex="justify-content-center">
                             <div class="m-2">
-                                <x-element.modal.button class="p-0" style="border-radius: 15px;" target="#{{ $avatar->get('id') }}" title="{{ __('page.profile.change') }}">
-                                    <x-element.ticket style="height: 250px; width: 250px;" image="{{ $avatar->get('path') }}">
+                                <x-element.modal.button class="p-0" style="border-radius: 15px;" target="#{{ $avatar->get('id') }}" title="{{ __('element.change') }}">
+                                    <x-element.ticket.photo style="height: 250px; width: 250px;" image="{{ $avatar->get('path') }}">
 
-                                    </x-element.ticket>
+                                    </x-element.ticket.photo>
                                 </x-element.modal.button>
                                 <x-element.modal id="{{ $avatar->get('id') }}" labelledby="{{ $avatar->get('labelledby') }}">
                                     <form action="{{ route('profile.avatar') }}" method="POST" enctype="multipart/form-data">
@@ -81,7 +81,7 @@
                             </div>
                             <div class="bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }} shadow-lg p-3 m-2" style="border-radius: 15px; min-width: 250px; min-height: 250px;">
                                 <x-element.flex flex="flex-column align-items-start">
-                                    <x-element.modal.button class="w-100 text-{{ $inversion_themes->get($theme) }}" target="#{{ $name->get('id') }}" title="{{ __('page.profile.change') }}">
+                                    <x-element.modal.button class="w-100 text-{{ $inversion_themes->get($theme) }}" target="#{{ $name->get('id') }}" title="{{ __('element.change') }}">
                                         <h3>
                                             {{ request()->user()->name }}
                                         </h3>
@@ -109,7 +109,7 @@
                                         </form>
                                     </x-element.modal>
                                     <p class="text-secondary ml-2 mb-0">{{ __("page.profile.email") }}</p>
-                                    <x-element.modal.button class="text-{{ $inversion_themes->get($theme) }}" target="#{{ $email->get('id') }}" title="{{ __('page.profile.change') }}">
+                                    <x-element.modal.button class="text-{{ $inversion_themes->get($theme) }}" target="#{{ $email->get('id') }}" title="{{ __('element.change') }}">
                                         {{ request()->user()->email }}
                                     </x-element.modal.button>
                                     <x-element.modal id="{{ $email->get('id') }}" labelledby="{{ $email->get('labelledby') }}">
@@ -177,11 +177,11 @@
                         </x-element.flex>
                         <x-element.flex flex="justify-content-center">
                             <div>
-                                <x-element.ticket class="m-2" style="width: 250px; height: 250px;" image="{{ $my_content->get('preview') }}" href="{{ $my_content->get('href') }}">
-                                    <x-element.ticket.name>
+                                <x-element.ticket.link class="m-2" style="width: 250px; height: 250px;" image="{{ $my_content->get('preview') }}" href="{{ $my_content->get('href') }}">
+                                    <x-element.ticket.link.name>
                                         {{ $my_content->get('header') }}
-                                    </x-element.ticket.name>
-                                </x-element.ticket>
+                                    </x-element.ticket.link.name>
+                                </x-element.ticket.link>
                             </div>
                         </x-element.flex>
                     </x-element.flex>

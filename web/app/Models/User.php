@@ -55,6 +55,11 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         return $this->hasOne(Avatar::class);
     }
 
+    public function contents()
+    {
+        return $this->hasMany(Content::class);
+    }
+
     public function forceDelete()
     {
         $avatar = $this->avatar;

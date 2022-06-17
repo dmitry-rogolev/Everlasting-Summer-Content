@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DeleteProfileController;
 use App\Http\Controllers\MyContentController;
 use App\Http\Controllers\ProfileController;
@@ -50,6 +51,24 @@ Route::middleware(["auth", "auth.session"])->group(function()
 
     Route::get("my-content", [ MyContentController::class, "show" ])
         ->name("my-content");
+
+    Route::prefix("my-content")->name("my-content.")->group(function()
+    {
+        Route::post("add", [ MyContentController::class, "add" ])
+            ->name("add");
+
+        Route::get("{content}", [ ContentController::class, "show" ])
+            ->name("content");
+
+        Route::prefix("{content}")->name("content.")->group(function()
+        {
+            Route::post("rename", [ ContentController::class, "rename" ])
+                ->name("rename");
+
+            Route::post("remove", [ ContentController::class, "remove" ])
+                ->name("remove");
+        });
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Navigation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 
 class WelcomeController extends Controller
 {

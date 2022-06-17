@@ -1,21 +1,21 @@
 @each $color, $value in $theme-colors {
     .bg-#{$color} {
-        background-color: #{$value}#{$opacity-color} !important;
+        background-color: #{$value} + #{$opacity-color} !important;
     }
     .bg-#{$color}-click {
-        background-color: darken($value, $theme-color-interval) !important;
+        background-color: darken($value, $theme-color-interval) + #{$opacity-color} !important;
     }
     .bg-#{$color}-hover:hover {
-        background-color: darken($value, $theme-color-interval) !important;
+        background-color: darken($value, $theme-color-interval) + #{$opacity-color} !important;
     }
 }
 
 .bg-white {
-    background-color: #{$white}#{$opacity-color} !important;
+    background-color: #{$white} + #{$opacity-color} !important;
 }
 .bg-white-click {
-    background-color: darken($white, $theme-color-interval) !important;
+    background-color: darken($white, $theme-color-interval) + #{$opacity-color} !important;
 }
 .bg-white-hover:hover {
-    background-color: darken($white, $theme-color-interval) !important;
+    background-color: darken($white, $theme-color-interval) + #{$opacity-color} !important;
 }

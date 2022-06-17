@@ -91,11 +91,11 @@
 }
 
 .bg-primary-click {
-  background-color: #0067d6 !important;
+  background-color: #0067d6e5 !important;
 }
 
 .bg-primary-hover:hover {
-  background-color: #0067d6 !important;
+  background-color: #0067d6e5 !important;
 }
 
 .bg-secondary {
@@ -103,11 +103,11 @@
 }
 
 .bg-secondary-click {
-  background-color: #596167 !important;
+  background-color: #596167e5 !important;
 }
 
 .bg-secondary-hover:hover {
-  background-color: #596167 !important;
+  background-color: #596167e5 !important;
 }
 
 .bg-success {
@@ -115,11 +115,11 @@
 }
 
 .bg-success-click {
-  background-color: #208637 !important;
+  background-color: #208637e5 !important;
 }
 
 .bg-success-hover:hover {
-  background-color: #208637 !important;
+  background-color: #208637e5 !important;
 }
 
 .bg-info {
@@ -127,11 +127,11 @@
 }
 
 .bg-info-click {
-  background-color: #128294 !important;
+  background-color: #128294e5 !important;
 }
 
 .bg-info-hover:hover {
-  background-color: #128294 !important;
+  background-color: #128294e5 !important;
 }
 
 .bg-warning {
@@ -139,11 +139,11 @@
 }
 
 .bg-warning-click {
-  background-color: #dda600 !important;
+  background-color: #dda600e5 !important;
 }
 
 .bg-warning-hover:hover {
-  background-color: #dda600 !important;
+  background-color: #dda600e5 !important;
 }
 
 .bg-danger {
@@ -151,11 +151,11 @@
 }
 
 .bg-danger-click {
-  background-color: #c62232 !important;
+  background-color: #c62232e5 !important;
 }
 
 .bg-danger-hover:hover {
-  background-color: #c62232 !important;
+  background-color: #c62232e5 !important;
 }
 
 .bg-light {
@@ -163,11 +163,11 @@
 }
 
 .bg-light-click {
-  background-color: #e0e5e9 !important;
+  background-color: #e0e5e9e5 !important;
 }
 
 .bg-light-hover:hover {
-  background-color: #e0e5e9 !important;
+  background-color: #e0e5e9e5 !important;
 }
 
 .bg-dark {
@@ -175,11 +175,11 @@
 }
 
 .bg-dark-click {
-  background-color: #222629 !important;
+  background-color: #222629e5 !important;
 }
 
 .bg-dark-hover:hover {
-  background-color: #222629 !important;
+  background-color: #222629e5 !important;
 }
 
 .bg-white {
@@ -187,11 +187,11 @@
 }
 
 .bg-white-click {
-  background-color: #ebebeb !important;
+  background-color: #ebebebe5 !important;
 }
 
 .bg-white-hover:hover {
-  background-color: #ebebeb !important;
+  background-color: #ebebebe5 !important;
 }
 
 .border-primary {
@@ -199,11 +199,11 @@
 }
 
 .border-primary-click {
-  border-color: #0067d6 !important;
+  border-color: #0067d6e5 !important;
 }
 
 .border-primary-hover:hover {
-  border-color: #0067d6 !important;
+  border-color: #0067d6e5 !important;
 }
 
 .border-secondary {
@@ -211,11 +211,11 @@
 }
 
 .border-secondary-click {
-  border-color: #596167 !important;
+  border-color: #596167e5 !important;
 }
 
 .border-secondary-hover:hover {
-  border-color: #596167 !important;
+  border-color: #596167e5 !important;
 }
 
 .border-success {
@@ -223,11 +223,11 @@
 }
 
 .border-success-click {
-  border-color: #208637 !important;
+  border-color: #208637e5 !important;
 }
 
 .border-success-hover:hover {
-  border-color: #208637 !important;
+  border-color: #208637e5 !important;
 }
 
 .border-info {
@@ -235,11 +235,11 @@
 }
 
 .border-info-click {
-  border-color: #128294 !important;
+  border-color: #128294e5 !important;
 }
 
 .border-info-hover:hover {
-  border-color: #128294 !important;
+  border-color: #128294e5 !important;
 }
 
 .border-warning {
@@ -247,11 +247,11 @@
 }
 
 .border-warning-click {
-  border-color: #dda600 !important;
+  border-color: #dda600e5 !important;
 }
 
 .border-warning-hover:hover {
-  border-color: #dda600 !important;
+  border-color: #dda600e5 !important;
 }
 
 .border-danger {
@@ -259,11 +259,11 @@
 }
 
 .border-danger-click {
-  border-color: #c62232 !important;
+  border-color: #c62232e5 !important;
 }
 
 .border-danger-hover:hover {
-  border-color: #c62232 !important;
+  border-color: #c62232e5 !important;
 }
 
 .border-light {
@@ -271,11 +271,11 @@
 }
 
 .border-light-click {
-  border-color: #e0e5e9 !important;
+  border-color: #e0e5e9e5 !important;
 }
 
 .border-light-hover:hover {
-  border-color: #e0e5e9 !important;
+  border-color: #e0e5e9e5 !important;
 }
 
 .border-dark {
@@ -283,11 +283,11 @@
 }
 
 .border-dark-click {
-  border-color: #222629 !important;
+  border-color: #222629e5 !important;
 }
 
 .border-dark-hover:hover {
-  border-color: #222629 !important;
+  border-color: #222629e5 !important;
 }
 
 .border-white {
@@ -295,11 +295,11 @@
 }
 
 .border-white-click {
-  border-color: #ebebeb !important;
+  border-color: #ebebebe5 !important;
 }
 
 .border-white-hover:hover {
-  border-color: #ebebeb !important;
+  border-color: #ebebebe5 !important;
 }
 
 .user-select-all {
@@ -336,112 +336,108 @@
           user-select: text !important;
 }
 
-.cursor-default, .cursor-default * {
-  cursor: "default" !important;
+.cursor-default {
+  cursor: default !important;
 }
 
-.cursor-pointer, .cursor-pointer * {
-  cursor: "pointer" !important;
+.cursor-pointer {
+  cursor: pointer !important;
 }
 
-.cursor-help, .cursor-help * {
-  cursor: "help" !important;
+.cursor-help {
+  cursor: help !important;
 }
 
-.cursor-not-allowed, .cursor-not-allowed * {
-  cursor: "not-allowed" !important;
+.cursor-not-allowed {
+  cursor: not-allowed !important;
 }
 
-.cursor-text, .cursor-text * {
-  cursor: "text" !important;
+.cursor-text {
+  cursor: text !important;
 }
 
-.cursor-vertical-text, .cursor-vertical-text * {
-  cursor: "vertical-text" !important;
+.cursor-vertical-text {
+  cursor: vertical-text !important;
 }
 
-.cursor-progress, .cursor-progress * {
-  cursor: "progress" !important;
+.cursor-progress {
+  cursor: progress !important;
 }
 
-.cursor-wait, .cursor-wait * {
-  cursor: "wait" !important;
+.cursor-wait {
+  cursor: wait !important;
 }
 
-.cursor-n-resize, .cursor-n-resize * {
-  cursor: "n-resize" !important;
+.cursor-n-resize {
+  cursor: n-resize !important;
 }
 
-.cursor-ne-resize, .cursor-ne-resize * {
-  cursor: "ne-resize" !important;
+.cursor-ne-resize {
+  cursor: ne-resize !important;
 }
 
-.cursor-e-resize, .cursor-e-resize * {
-  cursor: "e-resize" !important;
+.cursor-e-resize {
+  cursor: e-resize !important;
 }
 
-.cursor-se-resize, .cursor-se-resize * {
-  cursor: "se-resize" !important;
+.cursor-se-resize {
+  cursor: se-resize !important;
 }
 
-.cursor-s-resize, .cursor-s-resize * {
-  cursor: "s-resize" !important;
+.cursor-s-resize {
+  cursor: s-resize !important;
 }
 
-.cursor-sw-resize, .cursor-sw-resize * {
-  cursor: "sw-resize" !important;
+.cursor-sw-resize {
+  cursor: sw-resize !important;
 }
 
-.cursor-w-resize, .cursor-w-resize * {
-  cursor: "w-resize" !important;
+.cursor-w-resize {
+  cursor: w-resize !important;
 }
 
-.cursor-nw-resize, .cursor-nw-resize * {
-  cursor: "nw-resize" !important;
+.cursor-nw-resize {
+  cursor: nw-resize !important;
 }
 
-.cursor-nesw-resize, .cursor-nesw-resize * {
-  cursor: "nesw-resize" !important;
+.cursor-nesw-resize {
+  cursor: nesw-resize !important;
 }
 
-.cursor-nwse-resize, .cursor-nwse-resize * {
-  cursor: "nwse-resize" !important;
+.cursor-nwse-resize {
+  cursor: nwse-resize !important;
 }
 
-.cursor-col-resize, .cursor-col-resize * {
-  cursor: "col-resize" !important;
+.cursor-col-resize {
+  cursor: col-resize !important;
 }
 
-.cursor-row-resize, .cursor-row-resize * {
-  cursor: "row-resize" !important;
+.cursor-row-resize {
+  cursor: row-resize !important;
 }
 
-.cursor-zoom-in, .cursor-zoom-in * {
-  cursor: "zoom-in" !important;
+.cursor-zoom-in {
+  cursor: zoom-in !important;
 }
 
-.cursor-zoom-out, .cursor-zoom-out * {
-  cursor: "zoom-out" !important;
+.cursor-zoom-out {
+  cursor: zoom-out !important;
 }
 
-.cursor-move, .cursor-move * {
-  cursor: "move" !important;
+.cursor-move {
+  cursor: move !important;
 }
 
-.cursor-all-scroll, .cursor-all-scroll * {
-  cursor: "all-scroll" !important;
+.cursor-all-scroll {
+  cursor: all-scroll !important;
 }
 
-.cursor-crosshair, .cursor-crosshair * {
-  cursor: "crosshair" !important;
+.cursor-crosshair {
+  cursor: crosshair !important;
 }
 
-.cursor-cell, .cursor-cell * {
-  cursor: "cell" !important;
-}
-
-* {
-  cursor: "default" !important;
+.cursor-cell {
+  cursor: cell !important;
 }
 
 html {
@@ -450,6 +446,7 @@ html {
       -ms-user-select: none;
           user-select: none;
   height: 100%;
+  cursor: default;
 }
 
 body {
@@ -464,12 +461,17 @@ body {
 }
 
 .ticket {
-  background-size: 60% 60%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   border-radius: 15px;
   border-width: 5px;
   border-style: solid;
+}
+
+.ticket .name {
+  border-bottom-left-radius: 8.4px;
+  border-bottom-right-radius: 8.4px;
 }
 
 .max-width-xl {
