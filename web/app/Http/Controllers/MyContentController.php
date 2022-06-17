@@ -36,10 +36,6 @@ class MyContentController extends Controller
                 "id" => id(), 
                 "labelledby" => id(), 
                 "header" => __("page.my-content.add"), 
-                "path" => 
-                    Storage::disk("image")->exists("previews/add." . $this->theme . config("theme.extension")) 
-                    ? "../images/previews/add." . $this->theme . config("theme.extension") 
-                    : "", 
             ]), 
 
             "contents" => $request->user()->contents()->orderBy("title")->get(), 

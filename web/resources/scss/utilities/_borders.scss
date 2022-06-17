@@ -1,21 +1,30 @@
 @each $color, $value in $theme-colors {
     .border-#{$color} {
-        border-color: #{$value} + #{$opacity-color} !important;
+        border-color: $value + $opacity-color !important;
     }
     .border-#{$color}-click {
-        border-color: darken($value, $theme-color-interval) + #{$opacity-color} !important;
+        border-color: darken($value, $theme-color-interval) + $opacity-color !important;
     }
     .border-#{$color}-hover:hover {
-        border-color: darken($value, $theme-color-interval) + #{$opacity-color} !important;
+        border-color: darken($value, $theme-color-interval) + $opacity-color !important;
     }
 }
 
 .border-white {
-    border-color: #{$white} + #{$opacity-color} !important; 
+    border-color: $white + $opacity-color !important; 
 }
 .border-white-click {
-    border-color: darken($white, $theme-color-interval) + #{$opacity-color} !important;
+    border-color: darken($white, $theme-color-interval) + $opacity-color !important;
 }
 .border-white-hover:hover {
-    border-color: darken($white, $theme-color-interval) + #{$opacity-color} !important;
+    border-color: darken($white, $theme-color-interval) + $opacity-color !important;
+}
+.border-dark {
+    border-color: $dark + $opacity-color !important; 
+}
+.border-dark-click {
+    border-color: lighten($dark, $theme-color-interval) + $opacity-color !important;
+}
+.border-dark-hover:hover {
+    border-color: lighten($dark, $theme-color-interval) + $opacity-color !important;
 }

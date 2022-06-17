@@ -1,6 +1,6 @@
 @each $color, $value in $theme-colors {
     .btn-#{$color} {
-        border-color: #{$value}#{$opacity-color} !important;
-        background-color: #{$value}#{$opacity-color} !important;
+        border-color: $value + $opacity-color !important;
+        background-color: $value + $opacity-color !important;
     }
 }

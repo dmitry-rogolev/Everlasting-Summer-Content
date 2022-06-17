@@ -11,17 +11,53 @@
 }
 
 .no-photo-click {
-  background-image: url(/images/no-photo.hover.dark.theme.png?7c274773395f5facf8349fe5bee61e09);
+  background-image: url(/images/no-photo.hover.dark.theme.png?2a979af81d948b861fdc3610b9c8cd61);
 }
 
 .no-photo-hover:hover {
-  background-image: url(/images/no-photo.hover.dark.theme.png?7c274773395f5facf8349fe5bee61e09);
+  background-image: url(/images/no-photo.hover.dark.theme.png?2a979af81d948b861fdc3610b9c8cd61);
 }
 
 .no-preview {
   background-image: url(/images/default.dark.theme.png?c26d1480ae1e6a813ff1a50ebb565074);
 }
 
+.add {
+  background-image: url(/images/add.dark.theme.png?855fe46bb23a3cb5004b2163545e6ba8);
+}
+
+.add-click {
+  background-image: url(/images/add.hover.dark.theme.png?650e468a97a07f2fbb1f2a87266a1b56);
+}
+
+.add-hover:hover {
+  background-image: url(/images/add.hover.dark.theme.png?650e468a97a07f2fbb1f2a87266a1b56);
+}
+
+.add-folder {
+  background-image: url(/images/add-folder.dark.theme.png?00df28b49213f9b2801ed8e8663a693e);
+}
+
+.add-folder-click {
+  background-image: url(/images/add-folder.hover.dark.theme.png?0c4b1c322a9f1aa0251fc31bb1ddbc92);
+}
+
+.add-folder-hover:hover {
+  background-image: url(/images/add-folder.hover.dark.theme.png?0c4b1c322a9f1aa0251fc31bb1ddbc92);
+}
+
+.folder {
+  background-image: url(/images/folder.dark.theme.png?532b9d8a4276a425fbb74e8a6cf7e106);
+}
+
+.folder-click {
+  background-image: url(/images/folder.hover.dark.theme.png?0872d399314fd1f87715bca3ae5a992d);
+}
+
+.folder-hover:hover {
+  background-image: url(/images/folder.hover.dark.theme.png?0872d399314fd1f87715bca3ae5a992d);
+}
+
 .ticket:hover .name {
-  background-color: #222629e5 !important;
+  background-color: #464e57e5 !important;
 }

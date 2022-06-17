@@ -21,6 +21,33 @@ $theme: "light";
 .no-preview {
     background-image: img("../../images/previews/default", $theme);
 }
+.add {
+    background-image: img("../../images/add", $theme);
+}
+.add-click {
+    background-image: img("../../images/add.hover", $theme);
+}
+.add-hover:hover {
+    background-image: img("../../images/add.hover", $theme);
+}
+.add-folder {
+    background-image: img("../../images/add-folder", $theme);
+}
+.add-folder-click {
+    background-image: img("../../images/add-folder.hover", $theme);
+}
+.add-folder-hover:hover {
+    background-image: img("../../images/add-folder.hover", $theme);
+}
+.folder {
+    background-image: img("../../images/folder", $theme);
+}
+.folder-click {
+    background-image: img("../../images/folder.hover", $theme);
+}
+.folder-hover:hover {
+    background-image: img("../../images/folder.hover", $theme);
+}
 
 .ticket:hover .name-hover {
     background-color: darken($light, 15%) !important;

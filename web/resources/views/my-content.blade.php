@@ -52,9 +52,9 @@
                         <x-element.flex flex="justify-content-center">
                             <div class="m-2">
                                 <x-element.modal.button class="p-0" style="border-radius: 15px;" target="#{{ $add->get('id') }}" title="{{ __('page.my-content.add') }}">
-                                    <x-element.ticket style="height: 250px; width: 250px; background-size: 80% 80%;" image="{{ $add->get('path') }}">
+                                    <x-element.ticket.link class="add add-hover" style="height: 250px; width: 250px; background-size: 80% 80%;">
 
-                                    </x-element.ticket>
+                                    </x-element.ticket.link>
                                 </x-element.modal.button>
                                 <x-element.modal id="{{ $add->get('id') }}" labelledby="{{ $add->get('labelledby') }}">
                                     <form action="{{ route('my-content.add') }}" method="POST" enctype="multipart/form-data">

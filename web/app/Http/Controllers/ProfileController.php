@@ -64,7 +64,6 @@ class ProfileController extends Controller
             ]), 
             "my_content" => new Collection([
                 "header" => __("page.my-content.header"), 
-                "preview" => "../images/previews/default." . $this->theme . config("theme.extension"), 
                 "href" => route("my-content"), 
             ]), 
         ]);
