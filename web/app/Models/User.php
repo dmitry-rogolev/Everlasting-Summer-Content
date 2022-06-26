@@ -55,9 +55,14 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         return $this->hasOne(Avatar::class);
     }
 
+    public function folders()
+    {
+        return $this->hasMany(Folder::class)->whereFolderId(null);
+    }
+
     public function contents()
     {
-        return $this->hasMany(Content::class);
+        return $this->hasMany(Content::class)->whereFolderId(0);
     }
 
     public function forceDelete()
@@ -66,8 +71,22 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         if ($avatar)
         {
             Storage::disk("public")->delete("avatars/" . $this->id . "_" . $avatar->hash . "." . $avatar->extension);
-            $this->avatar->delete();
+            $this->avatar()->delete();
         }
+
+        Storage::disk("public")->deleteDirectory("contents/" . $this->id);
+        $this->remove();
+
         return $this->parentForceDelete();
+    }
+
+    public function remove()
+    {
+        foreach ($this->folders as $folder)
+        {
+            $folder->remove();
+        }
+
+        return $this->contents()->delete();
     }
 }

@@ -19,16 +19,13 @@ class ConfirmablePasswordController extends Controller
     {
         $this->settings();
         
-        return view('auth.confirm-password', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
-            "title" => $this->title, 
-            "lang" => $this->lang, 
+        return view('auth.confirm-password', $this->data->merge([
 
             "header" => config("app.name"), 
-        ]);
+
+        ])
+        ->all()
+        );
     }
 
     /**

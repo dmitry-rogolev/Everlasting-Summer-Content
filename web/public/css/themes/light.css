@@ -34,16 +34,16 @@
   background-image: url(/images/add.hover.light.theme.png?5e81083ac3322d754904c5b60de43379);
 }
 
-.add-folder {
-  background-image: url(/images/add-folder.light.theme.png?6ff91c052e806b48119c4e83adb51415);
+.create-folder {
+  background-image: url(/images/create-folder.light.theme.png?6ff91c052e806b48119c4e83adb51415);
 }
 
-.add-folder-click {
-  background-image: url(/images/add-folder.hover.light.theme.png?87f4f6c3633f84c9cbf0b893737adf2b);
+.create-folder-click {
+  background-image: url(/images/create-folder.hover.light.theme.png?87f4f6c3633f84c9cbf0b893737adf2b);
 }
 
-.add-folder-hover:hover {
-  background-image: url(/images/add-folder.hover.light.theme.png?87f4f6c3633f84c9cbf0b893737adf2b);
+.create-folder-hover:hover {
+  background-image: url(/images/create-folder.hover.light.theme.png?87f4f6c3633f84c9cbf0b893737adf2b);
 }
 
 .folder {

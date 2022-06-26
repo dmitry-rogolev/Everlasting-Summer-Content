@@ -20,15 +20,12 @@ class EmailVerificationPromptController extends Controller
 
         return $request->user()->hasVerifiedEmail()
                     ? redirect()->intended(RouteServiceProvider::HOME)
-                    : view('auth.verify-email', 
-                    [
-                        "theme" => $this->theme, 
-                        "themes" => $this->themes, 
-                        "inversion_themes" => $this->inversionThemes, 
-                        "title" => $this->title, 
-                        "lang" => $this->lang, 
+                    : view('auth.verify-email', $this->data->merge([
 
                         "header" => config("app.name"), 
-                    ]);
+            
+                    ])
+                    ->all()
+                    );
     }
 }

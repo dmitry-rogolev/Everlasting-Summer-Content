@@ -10,16 +10,13 @@ class DeleteProfileController extends Controller
     {
         $this->settings();
 
-        return view('profile.delete', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
-            "title" => $this->title, 
-            "lang" => $this->lang, 
+        return view('profile.delete', $this->data->merge([
 
             "header" => config("app.name"), 
-        ]);
+
+        ])
+        ->all()
+        );
     }
 
     public function destroy(Request $request)

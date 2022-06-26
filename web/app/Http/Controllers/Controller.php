@@ -29,6 +29,8 @@ class Controller extends BaseController
 
     protected string $lang;
 
+    protected Collection $data;
+
     public function __construct()
     {
         Cache::flush();
@@ -40,6 +42,7 @@ class Controller extends BaseController
         $this->theme();
         $this->title($title);
         if ($nav) $this->nav();
+        $this->data();
     }
 
     protected function theme()
@@ -78,5 +81,16 @@ class Controller extends BaseController
     protected function breadcrumbs(Collection $breadcrumbs)
     {
         Cache::put("breadcrumbs", $breadcrumbs);
+    }
+
+    protected function data()
+    {
+        $this->data = new Collection([
+            "theme" => $this->theme, 
+            "themes" => $this->themes, 
+            "inversion_themes" => $this->inversionThemes, 
+            "title" => $this->title, 
+            "lang" => $this->lang, 
+        ]);
     }
 }

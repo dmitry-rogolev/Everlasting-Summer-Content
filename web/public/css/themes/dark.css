@@ -34,16 +34,16 @@
   background-image: url(/images/add.hover.dark.theme.png?650e468a97a07f2fbb1f2a87266a1b56);
 }
 
-.add-folder {
-  background-image: url(/images/add-folder.dark.theme.png?00df28b49213f9b2801ed8e8663a693e);
+.create-folder {
+  background-image: url(/images/create-folder.dark.theme.png?00df28b49213f9b2801ed8e8663a693e);
 }
 
-.add-folder-click {
-  background-image: url(/images/add-folder.hover.dark.theme.png?0c4b1c322a9f1aa0251fc31bb1ddbc92);
+.create-folder-click {
+  background-image: url(/images/create-folder.hover.dark.theme.png?0c4b1c322a9f1aa0251fc31bb1ddbc92);
 }
 
-.add-folder-hover:hover {
-  background-image: url(/images/add-folder.hover.dark.theme.png?0c4b1c322a9f1aa0251fc31bb1ddbc92);
+.create-folder-hover:hover {
+  background-image: url(/images/create-folder.hover.dark.theme.png?0c4b1c322a9f1aa0251fc31bb1ddbc92);
 }
 
 .folder {

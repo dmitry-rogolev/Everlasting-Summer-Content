@@ -61,12 +61,12 @@
                                         @csrf
                                         <x-element.modal.header class="border-bottom-0">
                                             <x-element.modal.title id="{{ $avatar->get('labelledby') }}">
-                                                {{ $avatar->get('header') }}
+                                                {{ __("page.profile.avatar") }}
                                             </x-element.modal.title>
                                             <x-element.modal.quit />
                                         </x-element.modal.header>
                                         <x-element.modal.body>
-                                            <x-element.form.custom.file name="avatar" label="{{ $avatar->get('header') }}" accept="image/jpg, image/jpeg, image/png, image/gif" lang="{{ $lang }}" required />
+                                            <x-element.form.custom.file name="avatar" label="{{ __('page.profile.avatar') }}" accept="image/jpg, image/jpeg, image/png, image/gif" lang="{{ $lang }}" required />
                                         </x-element.modal.body>
                                         <x-element.modal.footer class="border-top-0">
                                             <x-element.modal.close>
@@ -91,12 +91,12 @@
                                             @csrf 
                                             <x-element.modal.header class="border-bottom-0">
                                                 <x-element.modal.title id="{{ $name->get('labelledby') }}">
-                                                    {{ $name->get("header") }}
+                                                    {{ __("page.profile.name") }}
                                                 </x-element.modal.title>
                                                 <x-element.modal.quit />
                                             </x-element.modal.header>
                                             <x-element.modal.body>
-                                                <x-element.form.input name="name" placeholder="{{ $name->get('header') }}" value="{{ old('name') }}" autocomplete="off" />
+                                                <x-element.form.input name="name" placeholder="{{ __('page.profile.name') }}" value="{{ old('name') }}" autocomplete="off" />
                                             </x-element.modal.body>
                                             <x-element.modal.footer class="border-top-0">
                                                 <x-element.modal.close>
@@ -117,12 +117,12 @@
                                             @csrf
                                             <x-element.modal.header class="border-bottom-0">
                                                 <x-element.modal.title id="{{ $email->get('labelledby') }}">
-                                                    {{ $email->get("header") }}
+                                                    {{ __("page.profile.email") }}
                                                 </x-element.modal.title>
                                                 <x-element.modal.quit />
                                             </x-element.modal.header>
                                             <x-element.modal.body>
-                                                <x-element.form.input type="email" name="email" placeholder="{{ $email->get('header') }}" value="{{ old('email') }}" autocomplete="off" required />
+                                                <x-element.form.input type="email" name="email" placeholder="{{ __('page.profile.email') }}" value="{{ old('email') }}" autocomplete="off" required />
                                             </x-element.modal.body>
                                             <x-element.modal.footer class="border-top-0">
                                                 <x-element.modal.close>
@@ -142,7 +142,7 @@
                                             @csrf 
                                             <x-element.modal.header class="border-bottom-0">
                                                 <x-element.modal.title id="{{ $password->get('labelledby') }}">
-                                                    {{ $password->get("header") }}
+                                                    {{ __("page.profile.changing-password") }}
                                                 </x-element.modal.title>
                                                 <x-element.modal.quit />
                                             </x-element.modal.header>
@@ -177,9 +177,9 @@
                         </x-element.flex>
                         <x-element.flex flex="justify-content-center">
                             <div>
-                                <x-element.ticket.link class="m-2 no-preview" style="width: 250px; height: 250px;" href="{{ $my_content->get('href') }}">
+                                <x-element.ticket.link class="m-2 no-preview" style="width: 250px; height: 250px;" href="{{ route('my', [ 'id' => request()->user()->id ]) }}">
                                     <x-element.ticket.link.name>
-                                        {{ $my_content->get('header') }}
+                                        {{ __("page.my.header") }}
                                     </x-element.ticket.link.name>
                                 </x-element.ticket.link>
                             </div>

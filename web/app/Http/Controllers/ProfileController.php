@@ -19,54 +19,56 @@ class ProfileController extends Controller
         $this->settings(null, true);
 
         $breadcrumbs = new Collection([
-            __("page.welcome") => route("welcome"), 
-            __("page.profile.header") => route("profile"), 
+            new Collection([
+                "name" => __("page.welcome"), 
+                "url" => route("welcome"), 
+                __("page.welcome"), 
+                route("welcome"), 
+            ]), 
+            new Collection([
+                "name" => __("page.profile.header"), 
+                "url" => route("profile"), 
+                __("page.profile.header"), 
+                route("profile"), 
+            ]), 
         ]);
 
         $this->breadcrumbs($breadcrumbs);
 
         $avatar = $request->user()->avatar;
 
-        return view("profile", 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
-            "title" => $this->title, 
-            "lang" => $this->lang, 
-            "request" => $request, 
+        return view("profile", $this->data->merge([
 
             "header" => __("page.profile.header"), 
             "referer" => url("/"), 
+
             "avatar" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
-                "header" => __("page.profile.avatar"), 
                 "path" => 
-                    $avatar && Storage::disk("public")->exists("avatars/" . $request->user()->id . "_" . $avatar->hash . "." . $avatar->extension) 
-                    ? "../storage/avatars/" . $request->user()->id . "_" . $avatar->hash . "." . $avatar->extension 
+                    $avatar
+                    ? "/storage/avatars/" . $request->user()->id . "/" . Str::lower($avatar->title) . "." . $avatar->extension 
                     : "", 
             ]), 
+
             "name" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
-                "header" => __("page.profile.name"), 
             ]), 
+
             "email" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
-                "header" => __("page.profile.email"), 
             ]), 
+
             "password" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
-                "header" => __("page.profile.changing-password"), 
             ]), 
-            "my_content" => new Collection([
-                "header" => __("page.my-content.header"), 
-                "href" => route("my-content"), 
-            ]), 
-        ]);
+
+        ])
+        ->all()
+        );
     }
 
     public function avatar(Request $request)
@@ -80,10 +82,9 @@ class ProfileController extends Controller
 
         if ($old_avatar)
         {
-            Storage::disk("public")->delete("avatars/" . $request->user()->id . "_" . $old_avatar->hash . "." . $old_avatar->extension);
+            Storage::disk("public")->delete("avatars/" . $request->user()->id . "/" . Str::lower($old_avatar->title) . "." . $old_avatar->extension);
             
-            $old_avatar->name = Str::of($new_avatar->getClientOriginalName())->beforeLast(".");
-            $old_avatar->hash = Str::of($new_avatar->hashName())->beforeLast(".");
+            $old_avatar->title = Str::of($new_avatar->getClientOriginalName())->beforeLast(".");
             $old_avatar->extension = $new_avatar->extension();
             $old_avatar->type = $new_avatar->getClientMimeType();
             $old_avatar->save();
@@ -91,15 +92,14 @@ class ProfileController extends Controller
         else 
         {
             Avatar::create([
-                "name" => Str::of($new_avatar->getClientOriginalName())->beforeLast("."), 
-                "hash" => Str::of($new_avatar->hashName())->beforeLast("."), 
+                "title" => Str::of($new_avatar->getClientOriginalName())->beforeLast("."), 
                 "extension" => $new_avatar->extension(), 
                 "type" => $new_avatar->getClientMimeType(), 
                 "user_id" => $request->user()->id, 
             ]);
         }
 
-        $new_avatar->storeAs("avatars", $request->user()->id . "_" . $new_avatar->hashName(), "public");
+        $new_avatar->storeAs("avatars/" . $request->user()->id, Str::lower($new_avatar->getClientOriginalName()), "public");
 
         return back();
     }

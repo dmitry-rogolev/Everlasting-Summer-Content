@@ -45,8 +45,8 @@
                         <x-element.dropdown-item url="{{ route('profile') }}">
                             {!! __("page.profile.header") !!}
                         </x-element.dropdown-item>
-                        <x-element.dropdown-item url="{{ route('my-content') }}">
-                            {!! __("page.my-content.header") !!}
+                        <x-element.dropdown-item url="{{ route('my', [ 'id' => request()->user()->id ]) }}">
+                            {!! __("page.my.header") !!}
                         </x-element.dropdown-item>
                         <div class="dropdown-item cursor-pointer">
                             <x-element.form.logout />

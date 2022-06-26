@@ -2,90 +2,147 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
+use App\Models\Folder;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ContentController extends Controller
 {
-    public function show(Request $request, string $title)
+    protected Content $content;
+
+    public function show(Request $request, $id, $title, Folder|User $parent, Collection $folders, Content $content)
     {
         $this->settings(null, true);
 
-        $content = $request->user()->contents()->whereTitle($title)->first();
-        
-        if (!$content) abort(404);
+        $this->can($id);
 
-        $breadcrumbs = new Collection([
-            __("page.welcome") => route("welcome"), 
-            __("page.my-content.header") => route("my-content"), 
-            $content->title => route("my-content.content", [ "content" => $title ]), 
-        ]);
+        $this->content = $content;
 
-        $this->breadcrumbs($breadcrumbs);
+        $breadcrumbs = $this->breadcrumbs($folders);
 
-        return view("content", 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
-            "title" => $this->title, 
-            "lang" => $this->lang, 
+        return view("content", $this->data->merge([
 
             "header" => $content->title, 
-            "referer" => route("my-content"), 
+            "referer" => $breadcrumbs->reverse()->skip(1)->first()->get("url"), 
+            "path" => Str::of($folders->implode("/"))->lower(), 
 
             "content" => $content, 
 
             "rename" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
-                "header" => __("page.content.renaming"), 
             ]), 
 
             "remove" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
-                "header" => __("page.content.removing"), 
-            ]), 
-        ]);
+            ]),
+
+        ])
+        ->all()
+        );
     }
 
-    public function rename(Request $request, string $title)
+    public function rename(Request $request, $id, $title, Folder|User $parent, Collection $folders, Content $content)
     {
+        $this->can($id);
+
         $request->validate([
             "title" => [ "required", "string", "max:255" ], 
         ]);
 
-        $content = $request->user()->contents()->whereTitle($title)->first();
-
-        if (!$content) 
-            back()->withErrors(["title" => __("page.content.no-exists", [ "title" => $title ])]);
-
-        if ($request->user()->contents()->whereTitle($request->title)->first())
-            return back()->withErrors(["title" => __("page.content.exists", [ "title" => $request->title ])]);
+        if ($parent->contents()->whereTitle($request->title)->first())
+            return back()->withErrors([ "title" => __("page.content.exists", [ "title" => $request->title ]) ]);
         
+        else if ($parent->folders()->whereTitle($request->title)->first())
+            return back()->withErrors([ "title" => __("page.my.used", [ "title" => $request->title ]) ]);
+        
+        $path = $folders->implode("/");
+
+        Storage::disk("public")
+            ->move("contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : $path) . Str::lower($content->title) . "." . $content->extension, 
+                   "contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : $path) . Str::lower($request->title) . "." . $content->extension);
+
         $content->title = $request->title;
         $content->save();
 
-        return redirect(route("my-content.content", [ "content" => $content->title ]));
+        return redirect(url($request->user()->id . "/" . ($path ? $path . "/" : $path) . $request->title));
     }
 
-    public function remove(Request $request, string $title)
+    public function remove(Request $request, $id, $title, Folder|User $parent, Collection $folders, Content $content)
     {
-        $content = $request->user()->contents()->whereTitle($title)->first();
+        $this->can($id);
 
-        if (!$content) 
-            back()->withErrors(["title" => __("page.content.no-exists", [ "title" => $title ])]);
+        $path = $folders->implode("/");
 
-        if ($content)
+        Storage::disk("public")
+            ->delete("contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : $path) . Str::lower($content->title) . "." . $content->extension);
+
+        $content->delete();
+
+        return redirect(url($request->user()->id . "/" . $path));
+    }
+
+    protected function can(int $id)
+    {
+        if ($id !== request()->user()->id) abort(404);
+    }
+
+    protected function parent(Collection $folders)
+    {
+        $parent = request()->user();
+
+        foreach ($folders as $folder)
         {
-            Storage::disk("public")
-                ->delete("contents/" . $request->user()->id . "/" . $content->hash . "." . $content->extension);
-
-            $content->delete();
+            $parent = $parent->folders()->whereTitle($folder)->first();
         }
 
-        return redirect(route("my-content"));
+        return $parent;
+    }
+
+    protected function breadcrumbs(Collection $folders)
+    {
+        $breadcrumbs = new Collection([
+            new Collection([
+                "name" => __("page.welcome"), 
+                "url" => route("welcome"), 
+                __("page.welcome"), 
+                route("welcome"), 
+            ]), 
+            new Collection([
+                "name" => __("page.my.header"), 
+                "url" => route("my", [ "id" => request()->user()->id ]), 
+                __("page.my.header"), 
+                route("my", [ "id" => request()->user()->id ]), 
+            ]), 
+        ]);
+
+        $path = "";
+        $f = request()->user();
+        foreach ($folders as $folder)
+        {
+            $path .= $folder . "/";
+            $f = $f->folders()->whereTitle($folder)->first();
+            $breadcrumbs->push(new Collection([
+                "name" => $f->title, 
+                "url" => url(request()->user()->id . "/" . $path), 
+                $f->title, 
+                url(request()->user()->id . "/" . $path), 
+            ]));
+        }
+        $breadcrumbs->push(new Collection([
+            "name" => $this->content->title, 
+            "url" => url(request()->user()->id . "/" . ($path ? $path . "/" : $path) . $this->content->title), 
+            $this->content->title, 
+            url(request()->user()->id . "/" . ($path ? $path . "/" : $path) . $this->content->title), 
+        ]));
+
+        parent::breadcrumbs($breadcrumbs);
+
+        return $breadcrumbs;
     }
 }

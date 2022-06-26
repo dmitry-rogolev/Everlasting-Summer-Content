@@ -19,16 +19,13 @@ class AuthenticatedSessionController extends Controller
     {
         $this->settings();
 
-        return view('auth.login', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
-            "title" => $this->title, 
-            "lang" => $this->lang, 
+        return view('auth.login', $this->data->merge([
 
             "header" => config("app.name"), 
-        ]);
+
+        ])
+        ->all()
+        );
     }
 
     /**

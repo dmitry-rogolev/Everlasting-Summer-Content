@@ -11,15 +11,19 @@ class Content extends Model
 
     protected $fillable = [
         "title", 
-        "name", 
-        "hash", 
         "extension", 
         "type", 
+        "folder_id", 
         "user_id", 
     ];
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function folder()
+    {
+        return $this->belongsTo(Folder::class);
     }
 }

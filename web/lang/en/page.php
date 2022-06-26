@@ -21,11 +21,22 @@ return [
 
     ], 
 
-    "my-content" => [
+    "my" => [
 
         "header" => "My Content", 
         "add" => "Add Content", 
         "name" => "Title", 
+        "create-folder" => "Create a folder", 
+        "creating-folder" => "Creating a folder", 
+        "folder" => "Folder", 
+        "exists" => "The directory with the name :title already exists.", 
+        "no-exists" => "The directory with the name :title does not exist.", 
+        "used" => "Title :title is already used in this directory.", 
+        "rename" => "Rename", 
+        "renaming" => "Renaming", 
+        "remove" => "Remove", 
+        "removing" => "Removing", 
+        "remove-text" => "Are you sure you want to delete this directory and all its contents? It will be impossible to cancel this action!",
 
     ], 
 

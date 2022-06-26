@@ -52,7 +52,7 @@
                         <x-element.flex flex="justify-content-center">
                             <div class="m-2">
                                 <x-element.ticket>
-                                    <x-element.image src="../../storage/contents/{{ request()->user()->id }}/{{ $content->hash . '.' . $content->extension }}" title="{{ $content->title ?? $content->name }}" />
+                                    <x-element.image src="/storage/contents/{{ request()->user()->id }}/{{ ($path ? $path . '/' : $path) . Str::lower($content->title) . '.' . $content->extension }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
                                 </x-element.ticket>
                             </div>
                         </x-element.flex>
@@ -62,17 +62,17 @@
                                     {{ __("page.content.rename") }}
                                 </x-element.modal.button>
                                 <x-element.modal id="{{ $rename->get('id') }}" labelledby="{{ $rename->get('labelledby') }}">
-                                    <form action="{{ route('my-content.content.rename', [ 'content' => $content->title ]) }}" method="POST">
+                                    <form action="{{ url(request()->user()->id . '/' . ($path ? $path . '/' : $path) . $header . '/rename') }}" method="POST">
                                         @csrf
                                         <x-element.modal.header class="border-bottom-0">
                                             <x-element.modal.title id="{{ $rename->get('labelledby') }}">
-                                                {{ $rename->get('header') }}
+                                                {{ __("page.content.renaming") }}
                                             </x-element.modal.title>
                                             <x-element.modal.quit />
                                         </x-element.modal.header>
                                         <x-element.modal.body>
                                             <x-element.form.group>
-                                                <x-element.form.input name="title" label="{{ __('page.my-content.name') }}" placeholder="{{ __('page.my-content.name') }}" value="{{ old('name') }}" autocomplete="off" />
+                                                <x-element.form.input name="title" label="{{ __('page.my.name') }}" placeholder="{{ __('page.my.name') }}" value="{{ old('name') }}" autocomplete="off" />
                                             </x-element.form.group>
                                         </x-element.modal.body>
                                         <x-element.modal.footer class="border-top-0">
@@ -91,11 +91,11 @@
                                     {{ __("page.content.remove") }}
                                 </x-element.modal.button>
                                 <x-element.modal id="{{ $remove->get('id') }}" labelledby="{{ $remove->get('labelledby') }}">
-                                    <form action="{{ route('my-content.content.remove', [ 'content' => $content->title ]) }}" method="POST">
+                                    <form action="{{ url(request()->user()->id . '/' . ($path ? $path . '/' : $path) . $header . '/remove') }}" method="POST">
                                         @csrf
                                         <x-element.modal.header class="border-bottom-0">
                                             <x-element.modal.title id="{{ $remove->get('labelledby') }}">
-                                                {{ $remove->get('header') }}
+                                                {{ __("page.content.removing") }}
                                             </x-element.modal.title>
                                             <x-element.modal.quit />
                                         </x-element.modal.header>

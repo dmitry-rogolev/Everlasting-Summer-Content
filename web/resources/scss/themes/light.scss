@@ -30,14 +30,14 @@ $theme: "light";
 .add-hover:hover {
     background-image: img("../../images/add.hover", $theme);
 }
-.add-folder {
-    background-image: img("../../images/add-folder", $theme);
+.create-folder {
+    background-image: img("../../images/create-folder", $theme);
 }
-.add-folder-click {
-    background-image: img("../../images/add-folder.hover", $theme);
+.create-folder-click {
+    background-image: img("../../images/create-folder.hover", $theme);
 }
-.add-folder-hover:hover {
-    background-image: img("../../images/add-folder.hover", $theme);
+.create-folder-hover:hover {
+    background-image: img("../../images/create-folder.hover", $theme);
 }
 .folder {
     background-image: img("../../images/folder", $theme);

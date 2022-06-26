@@ -10,8 +10,7 @@ class Avatar extends Model
     use HasFactory;
     
     protected $fillable = [
-        "name", 
-        "hash", 
+        "title", 
         "extension", 
         "type", 
         "user_id", 
