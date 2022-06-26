@@ -97,10 +97,7 @@
                                             <x-element.modal.quit />
                                         </x-element.modal.header>
                                         <x-element.modal.body>
-                                            <x-element.form.group>
-                                                <x-element.form.input name="title" label="{{ __('page.my.name') }}" placeholder="{{ __('page.my.name') }}" value="{{ old('title') }}" autocomplete="off" />
-                                            </x-element.form.group>
-                                            <x-element.form.custom.file name="file" label="{{ __('page.my.add') }}" lang="{{ $lang }}" required />
+                                            <x-element.form.custom.file name="files[]" label="{{ __('page.my.add') }}" lang="{{ $lang }}" required multiple />
                                         </x-element.modal.body>
                                         <x-element.modal.footer class="border-top-0">
                                             <x-element.modal.close>

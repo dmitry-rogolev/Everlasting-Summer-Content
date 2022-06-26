@@ -63,39 +63,36 @@ class FolderController extends Controller
         $this->can($id);
 
         $request->validate([
-            "title" => [ "max:255" ], 
-            "file" => [ "required", "file", "mimes:jpg,jpeg,png,gif", "max:51200" ], 
+            "files" => [ "required", "array" ], 
+            "files.*" => [ "file", "mimes:jpg,jpeg,png,gif", "max:51200", "distinct" ], 
         ]);
 
         if (!$parent) $parent = $this->parent($folders);
 
-        $file = $request->file("file");
-
-        $name = Str::of($file->getClientOriginalName())->beforeLast(".");
-
-        if ($request->title && $parent->contents()->whereTitle($request->title)->first())
-            return back()->withErrors(["title" => __("page.content.exists", [ "title" => $request->title ])]);
-    
-        else if (!$request->title && $parent->contents()->whereTitle($name)->first()) 
-            return back()->withErrors(["title" => __("page.content.exists", [ "title" => $name ])]);
-        
-        else if ($request->title && $parent->folders()->whereTitle($request->title)->first())
-            return back()->withErrors([ "title" => __("page.my.used", [ "title" => $request->title ]) ]);
-
-        else if (!$request->title && $parent->folders()->whereTitle($name)->first())
-            return back()->withErrors([ "title" => __("page.my.used", [ "title" => $name ]) ]);
+        $files = $request->file("files");
 
         $path = $folders ? $folders->implode("/") : "";
 
-        Content::create([
-            "title" => $request->title ?? $name, 
-            "extension" => $file->extension(), 
-            "type" => $file->getClientMimeType(), 
-            "folder_id" => $path ? $parent->id : 0, 
-            "user_id" => $request->user()->id, 
-        ]);
+        foreach ($files as $file)
+        {
+            $title = Str::of($file->getClientOriginalName())->beforeLast(".");
 
-        $file->storeAs("contents/" . $request->user()->id . "/" . Str::lower($path), Str::lower($request->title ?? $name) . "." . $file->extension(), "public");
+            if ($parent->contents()->whereTitle($title)->first()) 
+                return back()->withErrors(["title" => __("page.content.exists", [ "title" => $title ])]);
+            
+            else if ($parent->folders()->whereTitle($title)->first())
+                return back()->withErrors([ "title" => __("page.my.used", [ "title" => $title ]) ]);
+
+            Content::create([
+                "title" => $title, 
+                "extension" => $file->extension(), 
+                "type" => $file->getClientMimeType(), 
+                "folder_id" => $path ? $parent->id : 0, 
+                "user_id" => $request->user()->id, 
+            ]);
+
+            $file->storeAs("contents/" . $request->user()->id . "/" . Str::lower($path), Str::lower($title) . "." . $file->extension(), "public");
+        }
 
         return back();
     }
