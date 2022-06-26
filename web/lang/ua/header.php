@@ -10,6 +10,7 @@ return [
     ], 
 
     "download-all" => "Скачати все", 
+    "download" => "Скачавши", 
     "back" => "Назад", 
 
 ];

@@ -87,6 +87,15 @@ class ContentController extends Controller
         return redirect(url($request->user()->id . "/" . $path));
     }
 
+    public function download(Request $request, $id, $title, Folder|User $parent, Collection $folders, Content $content)
+    {
+        $this->can($id);
+
+        $path = $folders->implode("/");
+
+        return Storage::download("public/contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : "") . Str::lower($content->title) . "." . $content->extension);
+    }
+
     protected function can(int $id)
     {
         if ($id !== request()->user()->id) abort(404);

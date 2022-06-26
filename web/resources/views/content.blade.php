@@ -39,7 +39,14 @@
                                     @endif
                                 </div>
                                 <div class="col-2 p-0">
-                                    
+                                    <x-element.flex flex="justify-content-end">
+                                        <form action="{{ url()->current() . '/download' }}" method="POST">
+                                            @csrf
+                                            <x-element.form.button type="submit" class="btn-lg btn-{{ $theme }}" title="{{ __('header.download') }}">
+                                                &#10515;
+                                            </x-element.form.button>
+                                        </form>
+                                    </x-element.flex>
                                 </div>
                             </x-element.flex>
                         </section>

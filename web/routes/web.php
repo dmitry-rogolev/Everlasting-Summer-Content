@@ -96,7 +96,8 @@ Route::middleware(["auth", "auth.session"])->group(function()
                 $path->last() === "add-content" || 
                 $path->last() === "create-folder" || 
                 $path->last() === "rename" || 
-                $path->last() === "remove"
+                $path->last() === "remove" || 
+                $path->last() === "download"
             )
             $path->pop();
     
@@ -145,6 +146,13 @@ Route::middleware(["auth", "auth.session"])->group(function()
                     {
                         return App::make(ContentController::class)
                             ->callAction("remove", [ $request, $id, $title, $parent, $folders, $content ]);
+                    });
+
+                    Route::post("download", 
+                    function(Request $request, $id, $title) use ($parent, $folders, $content)
+                    {
+                        return App::make(ContentController::class)
+                            ->callAction("download", [ $request, $id, $title, $parent, $folders, $content ]);
                     });
                 });
             }
