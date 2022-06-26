@@ -75,7 +75,7 @@ class FolderController extends Controller
 
         foreach ($files as $file)
         {
-            $title = Str::of($file->getClientOriginalName())->beforeLast(".");
+            $title = Str::of($file->getClientOriginalName())->beforeLast(".")->limit(255, "");
 
             if ($parent->contents()->whereTitle($title)->first()) 
                 return back()->withErrors(["title" => __("page.content.exists", [ "title" => $title ])]);
