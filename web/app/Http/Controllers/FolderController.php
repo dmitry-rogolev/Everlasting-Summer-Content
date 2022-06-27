@@ -185,8 +185,6 @@ class FolderController extends Controller
     {
         $path = $folders->implode("/");
 
-        Storage::disk("local")->delete("tmp/download.zip");
-
         $title = $parent instanceof User ? $parent->name : $parent->title;
 
         $zip = Zipper::create(storage_path("app/tmp/download.zip"));
@@ -195,7 +193,7 @@ class FolderController extends Controller
 
         $zip->close();
 
-        return Storage::download("/tmp/download.zip");
+        return response()->download(storage_path("app/tmp/download.zip"))->deleteFileAfterSend();
     }
 
     protected function can(User|Folder $folder)
