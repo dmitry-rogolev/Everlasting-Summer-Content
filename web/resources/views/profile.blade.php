@@ -177,7 +177,7 @@
                         </x-element.flex>
                         <x-element.flex flex="justify-content-center">
                             <div>
-                                <x-element.ticket.link class="m-2 no-preview" style="width: 250px; height: 250px;" href="{{ route('my', [ 'id' => request()->user()->id ]) }}">
+                                <x-element.ticket.link class="m-2 no-preview" style="width: 250px; height: 250px;" href="{{ route('my', [ 'user' => request()->user()->id ]) }}">
                                     <x-element.ticket.link.name>
                                         {{ __("page.my.header") }}
                                     </x-element.ticket.link.name>

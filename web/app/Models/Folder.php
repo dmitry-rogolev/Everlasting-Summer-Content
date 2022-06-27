@@ -22,7 +22,10 @@ class Folder extends Model
 
     public function folder()
     {
-        return $this->whereId($this->folder_id);
+        if ($this->folder_id)
+            return $this->whereId($this->folder_id);
+        else 
+            return $this->user();
     }
 
     public function folders()

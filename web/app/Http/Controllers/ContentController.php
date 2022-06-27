@@ -7,6 +7,7 @@ use App\Models\Folder;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -14,21 +15,31 @@ class ContentController extends Controller
 {
     protected Content $content;
 
-    public function show(Request $request, $id, $title, Folder|User $parent, Collection $folders, Content $content)
+    protected User $user;
+
+    protected bool $can;
+
+    public function show(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
     {
         $this->settings(null, true);
 
-        $this->can($id);
-
         $this->content = $content;
 
+        $this->can = $this->can($parent);
+                        
+        $this->user = $this->can ? $request->user() : $user;
+
         $breadcrumbs = $this->breadcrumbs($folders);
+
+        $path = Str::lower($folders->reverse()->skip(1)->reverse()->implode("/"));
 
         return view("content", $this->data->merge([
 
             "header" => $content->title, 
             "referer" => $breadcrumbs->reverse()->skip(1)->first()->get("url"), 
-            "path" => Str::of($folders->implode("/"))->lower(), 
+            "path" => $path, 
+            "can" => $this->can, 
+            "user" => $this->user, 
 
             "content" => $content, 
 
@@ -47,9 +58,9 @@ class ContentController extends Controller
         );
     }
 
-    public function rename(Request $request, $id, $title, Folder|User $parent, Collection $folders, Content $content)
+    public function rename(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
     {
-        $this->can($id);
+        if (!$this->can($parent)) abort(404);
 
         $request->validate([
             "title" => [ "required", "string", "max:255" ], 
@@ -61,7 +72,7 @@ class ContentController extends Controller
         else if ($parent->folders()->whereTitle($request->title)->first())
             return back()->withErrors([ "title" => __("page.my.used", [ "title" => $request->title ]) ]);
         
-        $path = $folders->implode("/");
+        $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
         Storage::disk("public")
             ->move("contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : $path) . Str::lower($content->title) . "." . $content->extension, 
@@ -73,11 +84,11 @@ class ContentController extends Controller
         return redirect(url($request->user()->id . "/" . ($path ? $path . "/" : $path) . $request->title));
     }
 
-    public function remove(Request $request, $id, $title, Folder|User $parent, Collection $folders, Content $content)
+    public function remove(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
     {
-        $this->can($id);
+        if (!$this->can($parent)) abort(404);
 
-        $path = $folders->implode("/");
+        $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
         Storage::disk("public")
             ->delete("contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : $path) . Str::lower($content->title) . "." . $content->extension);
@@ -87,30 +98,23 @@ class ContentController extends Controller
         return redirect(url($request->user()->id . "/" . $path));
     }
 
-    public function download(Request $request, $id, $title, Folder|User $parent, Collection $folders, Content $content)
+    public function download(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
     {
-        $this->can($id);
+        $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
-        $path = $folders->implode("/");
-
-        return Storage::download("public/contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : "") . Str::lower($content->title) . "." . $content->extension);
+        return Storage::download("public/contents/" . $user->id . "/" . ($path ? Str::lower($path) . "/" : "") . Str::lower($content->title) . "." . $content->extension);
     }
 
-    protected function can(int $id)
+    protected function can(User|Folder $folder)
     {
-        if ($id !== request()->user()->id) abort(404);
-    }
-
-    protected function parent(Collection $folders)
-    {
-        $parent = request()->user();
-
-        foreach ($folders as $folder)
+        if (Auth::check()) 
         {
-            $parent = $parent->folders()->whereTitle($folder)->first();
+            if ($folder instanceof User)
+                return request()->user()->id === $folder->id;
+            else 
+                return request()->user()->can("show", $folder);
         }
-
-        return $parent;
+        return false;
     }
 
     protected function breadcrumbs(Collection $folders)
@@ -123,31 +127,31 @@ class ContentController extends Controller
                 route("welcome"), 
             ]), 
             new Collection([
-                "name" => __("page.my.header"), 
-                "url" => route("my", [ "id" => request()->user()->id ]), 
-                __("page.my.header"), 
-                route("my", [ "id" => request()->user()->id ]), 
-            ]), 
+                "name" => $this->can ? __("page.my.header") : $this->user->name, 
+                "url" => route("my", [ "user" => $this->user->id ]), 
+                $this->can ? __("page.my.header") : $this->user->name, 
+                route("my", [ "user" => $this->user->id ]), 
+            ]),
         ]);
 
         $path = "";
-        $f = request()->user();
-        foreach ($folders as $folder)
+        $f = $this->user;
+        foreach ($folders->reverse()->skip(1)->reverse() as $folder)
         {
-            $path .= $folder . "/";
             $f = $f->folders()->whereTitle($folder)->first();
+            $path .= $f->title . "/";
             $breadcrumbs->push(new Collection([
                 "name" => $f->title, 
-                "url" => url(request()->user()->id . "/" . $path), 
+                "url" => url($this->user->id . "/" . $path), 
                 $f->title, 
-                url(request()->user()->id . "/" . $path), 
+                url($this->user->id . "/" . $path), 
             ]));
         }
         $breadcrumbs->push(new Collection([
             "name" => $this->content->title, 
-            "url" => url(request()->user()->id . "/" . ($path ? $path . "/" : $path) . $this->content->title), 
+            "url" => url($this->user->id . "/" . ($path ? $path . "/" : $path) . $this->content->title), 
             $this->content->title, 
-            url(request()->user()->id . "/" . ($path ? $path . "/" : $path) . $this->content->title), 
+            url($this->user->id . "/" . ($path ? $path . "/" : $path) . $this->content->title), 
         ]));
 
         parent::breadcrumbs($breadcrumbs);

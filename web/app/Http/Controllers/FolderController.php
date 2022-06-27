@@ -7,26 +7,34 @@ use Illuminate\Support\Collection;
 use App\Models\Content;
 use App\Models\Folder;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Russsiq\Zipper\Facades\Zipper;
 
 class FolderController extends Controller
 {
-    public function show(Request $request, $id, Folder|User $parent = null, Collection $folders = null)
+    protected User $user;
+
+    protected bool $can;
+
+    public function show(Request $request, User $user, Folder|User $parent, Collection $folders)
     {
         $this->settings(null, true);
 
-        $this->can($id);
+        $this->can = $this->can($parent);
+                        
+        $this->user = $this->can ? $request->user() : $user;
 
         $breadcrumbs = $this->breadcrumbs($folders);
-
-        if (!$parent) $parent = $this->parent($folders);
 
         return view("folder", $this->data->merge([
 
             "header" => $breadcrumbs->last()->get("name"), 
             "referer" => $breadcrumbs->reverse()->skip(1)->first()->get("url"), 
-            "path" => $folders ? $folders->implode("/") : "", 
+            "path" => $folders->implode("/"), 
+            "can" => $this->can, 
+            "user" => $this->user, 
 
             "create_folder" => new Collection([
                 "id" => id(), 
@@ -41,7 +49,7 @@ class FolderController extends Controller
             "rename" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
-                "show" => $folders ? true : false, 
+                "show" => $parent instanceof Folder ? true : false, 
             ]), 
 
             "remove" => new Collection([
@@ -58,20 +66,18 @@ class FolderController extends Controller
         );
     }
 
-    public function addContent(Request $request, $id, Folder|User $parent = null, Collection $folders = null)
+    public function addContent(Request $request, User $user, Folder|User $parent, Collection $folders)
     {
-        $this->can($id);
+        if (!$this->can($parent)) abort(404);
 
         $request->validate([
             "files" => [ "required", "array" ], 
             "files.*" => [ "file", "mimes:jpg,jpeg,png,gif", "max:51200", "distinct" ], 
         ]);
 
-        if (!$parent) $parent = $this->parent($folders);
-
         $files = $request->file("files");
 
-        $path = $folders ? $folders->implode("/") : "";
+        $path = $folders->implode("/");
 
         foreach ($files as $file)
         {
@@ -97,15 +103,13 @@ class FolderController extends Controller
         return back();
     }
 
-    public function createFolder(Request $request, $id, Folder|User $parent = null, Collection $folders = null)
+    public function createFolder(Request $request, User $user, Folder|User $parent, Collection $folders)
     {
-        $this->can($id);
+        if (!$this->can($parent)) abort(404);
 
         $request->validate([
             "title" => [ "required", "string", "max:255" ], 
         ]);
-
-        if (!$parent) $parent = $this->parent($folders);
 
         if ($parent->folders()->whereTitle($request->title)->first())
             return back()->withErrors([ "title" => __("page.my.exists", [ "title" => $request->title ]) ]);
@@ -113,7 +117,7 @@ class FolderController extends Controller
         else if ($parent->contents()->whereTitle($request->title)->first())
             return back()->withErrors([ "title" => __("page.my.used", [ "title" => $request->title ]) ]);
 
-        $path = $folders ? $folders->implode("/") : "";;
+        $path = $folders->implode("/");
 
         Folder::create([
             "title" => $request->title, 
@@ -122,14 +126,14 @@ class FolderController extends Controller
         ]);
 
         Storage::disk("public")
-            ->makeDirectory("contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : $path) . Str::lower($request->title));
+            ->makeDirectory("contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : "") . Str::lower($request->title));
 
         return back();
     }
 
-    public function rename(Request $request, $id, Folder|User $parent = null, Collection $folders = null)
+    public function rename(Request $request, User $user, Folder|User $parent, Collection $folders)
     {
-        $this->can($id);
+        if (!$this->can($parent)) abort(404);
 
         $request->validate([
             "title" => [ "required", "string", "max:255" ], 
@@ -139,20 +143,17 @@ class FolderController extends Controller
 
         $p = $parent->folder()->first();
 
-        if (!$p && $p->folders()->whereTitle($request->title)->first())
-            return back()->withErrors([ "title" => __("page.my.exists", [ "title" => $request->title ]) ]);
-
-        else if ($p && $p->folders()->whereTitle($request->title)->first())
+        if ($p->folders()->whereTitle($request->title)->first())
             return back()->withErrors([ "title" => __("page.my.exists", [ "title" => $request->title ]) ]);
         
-        else if ($p && $p->contents()->whereTitle($request->title)->first())
+        else if ($p->contents()->whereTitle($request->title)->first())
             return back()->withErrors([ "title" => __("page.my.used", [ "title" => $request->title ]) ]);
 
         $parent->title = $request->title;
         $parent->save();
 
-        $path = $folders ? $folders->implode("/") : "";
-        $new_path = $folders ? $folders->reverse()->skip(1)->reverse()->implode("/") : "";
+        $path = $folders->implode("/");
+        $new_path = $folders->reverse()->skip(1)->reverse()->implode("/");
         if ($new_path) $new_path .= "/";
 
         Storage::disk("public")
@@ -162,13 +163,11 @@ class FolderController extends Controller
         return redirect(url($request->user()->id . "/" . $new_path . $request->title));
     }
 
-    public function remove(Request $request, $id, Folder|User $parent = null, Collection $folders = null)
+    public function remove(Request $request, $id, Folder|User $parent, Collection $folders)
     {
-        $this->can($id);
+        if (!$this->can($parent)) abort(404);
 
-        if (!$parent) $parent = $this->parent($folders);
-
-        $path = $folders ? $folders->implode("/") : "";
+        $path = $folders->implode("/");
         
         Storage::disk("public")
             ->deleteDirectory("contents/" . $request->user()->id . "/" . Str::lower($path));
@@ -182,24 +181,33 @@ class FolderController extends Controller
         return redirect(url($request->user()->id . "/" . $path));
     }
 
-    protected function can(int $id)
+    public function download(Request $request, User $user, Folder|User $parent, Collection $folders)
     {
-        if ($id !== request()->user()->id) abort(404);
+        $path = $folders->implode("/");
+
+        Storage::disk("local")->delete("tmp/download.zip");
+
+        $title = $parent instanceof User ? $parent->name : $parent->title;
+
+        $zip = Zipper::create(storage_path("app/tmp/download.zip"));
+
+        $zip->addDirectory(storage_path("app/public/contents/" . $user->id . "/" . Str::lower($path)), $title);
+
+        $zip->close();
+
+        return Storage::download("/tmp/download.zip");
     }
 
-    protected function parent(Collection $folders = null)
+    protected function can(User|Folder $folder)
     {
-        $parent = request()->user();
-
-        if ($folders)
+        if (Auth::check()) 
         {
-            foreach ($folders as $folder)
-            {
-                $parent = $parent->folders()->whereTitle($folder)->first();
-            }
+            if ($folder instanceof User)
+                return request()->user()->id === $folder->id;
+            else 
+                return request()->user()->can("show", $folder);
         }
-
-        return $parent;
+        return false;
     }
 
     protected function breadcrumbs(Collection $folders = null)
@@ -212,26 +220,26 @@ class FolderController extends Controller
                 route("welcome"), 
             ]), 
             new Collection([
-                "name" => __("page.my.header"), 
-                "url" => route("my", [ "id" => request()->user()->id ]), 
-                __("page.my.header"), 
-                route("my", [ "id" => request()->user()->id ]), 
+                "name" => $this->can ? __("page.my.header") : $this->user->name, 
+                "url" => route("my", [ "user" => $this->user->id ]), 
+                $this->can ? __("page.my.header") : $this->user->name, 
+                route("my", [ "user" => $this->user->id ]), 
             ]), 
         ]);
 
         if ($folders)
         {
             $path = "";
-            $f = request()->user();
+            $f = $this->user;
             foreach ($folders as $folder)
             {
-                $path .= $folder . "/";
                 $f = $f->folders()->whereTitle($folder)->first();
+                $path .= $f->title . "/";
                 $breadcrumbs->push(new Collection([
                     "name" => $f->title, 
-                    "url" => url(request()->user()->id . "/" . $path), 
+                    "url" => url($this->user->id . "/" . $path), 
                     $f->title, 
-                    url(request()->user()->id . "/" . $path), 
+                    url($this->user->id . "/" . $path), 
                 ]));
             }
         }

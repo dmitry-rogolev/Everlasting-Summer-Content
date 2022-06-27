@@ -59,69 +59,73 @@
                         <x-element.flex flex="justify-content-center">
                             <div class="m-2">
                                 <x-element.ticket>
-                                    <x-element.image src="/storage/contents/{{ request()->user()->id }}/{{ ($path ? $path . '/' : $path) . Str::lower($content->title) . '.' . $content->extension }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
+                                    <x-element.image src="/storage/contents/{{ $user->id }}/{{ ($path ? $path . '/' : $path) . Str::lower($content->title) . '.' . $content->extension }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
                                 </x-element.ticket>
                             </div>
                         </x-element.flex>
                         <x-element.flex flex="justify-content-center">
-                            <div class="m-2">
-                                <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $rename->get('id') }}">
-                                    {{ __("page.content.rename") }}
-                                </x-element.modal.button>
-                                <x-element.modal id="{{ $rename->get('id') }}" labelledby="{{ $rename->get('labelledby') }}">
-                                    <form action="{{ url(request()->user()->id . '/' . ($path ? $path . '/' : $path) . $header . '/rename') }}" method="POST">
-                                        @csrf
-                                        <x-element.modal.header class="border-bottom-0">
-                                            <x-element.modal.title id="{{ $rename->get('labelledby') }}">
-                                                {{ __("page.content.renaming") }}
-                                            </x-element.modal.title>
-                                            <x-element.modal.quit />
-                                        </x-element.modal.header>
-                                        <x-element.modal.body>
-                                            <x-element.form.group>
-                                                <x-element.form.input name="title" label="{{ __('page.my.name') }}" placeholder="{{ __('page.my.name') }}" value="{{ old('name') }}" autocomplete="off" />
-                                            </x-element.form.group>
-                                        </x-element.modal.body>
-                                        <x-element.modal.footer class="border-top-0">
-                                            <x-element.modal.close>
-                                                {{ __('element.modal.close') }}
-                                            </x-element.modal.close>
-                                            <x-element.modal.save type="submit">
-                                                {{ __('element.modal.save') }}
-                                            </x-element.modal.save>
-                                        </x-element.modal.footer>
-                                    </form>
-                                </x-element.modal>
-                            </div>
-                            <div class="m-2">
-                                <x-element.modal.button class="btn-danger" target="#{{ $remove->get('id') }}">
-                                    {{ __("page.content.remove") }}
-                                </x-element.modal.button>
-                                <x-element.modal id="{{ $remove->get('id') }}" labelledby="{{ $remove->get('labelledby') }}">
-                                    <form action="{{ url(request()->user()->id . '/' . ($path ? $path . '/' : $path) . $header . '/remove') }}" method="POST">
-                                        @csrf
-                                        <x-element.modal.header class="border-bottom-0">
-                                            <x-element.modal.title id="{{ $remove->get('labelledby') }}">
-                                                {{ __("page.content.removing") }}
-                                            </x-element.modal.title>
-                                            <x-element.modal.quit />
-                                        </x-element.modal.header>
-                                        <x-element.modal.body>
-                                            <p>
-                                                {{ __("page.content.remove-text") }}
-                                            </p>
-                                        </x-element.modal.body>
-                                        <x-element.modal.footer class="border-top-0">
-                                            <x-element.modal.close>
-                                                {{ __('element.modal.close') }}
-                                            </x-element.modal.close>
-                                            <x-element.modal.save type="submit" class="btn-danger">
-                                                {{ __("page.content.remove") }}
-                                            </x-element.modal.save>
-                                        </x-element.modal.footer>
-                                    </form>
-                                </x-element.modal>
-                            </div>
+                            @if ($can)
+                                <div class="m-2">
+                                    <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $rename->get('id') }}">
+                                        {{ __("page.content.rename") }}
+                                    </x-element.modal.button>
+                                    <x-element.modal id="{{ $rename->get('id') }}" labelledby="{{ $rename->get('labelledby') }}">
+                                        <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/rename') }}" method="POST">
+                                            @csrf
+                                            <x-element.modal.header class="border-bottom-0">
+                                                <x-element.modal.title id="{{ $rename->get('labelledby') }}">
+                                                    {{ __("page.content.renaming") }}
+                                                </x-element.modal.title>
+                                                <x-element.modal.quit />
+                                            </x-element.modal.header>
+                                            <x-element.modal.body>
+                                                <x-element.form.group>
+                                                    <x-element.form.input name="title" label="{{ __('page.my.name') }}" placeholder="{{ __('page.my.name') }}" value="{{ old('name') }}" autocomplete="off" />
+                                                </x-element.form.group>
+                                            </x-element.modal.body>
+                                            <x-element.modal.footer class="border-top-0">
+                                                <x-element.modal.close>
+                                                    {{ __('element.modal.close') }}
+                                                </x-element.modal.close>
+                                                <x-element.modal.save type="submit">
+                                                    {{ __('element.modal.save') }}
+                                                </x-element.modal.save>
+                                            </x-element.modal.footer>
+                                        </form>
+                                    </x-element.modal>
+                                </div>
+                            @endif
+                            @if ($can)
+                                <div class="m-2">
+                                    <x-element.modal.button class="btn-danger" target="#{{ $remove->get('id') }}">
+                                        {{ __("page.content.remove") }}
+                                    </x-element.modal.button>
+                                    <x-element.modal id="{{ $remove->get('id') }}" labelledby="{{ $remove->get('labelledby') }}">
+                                        <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/remove') }}" method="POST">
+                                            @csrf
+                                            <x-element.modal.header class="border-bottom-0">
+                                                <x-element.modal.title id="{{ $remove->get('labelledby') }}">
+                                                    {{ __("page.content.removing") }}
+                                                </x-element.modal.title>
+                                                <x-element.modal.quit />
+                                            </x-element.modal.header>
+                                            <x-element.modal.body>
+                                                <p>
+                                                    {{ __("page.content.remove-text") }}
+                                                </p>
+                                            </x-element.modal.body>
+                                            <x-element.modal.footer class="border-top-0">
+                                                <x-element.modal.close>
+                                                    {{ __('element.modal.close') }}
+                                                </x-element.modal.close>
+                                                <x-element.modal.save type="submit" class="btn-danger">
+                                                    {{ __("page.content.remove") }}
+                                                </x-element.modal.save>
+                                            </x-element.modal.footer>
+                                        </form>
+                                    </x-element.modal>
+                                </div>
+                            @endif
                         </x-element.flex>
                     </x-element.flex>
                 </main>
