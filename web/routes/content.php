@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 $path = Str::of(path())->explode("/");
@@ -130,3 +131,11 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
         });
     }
 });
+
+if (Storage::disk("public")->exists("contents/" . Str::lower($path->implode("/"))))
+{
+    Route::get($path->implode("/"), function() use ($path)
+    {
+        return response()->file(storage_path("app/public/contents/" . Str::lower($path->implode("/"))));
+    });
+}
