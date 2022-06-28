@@ -31,7 +31,7 @@ class ContentController extends Controller
 
         $breadcrumbs = $this->breadcrumbs($folders);
 
-        $path = Str::lower($folders->reverse()->skip(1)->reverse()->implode("/"));
+        $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
         return view("content", $this->data->merge([
 
@@ -75,8 +75,8 @@ class ContentController extends Controller
         $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
         Storage::disk("public")
-            ->move("contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : $path) . Str::lower($content->title) . "." . $content->extension, 
-                   "contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : $path) . Str::lower($request->title) . "." . $content->extension);
+            ->move("contents/" . $request->user()->id . "/" . ($path ? $path . "/" : $path) . $content->title . "." . $content->extension, 
+                   "contents/" . $request->user()->id . "/" . ($path ? $path . "/" : $path) . $request->title . "." . $content->extension);
 
         $content->title = $request->title;
         $content->save();
@@ -91,7 +91,7 @@ class ContentController extends Controller
         $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
         Storage::disk("public")
-            ->delete("contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : $path) . Str::lower($content->title) . "." . $content->extension);
+            ->delete("contents/" . $request->user()->id . "/" . ($path ? $path . "/" : $path) . $content->title . "." . $content->extension);
 
         $content->delete();
 
@@ -102,7 +102,7 @@ class ContentController extends Controller
     {
         $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
-        return Storage::download("public/contents/" . $user->id . "/" . ($path ? Str::lower($path) . "/" : "") . Str::lower($content->title) . "." . $content->extension);
+        return Storage::download("public/contents/" . $user->id . "/" . ($path ? $path . "/" : "") . $content->title . "." . $content->extension);
     }
 
     protected function can(User|Folder $folder)

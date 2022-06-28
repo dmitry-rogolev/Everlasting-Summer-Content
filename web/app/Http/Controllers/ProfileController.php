@@ -47,7 +47,7 @@ class ProfileController extends Controller
                 "labelledby" => id(), 
                 "path" => 
                     $avatar
-                    ? "/storage/avatars/" . $request->user()->id . "/" . Str::lower($avatar->title) . "." . $avatar->extension 
+                    ? "/storage/avatars/" . $request->user()->id . "/" . $avatar->title . "." . $avatar->extension 
                     : "", 
             ]), 
 
@@ -82,7 +82,7 @@ class ProfileController extends Controller
 
         if ($old_avatar)
         {
-            Storage::disk("public")->delete("avatars/" . $request->user()->id . "/" . Str::lower($old_avatar->title) . "." . $old_avatar->extension);
+            Storage::disk("public")->delete("avatars/" . $request->user()->id . "/" . $old_avatar->title . "." . $old_avatar->extension);
             
             $old_avatar->title = Str::of($new_avatar->getClientOriginalName())->beforeLast(".");
             $old_avatar->extension = $new_avatar->extension();
@@ -99,7 +99,7 @@ class ProfileController extends Controller
             ]);
         }
 
-        $new_avatar->storeAs("avatars/" . $request->user()->id, Str::lower($new_avatar->getClientOriginalName()), "public");
+        $new_avatar->storeAs("avatars/" . $request->user()->id, $new_avatar->getClientOriginalName(), "public");
 
         return back();
     }

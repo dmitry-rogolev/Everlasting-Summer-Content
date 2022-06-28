@@ -97,7 +97,7 @@ class FolderController extends Controller
                 "user_id" => $request->user()->id, 
             ]);
 
-            $file->storeAs("contents/" . $request->user()->id . "/" . Str::lower($path), Str::lower($title) . "." . $file->extension(), "public");
+            $file->storeAs("contents/" . $request->user()->id . "/" . $path, $title . "." . $file->extension(), "public");
         }
 
         return back();
@@ -126,7 +126,7 @@ class FolderController extends Controller
         ]);
 
         Storage::disk("public")
-            ->makeDirectory("contents/" . $request->user()->id . "/" . ($path ? Str::lower($path) . "/" : "") . Str::lower($request->title));
+            ->makeDirectory("contents/" . $request->user()->id . "/" . ($path ? $path . "/" : "") . $request->title);
 
         return back();
     }
@@ -157,8 +157,8 @@ class FolderController extends Controller
         if ($new_path) $new_path .= "/";
 
         Storage::disk("public")
-            ->move("contents/" . $request->user()->id . "/" . Str::lower($path), 
-                   "contents/" . $request->user()->id . "/" . Str::lower($new_path) . Str::lower($request->title));
+            ->move("contents/" . $request->user()->id . "/" . $path, 
+                   "contents/" . $request->user()->id . "/" . $new_path . $request->title);
         
         return redirect(url($request->user()->id . "/" . $new_path . $request->title));
     }
@@ -170,7 +170,7 @@ class FolderController extends Controller
         $path = $folders->implode("/");
         
         Storage::disk("public")
-            ->deleteDirectory("contents/" . $request->user()->id . "/" . Str::lower($path));
+            ->deleteDirectory("contents/" . $request->user()->id . "/" . $path);
 
         $parent->remove();
 
@@ -187,13 +187,15 @@ class FolderController extends Controller
 
         $title = $parent instanceof User ? $parent->name : $parent->title;
 
-        $zip = Zipper::create(storage_path("app/tmp/download.zip"));
+        $name = Str::random(60);
 
-        $zip->addDirectory(storage_path("app/public/contents/" . $user->id . "/" . Str::lower($path)), $title);
+        $zip = Zipper::create(storage_path("app/tmp/" . $name . ".zip"));
+
+        $zip->addDirectory(storage_path("app/public/contents/" . $user->id . "/" . $path), $title);
 
         $zip->close();
 
-        return response()->download(storage_path("app/tmp/download.zip"))->deleteFileAfterSend();
+        return response()->download(storage_path("app/tmp/" . $name . ".zip"))->deleteFileAfterSend();
     }
 
     protected function can(User|Folder $folder)

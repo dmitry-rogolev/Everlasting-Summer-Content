@@ -132,10 +132,10 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
     }
 });
 
-if (Storage::disk("public")->exists("contents/" . Str::lower($path->implode("/"))))
+if (Storage::disk("public")->exists("contents/" . $path->implode("/")))
 {
     Route::get($path->implode("/"), function() use ($path)
     {
-        return response()->file(storage_path("app/public/contents/" . Str::lower($path->implode("/"))));
+        return response()->file(storage_path("app/public/contents/" . $path->implode("/")));
     });
 }

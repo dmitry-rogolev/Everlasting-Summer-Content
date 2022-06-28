@@ -196,7 +196,7 @@
                             @endforeach
                             @foreach ($contents as $content)
                                 <div class="m-2">
-                                    <x-element.ticket.content.link style="height: 250px; width: 250px;" href="{{ url($user->id . '/' . ($path ? $path . '/' : '') . $content->title) }}" image="/storage/contents/{{ $user->id }}/{{ ($path ? Str::lower($path) . '/' : '') . Str::lower($content->title) . '.' . $content->extension }}" title="{{ $content->title }}">
+                                    <x-element.ticket.content.link style="height: 250px; width: 250px;" href="{{ url($user->id . '/' . ($path ? $path . '/' : '') . $content->title) }}" image="/storage/contents/{{ $user->id }}/{{ ($path ? $path . '/' : '') . $content->title . '.' . $content->extension }}" title="{{ $content->title }}">
                                         <x-element.ticket.content.link.name>
                                             {{ $content->title }}
                                         </x-element.ticket.content.link.name>

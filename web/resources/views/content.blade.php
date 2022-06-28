@@ -59,7 +59,7 @@
                         <x-element.flex flex="justify-content-center">
                             <div class="m-2">
                                 <x-element.ticket.link href="{{ url($user->id . '/' . ($path ? $path . '/' : '') . $content->title . '.' . $content->extension) }}">
-                                    <x-element.image src="/storage/contents/{{ $user->id }}/{{ ($path ? $path . '/' : $path) . Str::lower($content->title) . '.' . $content->extension }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
+                                    <x-element.image src="/storage/contents/{{ $user->id }}/{{ ($path ? $path . '/' : $path) . $content->title . '.' . $content->extension }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
                                 </x-element.ticket.link>
                             </div>
                         </x-element.flex>
