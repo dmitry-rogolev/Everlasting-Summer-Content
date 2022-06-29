@@ -41,7 +41,11 @@ if (!function_exists("path"))
 {
     function path()
     {
-        $path = Str::of(urldecode(request()->path()))->explode("/");
+        $path = urldecode(request()->path());
+
+        if ($path === "/") return "";
+
+        $path = Str::of($path)->explode("/");
 
         if 
         (

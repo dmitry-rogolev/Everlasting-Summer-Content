@@ -132,7 +132,7 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
     }
 });
 
-if (Storage::disk("public")->exists("contents/" . $path->implode("/")))
+if (Str::of($path->last())->explode(".")->count() === 2 && Storage::disk("public")->exists("contents/" . $path->implode("/")))
 {
     Route::get($path->implode("/"), function() use ($path)
     {
