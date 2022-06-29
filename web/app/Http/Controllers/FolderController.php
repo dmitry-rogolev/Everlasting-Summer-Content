@@ -90,9 +90,11 @@ class FolderController extends Controller
                 return back()->withErrors([ "title" => __("page.my.used", [ "title" => $title ]) ]);
 
             Content::create([
+                "name" => $title . "." . $file->extension(), 
                 "title" => $title, 
                 "extension" => $file->extension(), 
                 "type" => $file->getClientMimeType(), 
+                "path" => $path ?: null, 
                 "folder_id" => $path ? $parent->id : 0, 
                 "user_id" => $request->user()->id, 
             ]);
@@ -121,6 +123,7 @@ class FolderController extends Controller
 
         Folder::create([
             "title" => $request->title, 
+            "path" => $path ?: null, 
             "folder_id" => $path ? $parent->id : null,  
             "user_id" => $request->user()->id, 
         ]);

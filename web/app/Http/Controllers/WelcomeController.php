@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -26,6 +27,8 @@ class WelcomeController extends Controller
 
             "header" => __("page.welcome"), 
             "referer" => "", 
+
+            "contents" => Content::all()->shuffle(), 
 
         ])
         ->all()

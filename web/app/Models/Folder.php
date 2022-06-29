@@ -11,6 +11,7 @@ class Folder extends Model
 
     protected $fillable = [
         "title", 
+        "path", 
         "folder_id", 
         "user_id", 
     ];

@@ -39,21 +39,23 @@
                                     @endif
                                 </div>
                                 <div class="col-2 p-0">
-                                    <x-element.flex flex="justify-content-end">
-                                        <a href="{{ url()->current() . '/download/all' }}">
-                                            <x-element.form.button class="btn-lg btn-{{ $theme }}" title="{{ __('header.download-all') }}">
-                                                &#10515;
-                                            </x-element.form.button>
-                                        </a>
-                                    </x-element.flex>
+
                                 </div>
                             </x-element.flex>
                         </section>
                     </x-element.flex>
                 </header>
                 <main class="col-12 max-width-xl">
-                    <x-element.flex flex="flex-column">
-
+                    <x-element.flex flex="justify-content-center">
+                        @foreach ($contents as $content)
+                            <div class="m-2">
+                                <x-element.ticket.content.link style="height: 250px; width: 250px;" href="{{ url($content->user_id . '/' . ($content->path ? $content->path . '/' : '') . $content->title) }}" image="/storage/contents/{{ $content->user_id }}/{{ ($content->path ? $content->path . '/' : '') . $content->name }}" title="{{ $content->title }}">
+                                    <x-element.ticket.content.link.name>
+                                        {{ $content->title }}
+                                    </x-element.ticket.content.link.name>
+                                </x-element.ticket.content.link>
+                            </div>
+                        @endforeach
                     </x-element.flex>
                 </main>
             </x-element.flex>

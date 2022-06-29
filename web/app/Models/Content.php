@@ -10,9 +10,11 @@ class Content extends Model
     use HasFactory;
 
     protected $fillable = [
+        "name", 
         "title", 
         "extension", 
         "type", 
+        "path", 
         "folder_id", 
         "user_id", 
     ];
