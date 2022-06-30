@@ -46,6 +46,9 @@
                     </x-element.flex>
                 </header>
                 <main class="col-12 max-width-xl">
+                    <x-element.flex class="mt-4" flex="justify-content-center">
+                        {{ $contents->links("components.element.pagination", [ "theme" => $theme, "inversion_themes" => $inversion_themes ]) }}
+                    </x-element.flex>
                     <x-element.flex flex="justify-content-center">
                         @foreach ($contents as $content)
                             <div class="m-2">
@@ -56,6 +59,9 @@
                                 </x-element.ticket.content.link>
                             </div>
                         @endforeach
+                    </x-element.flex>
+                    <x-element.flex class="my-4" flex="justify-content-center">
+                        {{ $contents->links("components.element.pagination", [ "theme" => $theme, "inversion_themes" => $inversion_themes ]) }}
                     </x-element.flex>
                 </main>
             </x-element.flex>

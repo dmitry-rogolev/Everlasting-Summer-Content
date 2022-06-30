@@ -194,18 +194,6 @@
   background-color: #ebebebe5 !important;
 }
 
-.bg-dark {
-  background-color: #343a40e5 !important;
-}
-
-.bg-dark-click {
-  background-color: #464e57e5 !important;
-}
-
-.bg-dark-hover:hover {
-  background-color: #464e57e5 !important;
-}
-
 .border-primary {
   border-color: #007bffe5 !important;
 }

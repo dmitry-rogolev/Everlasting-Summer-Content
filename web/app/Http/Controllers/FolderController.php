@@ -62,13 +62,13 @@ class FolderController extends Controller
                 "title" => $parent->visibility ? __("page.my.private-text") : __("page.my.public-text"), 
             ]), 
 
-            "folders" => $this->can 
-                            ? $parent->folders()->orderBy("title")->get() 
-                            : $parent->folders()->visibles()->orderBy("title")->get(), 
-
             "contents" => $this->can 
-                            ? $parent->contents()->orderBy("title")->get()
-                            : $parent->contents()->visibles()->orderBy("title")->get(), 
+                            ? $parent->folders()->orderBy("title")->get()->merge(
+                                $parent->contents()->orderBy("title")->get()->all()
+                            )
+                            : $parent->folders()->visibles()->orderBy("title")->get()->merge(
+                                $parent->contents()->visibles()->orderBy("title")->get()
+                            ), 
 
         ])
         ->all()

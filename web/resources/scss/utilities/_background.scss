@@ -19,12 +19,3 @@
 .bg-white-hover:hover {
     background-color: darken($white, $theme-color-interval) + $opacity-color !important;
 }
-.bg-dark {
-    background-color: $dark + $opacity-color !important;
-}
-.bg-dark-click {
-    background-color: lighten($dark, $theme-color-interval) + $opacity-color !important;
-}
-.bg-dark-hover:hover {
-    background-color: lighten($dark, $theme-color-interval) + $opacity-color !important;
-}

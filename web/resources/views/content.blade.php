@@ -57,13 +57,6 @@
                         <x-auth.session-status />
                         <x-auth.error />
                         <x-element.flex flex="justify-content-center">
-                            <div class="m-2">
-                                <x-element.ticket.link href="{{ url($content->user_id . '/' . ($content->path ? $content->path . '/' : '') . $content->name) }}">
-                                    <x-element.image src="/storage/contents/{{ $content->user_id }}/{{ ($content->path ? $content->path . '/' : $path) . $content->name }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
-                                </x-element.ticket.link>
-                            </div>
-                        </x-element.flex>
-                        <x-element.flex flex="justify-content-center">
                             @if ($can)
                                 <div class="m-2">
                                     <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $rename->get('id') }}">
@@ -74,7 +67,7 @@
                                             @csrf
                                             <x-element.modal.header class="border-bottom-0">
                                                 <x-element.modal.title id="{{ $rename->get('labelledby') }}">
-                                                    {{ __("page.content.renaming") }}
+                                                    {{ __("page.content.rename") }}
                                                 </x-element.modal.title>
                                                 <x-element.modal.quit />
                                             </x-element.modal.header>
@@ -105,7 +98,7 @@
                                             @csrf
                                             <x-element.modal.header class="border-bottom-0">
                                                 <x-element.modal.title id="{{ $remove->get('labelledby') }}">
-                                                    {{ __("page.content.removing") }}
+                                                    {{ __("page.content.remove") }}
                                                 </x-element.modal.title>
                                                 <x-element.modal.quit />
                                             </x-element.modal.header>
@@ -136,6 +129,13 @@
                                     </form>
                                 </div>
                             @endif
+                        </x-element.flex>
+                        <x-element.flex flex="justify-content-center">
+                            <div class="m-2">
+                                <x-element.ticket.link href="{{ url($content->user_id . '/' . ($content->path ? $content->path . '/' : '') . $content->name) }}">
+                                    <x-element.image src="/storage/contents/{{ $content->user_id }}/{{ ($content->path ? $content->path . '/' : $path) . $content->name }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
+                                </x-element.ticket.link>
+                            </div>
                         </x-element.flex>
                     </x-element.flex>
                 </main>

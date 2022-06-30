@@ -139,7 +139,7 @@
                                             @csrf
                                             <x-element.modal.header class="border-bottom-0">
                                                 <x-element.modal.title id="{{ $rename->get('labelledby') }}">
-                                                    {{ __("page.content.renaming") }}
+                                                    {{ __("page.content.rename") }}
                                                 </x-element.modal.title>
                                                 <x-element.modal.quit />
                                             </x-element.modal.header>
@@ -170,7 +170,7 @@
                                             @csrf
                                             <x-element.modal.header class="border-bottom-0">
                                                 <x-element.modal.title id="{{ $remove->get('labelledby') }}">
-                                                    {{ __("page.content.removing") }}
+                                                    {{ __("page.content.remove") }}
                                                 </x-element.modal.title>
                                                 <x-element.modal.quit />
                                             </x-element.modal.header>
@@ -203,23 +203,24 @@
                             @endif
                         </x-element.flex>
                         <x-element.flex flex="justify-content-center">
-                            @foreach ($folders as $folder)
-                                <div class="m-2">
-                                    <x-element.ticket.content.link style="height: 250px; width: 250px; background-size: 70% 70%;" class="folder folder-hover" href="{{ url()->current() . '/' . $folder->title }}">
-                                        <x-element.ticket.content.link.name>
-                                            {{ $folder->title }}
-                                        </x-element.ticket.content.link.name>
-                                    </x-element.ticket.content.link>
-                                </div>
-                            @endforeach
                             @foreach ($contents as $content)
-                                <div class="m-2">
-                                    <x-element.ticket.content.link style="height: 250px; width: 250px;" href="{{ url($content->user_id . '/' . ($content->path ? $content->path . '/' : '') . $content->title) }}" image="/storage/contents/{{ $content->user_id }}/{{ ($content->path ? $content->path . '/' : '') . $content->name }}" title="{{ $content->title }}">
-                                        <x-element.ticket.content.link.name>
-                                            {{ $content->title }}
-                                        </x-element.ticket.content.link.name>
-                                    </x-element.ticket.content.link>
-                                </div>
+                                @if ($content instanceof App\Models\Folder)
+                                    <div class="m-2">
+                                        <x-element.ticket.content.link style="height: 250px; width: 250px; background-size: 70% 70%;" class="folder folder-hover" href="{{ url()->current() . '/' . $content->title }}">
+                                            <x-element.ticket.content.link.name>
+                                                {{ $content->title }}
+                                            </x-element.ticket.content.link.name>
+                                        </x-element.ticket.content.link>
+                                    </div>
+                                @else 
+                                    <div class="m-2">
+                                        <x-element.ticket.content.link style="height: 250px; width: 250px;" href="{{ url($content->user_id . '/' . ($content->path ? $content->path . '/' : '') . $content->title) }}" image="/storage/contents/{{ $content->user_id }}/{{ ($content->path ? $content->path . '/' : '') . $content->name }}" title="{{ $content->title }}">
+                                            <x-element.ticket.content.link.name>
+                                                {{ $content->title }}
+                                            </x-element.ticket.content.link.name>
+                                        </x-element.ticket.content.link>
+                                    </div>
+                                @endif
                             @endforeach
                         </x-element.flex>
                     </x-element.flex>
