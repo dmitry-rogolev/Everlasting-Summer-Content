@@ -57,9 +57,18 @@ class FolderController extends Controller
                 "labelledby" => id(), 
             ]), 
 
-            "folders" => $parent->folders()->orderBy("title")->get(), 
+            "visibility" => new Collection([
+                "header" => $parent->visibility ? __("page.my.public") : __("page.my.private"),
+                "title" => $parent->visibility ? __("page.my.private-text") : __("page.my.public-text"), 
+            ]), 
 
-            "contents" => $parent->contents()->orderBy("title")->get(), 
+            "folders" => $this->can 
+                            ? $parent->folders()->orderBy("title")->get() 
+                            : $parent->folders()->visibles()->orderBy("title")->get(), 
+
+            "contents" => $this->can 
+                            ? $parent->contents()->orderBy("title")->get()
+                            : $parent->contents()->visibles()->orderBy("title")->get(), 
 
         ])
         ->all()
@@ -73,6 +82,7 @@ class FolderController extends Controller
         $request->validate([
             "files" => [ "required", "array" ], 
             "files.*" => [ "file", "mimes:jpg,jpeg,png,gif", "max:51200", "distinct" ], 
+            "visibility" => [ "string" ], 
         ]);
 
         $files = $request->file("files");
@@ -95,6 +105,7 @@ class FolderController extends Controller
                 "extension" => $file->extension(), 
                 "type" => $file->getClientMimeType(), 
                 "path" => $path ?: null, 
+                "visibility" => $request->visibility === "true" || $request->visibility === "1", 
                 "folder_id" => $path ? $parent->id : 0, 
                 "user_id" => $request->user()->id, 
             ]);
@@ -111,6 +122,7 @@ class FolderController extends Controller
 
         $request->validate([
             "title" => [ "required", "string", "max:255" ], 
+            "visibility" => [ "string" ], 
         ]);
 
         if ($parent->folders()->whereTitle($request->title)->first())
@@ -124,6 +136,7 @@ class FolderController extends Controller
         Folder::create([
             "title" => $request->title, 
             "path" => $path ?: null, 
+            "visibility" => $request->visibility === "true" || $request->visibility === "1", 
             "folder_id" => $path ? $parent->id : null,  
             "user_id" => $request->user()->id, 
         ]);
@@ -201,16 +214,34 @@ class FolderController extends Controller
         return response()->download(storage_path("app/tmp/" . $name . ".zip"))->deleteFileAfterSend();
     }
 
+    public function visibility(Request $request, User $user, Folder|User $parent, Collection $folders)
+    {
+        if (!$this->can($parent)) abort(404);
+
+        $visibility = $parent->visibility ? false : true;
+
+        $this->visible($parent, $visibility);
+
+        return back();
+    }
+
     protected function can(User|Folder $folder)
     {
         if (Auth::check()) 
         {
             if ($folder instanceof User)
-                return request()->user()->id === $folder->id;
-            else 
+            {
                 return request()->user()->can("show", $folder);
+            }
+            else 
+            {
+                return request()->user()->can("show", $folder);
+            }
         }
-        return false;
+        else 
+        {
+            return false;
+        }
     }
 
     protected function breadcrumbs(Collection $folders = null)
@@ -250,5 +281,22 @@ class FolderController extends Controller
         parent::breadcrumbs($breadcrumbs);
 
         return $breadcrumbs;
+    }
+
+    private function visible(Folder|User $parent, bool $visibility)
+    {
+        $parent->visibility = $visibility;
+        $parent->save();
+
+        foreach ($parent->folders()->get() as $folder)
+        {
+            $this->visible($folder, $visibility);
+        }
+
+        foreach ($parent->contents()->get() as $content)
+        {
+            $content->visibility = $visibility;
+            $content->save();
+        }
     }
 }

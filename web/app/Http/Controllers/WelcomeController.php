@@ -28,7 +28,7 @@ class WelcomeController extends Controller
             "header" => __("page.welcome"), 
             "referer" => "", 
 
-            "contents" => Content::all()->shuffle(), 
+            "contents" => Content::visibles()->get()->shuffle(), 
 
         ])
         ->all()

@@ -37,6 +37,10 @@ return [
         "remove" => "Remove", 
         "removing" => "Removing", 
         "remove-text" => "Are you sure you want to delete this directory and all its contents? It will be impossible to cancel this action!",
+        "public-text" => "Display for other users", 
+        "private-text" => "Hide from other users", 
+        "public" => "Public", 
+        "private" => "Hidden", 
 
     ], 
 

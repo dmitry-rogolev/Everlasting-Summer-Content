@@ -25,8 +25,10 @@ class ContentController extends Controller
 
         $this->content = $content;
 
-        $this->can = $this->can($parent);
-                        
+        $this->can = $this->can($content);
+
+        $this->authorize("visible", $content);
+
         $this->user = $this->can ? $request->user() : $user;
 
         $breadcrumbs = $this->breadcrumbs($folders);
@@ -53,6 +55,11 @@ class ContentController extends Controller
                 "labelledby" => id(), 
             ]),
 
+            "visibility" => new Collection([
+                "header" => $content->visibility ? __("page.my.public") : __("page.my.private"),
+                "title" => $content->visibility ? __("page.my.private-text") : __("page.my.public-text"), 
+            ]),
+
         ])
         ->all()
         );
@@ -60,7 +67,7 @@ class ContentController extends Controller
 
     public function rename(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
     {
-        if (!$this->can($parent)) abort(404);
+        if (!$this->can($content)) abort(404);
 
         $request->validate([
             "title" => [ "required", "string", "max:255" ], 
@@ -86,7 +93,7 @@ class ContentController extends Controller
 
     public function remove(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
     {
-        if (!$this->can($parent)) abort(404);
+        if (!$this->can($content)) abort(404);
 
         $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
@@ -105,16 +112,26 @@ class ContentController extends Controller
         return Storage::download("public/contents/" . $user->id . "/" . ($path ? $path . "/" : "") . $content->title . "." . $content->extension);
     }
 
-    protected function can(User|Folder $folder)
+    public function visibility(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
+    {
+        if (!$this->can($content)) abort(404);
+
+        $content->visibility = $content->visibility ? false : true;
+        $content->save();
+
+        return back();
+    }
+
+    protected function can(Content $content)
     {
         if (Auth::check()) 
         {
-            if ($folder instanceof User)
-                return request()->user()->id === $folder->id;
-            else 
-                return request()->user()->can("show", $folder);
+            return request()->user()->can("show", $content);
         }
-        return false;
+        else 
+        {
+            return false;
+        }
     }
 
     protected function breadcrumbs(Collection $folders)

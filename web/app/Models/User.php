@@ -89,4 +89,9 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
 
         return $this->contents()->delete();
     }
+
+    public function scopeVisibles($query)
+    {
+        return $query->whereVisibility(true);
+    }
 }

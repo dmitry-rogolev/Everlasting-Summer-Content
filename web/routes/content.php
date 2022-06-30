@@ -57,6 +57,14 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
     })
     ->name("download");
 
+    Route::post("visibility", function(Request $request, User $user) use ($parent, $folders)
+    {
+        return App::make(FolderController::class)
+            ->callAction("visibility", [ $request, $user, $parent, $folders ]);
+    })
+    ->name("download")
+    ->middleware(["auth", "auth.session"]);
+
     if ($content)
     {
         Route::get($folders->implode("/"), function(Request $request, User $user) use ($parent, $folders, $content)
@@ -84,6 +92,12 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
                 return App::make(ContentController::class)
                     ->callAction("download", [ $request, $user, $parent, $folders, $content ]);
             });
+
+            Route::post("visibility", function(Request $request, User $user) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("visibility", [ $request, $user, $parent, $folders, $content ]);
+            })->middleware(["auth", "auth.session"]);
         });
     }
 
@@ -127,6 +141,12 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
             {
                 return App::make(FolderController::class)
                     ->callAction("download", [ $request, $user, $parent, $folders ]);
+            });
+
+            Route::post("visibility", function(Request $request, User $user) use ($parent, $folders)
+            {
+                return App::make(FolderController::class)
+                    ->callAction("visibility", [ $request, $user, $parent, $folders ]);
             });
         });
     }

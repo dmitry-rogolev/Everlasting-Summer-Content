@@ -53,7 +53,8 @@ if (!function_exists("path"))
             $path->last() === "create-folder" || 
             $path->last() === "rename" || 
             $path->last() === "remove" || 
-            $path->last() === "download"
+            $path->last() === "download" || 
+            $path->last() === "visibility" 
         )
         $path->pop();
 

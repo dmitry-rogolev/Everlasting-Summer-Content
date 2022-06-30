@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Folder;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class FolderPolicy
+class UserPolicy
 {
     use HandlesAuthorization;
 
@@ -20,16 +19,16 @@ class FolderPolicy
         //
     }
 
-    public function show(?User $user, Folder $folder)
+    public function show(?User $current, User $user)
     {
-        return optional($user)->id === $folder->user_id;
+        return optional($current)->id === $user->id;
     }
 
-    public function visible(?User $user, Folder $folder)
+    public function visible(?User $current, User $user)
     {
-        if (optional($user)->id === $folder->user_id)
+        if (optional($current)->id === $user->id)
             return true;
         else 
-            return boolval($folder->visibility);
+            return boolval($user->visibility);
     }
 }

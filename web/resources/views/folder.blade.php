@@ -77,6 +77,9 @@
                                                 <x-element.form.group>
                                                     <x-element.form.input name="title" label="{{ __('page.my.folder') }}" placeholder="{{ __('page.my.folder') }}" value="{{ old('folder') }}" autocomplete="off" />
                                                 </x-element.form.group>
+                                                <x-element.form.group>
+                                                    <x-element.form.custom.checkbox name="visibility" label="{{ __('page.my.public-text') }}" value="true" />
+                                                </x-element.form.group>
                                             </x-element.modal.body>
                                             <x-element.modal.footer class="border-top-0">
                                                 <x-element.modal.close>
@@ -107,7 +110,12 @@
                                                 <x-element.modal.quit />
                                             </x-element.modal.header>
                                             <x-element.modal.body>
-                                                <x-element.form.custom.file name="files[]" label="{{ __('page.my.add') }}" lang="{{ $lang }}" required multiple />
+                                                <x-element.form.group>
+                                                    <x-element.form.custom.file name="files[]" label="{{ __('page.my.add') }}" lang="{{ $lang }}" required multiple />
+                                                </x-element.form.group>
+                                                <x-element.form.group>
+                                                    <x-element.form.custom.checkbox name="visibility" label="{{ __('page.my.public-text') }}" value="true" />
+                                                </x-element.form.group>
                                             </x-element.modal.body>
                                             <x-element.modal.footer class="border-top-0">
                                                 <x-element.modal.close>
@@ -181,6 +189,16 @@
                                             </x-element.modal.footer>
                                         </form>
                                     </x-element.modal>
+                                </div>
+                            @endif
+                            @if ($can)
+                                <div class="m-2">
+                                    <form action="{{ url($user->id . '/' . ($path ? $path . '/' : '') . 'visibility') }}" method="POST">
+                                        @csrf 
+                                        <x-element.form.button type="submit" class="btn-{{ $theme }}" title="{{ $visibility->get('title') }}">
+                                            {{ $visibility->get("header") }}
+                                        </x-element.form.button>
+                                    </form>
                                 </div>
                             @endif
                         </x-element.flex>

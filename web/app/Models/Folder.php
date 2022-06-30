@@ -12,6 +12,7 @@ class Folder extends Model
     protected $fillable = [
         "title", 
         "path", 
+        "visibility", 
         "folder_id", 
         "user_id", 
     ];
@@ -51,5 +52,10 @@ class Folder extends Model
         $this->contents()->delete();
 
         return $this->delete();
+    }
+
+    public function scopeVisibles($query)
+    {
+        return $query->whereVisibility(true);
     }
 }

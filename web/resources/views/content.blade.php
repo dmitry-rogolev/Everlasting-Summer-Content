@@ -126,6 +126,16 @@
                                     </x-element.modal>
                                 </div>
                             @endif
+                            @if ($can)
+                                <div class="m-2">
+                                    <form action="{{ url($user->id . '/' . ($path ? $path . '/' : '') . $content->title . '/visibility') }}" method="POST">
+                                        @csrf 
+                                        <x-element.form.button type="submit" class="btn-{{ $theme }}" title="{{ $visibility->get('title') }}">
+                                            {{ $visibility->get("header") }}
+                                        </x-element.form.button>
+                                    </form>
+                                </div>
+                            @endif
                         </x-element.flex>
                     </x-element.flex>
                 </main>

@@ -15,6 +15,7 @@ class Content extends Model
         "extension", 
         "type", 
         "path", 
+        "visibility", 
         "folder_id", 
         "user_id", 
     ];
@@ -27,5 +28,10 @@ class Content extends Model
     public function folder()
     {
         return $this->belongsTo(Folder::class);
+    }
+
+    public function scopeVisibles($query)
+    {
+        return $query->whereVisibility(true);
     }
 }
