@@ -32,8 +32,8 @@
                                 <div class="col-8 p-0">
                                     @if ($header)
                                         <x-element.flex flex="justify-content-center">
-                                            <x-element.header3>
-                                                {{ $header }}
+                                            <x-element.header3 title="{{ $header }}">
+                                                {{ Str::limit($header, 40) }}
                                             </x-element.header3>
                                         </x-element.flex>
                                     @endif

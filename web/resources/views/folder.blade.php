@@ -32,8 +32,8 @@
                                 <div class="col-8 p-0">
                                     @if ($header)
                                         <x-element.flex flex="justify-content-center">
-                                            <x-element.header3>
-                                                {{ $header }}
+                                            <x-element.header3 title="{{ $header }}">
+                                                {{ Str::limit($header, 40) }}
                                             </x-element.header3>
                                         </x-element.flex>
                                     @endif
@@ -206,9 +206,9 @@
                             @foreach ($contents as $content)
                                 @if ($content instanceof App\Models\Folder)
                                     <div class="m-2">
-                                        <x-element.ticket.content.link style="height: 250px; width: 250px; background-size: 70% 70%;" class="folder folder-hover" href="{{ url()->current() . '/' . $content->title }}">
+                                        <x-element.ticket.content.link style="height: 250px; width: 250px; background-size: 70% 70%;" class="folder folder-hover" href="{{ url()->current() . '/' . $content->title }}" title="{{ __($content->title) }}">
                                             <x-element.ticket.content.link.name>
-                                                {{ $content->title }}
+                                                {{ Str::limit($content->title, 40) }}
                                             </x-element.ticket.content.link.name>
                                         </x-element.ticket.content.link>
                                     </div>
@@ -216,7 +216,7 @@
                                     <div class="m-2">
                                         <x-element.ticket.content.link style="height: 250px; width: 250px;" href="{{ url($content->user_id . '/' . ($content->path ? $content->path . '/' : '') . $content->title) }}" image="/storage/contents/{{ $content->user_id }}/{{ ($content->path ? $content->path . '/' : '') . $content->name }}" title="{{ $content->title }}">
                                             <x-element.ticket.content.link.name>
-                                                {{ $content->title }}
+                                                {{ Str::limit($content->title, 40) }}
                                             </x-element.ticket.content.link.name>
                                         </x-element.ticket.content.link>
                                     </div>
