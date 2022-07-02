@@ -20,21 +20,9 @@ class Head extends Component
 
     protected string $favicon;
 
-    protected string $font;
-
     protected string $cssApp;
 
-    protected string $cssBs;
-
-    protected string $cssBsIntegrity;
-
-    protected string $jq;
-
-    protected string $jqIntegrity;
-
-    protected string $jsBs;
-
-    protected string $jsBsIntegrity;
+    protected string $jsApp;
 
     protected string $themeLink;
 
@@ -57,14 +45,8 @@ class Head extends Component
         $this->author = config("view.author");
         $this->robots = config("view.robots");
         $this->favicon = url(config("view.favicon"));
-        $this->font = config("view.font");
         $this->cssApp = url(config("view.css_app"));
-        $this->cssBs = config("view.css_bs");
-        $this->cssBsIntegrity = config("view.css_bs_integrity");
-        $this->jq = config("view.jq");
-        $this->jqIntegrity = config("view.jq_integrity");
-        $this->jsBs = config("view.js_bs");
-        $this->jsBsIntegrity = config("view.js_bs_integrity");
+        $this->jsApp = url(config("view.js_app"));
 
         $this->themeLink = url(config("theme.directory") . "/" . $this->theme . ".css");
     }
@@ -86,14 +68,8 @@ class Head extends Component
             "author" => $this->author, 
             "robots" => $this->robots, 
             "favicon" => $this->favicon, 
-            "font" => $this->font, 
             "css_app" => $this->cssApp, 
-            "css_bs" => $this->cssBs, 
-            "css_bs_integrity" => $this->cssBsIntegrity, 
-            "jq" => $this->jq, 
-            "jq_integrity" => $this->jqIntegrity, 
-            "js_bs" => $this->jsBs, 
-            "js_bs_integrity" => $this->jsBsIntegrity, 
+            "js_app" => $this->jsApp, 
             "theme" => $this->themeLink, 
         ]);
     }

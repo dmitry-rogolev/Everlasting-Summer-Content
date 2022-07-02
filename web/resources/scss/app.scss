@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css");
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
 @import "functions";
 @import "variables";
 @import "mixins";
@@ -36,6 +38,16 @@ body {
 }
 .max-width-xl {
     max-width: 1200px;
+}
+
+.dropzone {
+    background: #e3e6ff;
+    border-radius: 13px;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px dotted #1833FF;
+    margin-top: 50px;
 }
 
 @media (min-width: 0px)

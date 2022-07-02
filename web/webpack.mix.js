@@ -17,4 +17,5 @@ const mix = require('laravel-mix');
 
 mix.sass('resources/scss/app.scss', 'public/css')
 .sass("resources/scss/themes/light.scss", "public/css/themes")
-.sass("resources/scss/themes/dark.scss", "public/css/themes");
+.sass("resources/scss/themes/dark.scss", "public/css/themes")
+.js("resources/js/app.js", "public/js");
