@@ -56,4 +56,11 @@ return [
 
     ], 
 
+    "search" => [
+
+        "search" => "Search", 
+        "search-text" => "Search results for", 
+
+    ],
+
 ];

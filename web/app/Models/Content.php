@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Content extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     protected $fillable = [
         "name", 
@@ -15,7 +16,8 @@ class Content extends Model
         "extension", 
         "type", 
         "path", 
-        "visibility", 
+        "visibility",
+        "tags",  
         "folder_id", 
         "user_id", 
     ];
@@ -33,5 +35,13 @@ class Content extends Model
     public function scopeVisibles($query)
     {
         return $query->whereVisibility(true);
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            "path" => $this->path, 
+            "tags" => $this->tags, 
+        ];
     }
 }

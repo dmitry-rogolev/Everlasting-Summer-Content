@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", [ WelcomeController::class, "show" ])
     ->name("welcome");
+
+Route::get("search", [ SearchController::class, "show" ])
+    ->name("search");
 
 require_once __DIR__ . "/auth.php";
 

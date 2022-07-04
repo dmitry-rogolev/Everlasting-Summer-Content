@@ -4,16 +4,8 @@ namespace App\View\Components\Element\Form;
 
 use App\View\Components\Component;
 
-class Input extends Component
+class Search extends Component
 {
-    protected string $id;
-
-    protected string $aria;
-
-    protected string $label;
-
-    protected string $small;
-
     protected string $class;
 
     /**
@@ -21,14 +13,10 @@ class Input extends Component
      *
      * @return void
      */
-    public function __construct(?string $label = null, ?string $small = null, ?string $class = null)
+    public function __construct(?string $class = null)
     {
         parent::__construct();
 
-        $this->id = id();
-        $this->aria = id();
-        $this->label = $label ?? "";
-        $this->small = $small ?? "";
         $this->class = $class ?? "";
     }
 
@@ -39,15 +27,11 @@ class Input extends Component
      */
     public function render()
     {
-        return view('components.element.form.input', 
+        return view('components.element.form.search', 
         [
             "theme" => $this->theme, 
             "themes" => $this->themes, 
             "inversion_themes" => $this->inversionThemes, 
-            "id" => $this->id, 
-            "aria" => $this->aria, 
-            "label" => $this->label, 
-            "small" => $this->small, 
             "class" => $this->class, 
         ]);
     }

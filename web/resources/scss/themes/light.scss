@@ -48,6 +48,12 @@ $theme: "light";
 .folder-hover:hover {
     background-image: img("../../images/folder.hover", $theme);
 }
+.search-icon {
+    background-image: img("../../images/search", $theme);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
 .ticket:hover .name-hover {
     background-color: darken($light, 15%) !important;

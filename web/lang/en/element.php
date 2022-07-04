@@ -19,4 +19,10 @@ return [
 
     "change" => "To change", 
 
+    "form" => [
+
+        "search" => "Search", 
+
+    ], 
+
 ];

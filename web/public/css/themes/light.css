@@ -58,6 +58,13 @@
   background-image: url(/images/folder.hover.light.theme.png?80c4875f9668a29f5e7c2325450e3e7b);
 }
 
+.search-icon {
+  background-image: url(/images/search.light.theme.png?1c91abcd2c2e69b15dbcb5b21809f72c);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .ticket:hover .name-hover {
   background-color: #cbd3da !important;
 }
