@@ -4,6 +4,8 @@ use App\Http\Controllers\DeleteProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::get("{user}/profile", [ ProfileController::class, "show" ]);
+
 Route::middleware(["auth", "auth.session"])->group(function()
 {
     Route::get("profile", [ ProfileController::class, "show" ])
@@ -19,6 +21,9 @@ Route::middleware(["auth", "auth.session"])->group(function()
 
         Route::post("email", [ ProfileController::class, "email" ])
             ->name("email");
+
+        Route::post("email-visibility", [ ProfileController::class, "emailVisibility" ])
+            ->name("email-visibility");
 
         Route::post("password", [ ProfileController::class, "password" ])
             ->name("password");

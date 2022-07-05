@@ -40,7 +40,6 @@ class Content extends Model
     public function toSearchableArray()
     {
         return [
-            "path" => $this->path, 
             "tags" => $this->tags, 
         ];
     }

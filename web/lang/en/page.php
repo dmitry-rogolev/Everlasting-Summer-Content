@@ -18,6 +18,8 @@ return [
         "changing-password" => "Changing the password", 
         "delete" => "Delete Account", 
         "delete-text" => "Are you sure you want to delete your account? It will be impossible to cancel this action!", 
+        "email-visibility" => "Hide email from other users", 
+        "email-hidden" => "Hidden", 
 
     ], 
 
@@ -41,6 +43,7 @@ return [
         "private-text" => "Hide from other users", 
         "public" => "Public", 
         "private" => "Hidden", 
+        "content" => "User content", 
 
     ], 
 

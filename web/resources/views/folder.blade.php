@@ -32,9 +32,17 @@
                                 <div class="col-8 p-0">
                                     @if ($header)
                                         <x-element.flex flex="justify-content-center">
-                                            <x-element.header3 title="{{ $header }}">
-                                                {{ Str::limit($header, 40) }}
-                                            </x-element.header3>
+                                            @if (!$can && !$path)
+                                                <a class="text-decoration-none" href="{{ url($user->id . '/profile') }}">
+                                                    <button class="btn btn-{{ $theme }} btn-lg">
+                                                            {{ $header }}
+                                                    </button>    
+                                                </a>
+                                            @else 
+                                                <x-element.header3 title="{{ $header }}">
+                                                    {{ Str::limit($header, 40) }}
+                                                </x-element.header3>
+                                            @endif
                                         </x-element.flex>
                                     @endif
                                 </div>

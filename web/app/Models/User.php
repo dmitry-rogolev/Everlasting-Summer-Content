@@ -28,7 +28,9 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
     protected $fillable = [
         'name',
         'email',
+        "email_visibility", 
         'password',
+        "visibility", 
     ];
 
     /**

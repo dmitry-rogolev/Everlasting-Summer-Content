@@ -3,51 +3,91 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avatar;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
-use App\Rules\User;
 
 class ProfileController extends Controller
 {
-    public function show(Request $request)
+    protected ?User $user;
+
+    protected bool $can;
+
+    public function show(Request $request, User $user = null)
     {
         $this->settings(null, true);
 
-        $breadcrumbs = new Collection([
-            new Collection([
-                "name" => __("page.welcome"), 
-                "url" => route("welcome"), 
-                __("page.welcome"), 
-                route("welcome"), 
-            ]), 
-            new Collection([
-                "name" => __("page.profile.header"), 
-                "url" => route("profile"), 
-                __("page.profile.header"), 
-                route("profile"), 
-            ]), 
-        ]);
+        $this->can = $this->can();
+
+        if (Auth::check() && $request->user()->can("show", $user))
+            return redirect(route("profile"));
+        
+        $this->user = $this->can ? $request->user() : $user;
+
+        if ($this->can)
+        {
+            $breadcrumbs = new Collection([
+                new Collection([
+                    "name" => __("page.welcome"), 
+                    "url" => route("welcome"), 
+                    __("page.welcome"), 
+                    route("welcome"), 
+                ]), 
+                new Collection([
+                    "name" => __("page.profile.header"), 
+                    "url" => route("profile"), 
+                    __("page.profile.header"), 
+                    route("profile"), 
+                ]), 
+            ]);
+        }
+        else 
+        {
+            $breadcrumbs = new Collection([
+                new Collection([
+                    "name" => __("page.welcome"), 
+                    "url" => route("welcome"), 
+                    __("page.welcome"), 
+                    route("welcome"), 
+                ]), 
+                new Collection([
+                    "name" => $this->user->name, 
+                    "url" => url($this->user->id), 
+                    $this->user->name, 
+                    url($this->user->id), 
+                ]), 
+                new Collection([
+                    "name" => __("page.profile.header"), 
+                    "url" => url($this->user->id . "/profile"), 
+                    $this->user->name, 
+                    url($this->user->id . "/profile"), 
+                ]), 
+            ]);
+        }
 
         $this->breadcrumbs($breadcrumbs);
 
-        $avatar = $request->user()->avatar;
+        $avatar = $this->user->avatar;
 
         return view("profile", $this->data->merge([
 
             "header" => __("page.profile.header"), 
-            "referer" => url("/"), 
+            "referer" => $breadcrumbs->reverse()->skip(1)->first()->get("url"), 
+            "can" => $this->can,
+            "user" => $this->user,  
 
             "avatar" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
                 "path" => 
                     $avatar
-                    ? "/storage/avatars/" . $request->user()->id . "/" . $avatar->title . "." . $avatar->extension 
+                    ? "/storage/avatars/" . $this->user->id . "/" . $avatar->title . "." . $avatar->extension 
                     : "", 
             ]), 
 
@@ -120,7 +160,7 @@ class ProfileController extends Controller
     public function email(Request $request)
     {
         $request->validate([
-            "email" => [ "required", "string", "email", "max:255", new User\Unique() ], 
+            "email" => [ "required", "string", "email", "max:255", new \App\Rules\User\Unique() ], 
         ]);
 
         $user = $request->user();
@@ -128,6 +168,18 @@ class ProfileController extends Controller
         $user->save();
 
         event(new Registered($user));
+
+        return back();
+    }
+
+    public function emailVisibility(Request $request)
+    {
+        // $request->validate([
+        //     "email_visibility" => [ "null" ], 
+        // ]);
+
+        $request->user()->email_visibility = !boolval($request->email_visibility);
+        $request->user()->save();
 
         return back();
     }
@@ -148,5 +200,13 @@ class ProfileController extends Controller
         $user->save();
 
         return back();
+    }
+
+    protected function can()
+    {
+        if (path() === "profile")
+            return true;
+
+        return false;
     }
 }
