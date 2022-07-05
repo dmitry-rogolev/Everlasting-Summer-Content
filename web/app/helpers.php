@@ -54,7 +54,8 @@ if (!function_exists("path"))
             $path->last() === "rename" || 
             $path->last() === "remove" || 
             $path->last() === "download" || 
-            $path->last() === "visibility" 
+            $path->last() === "visibility" || 
+            $path->last() === "tags"
         )
         $path->pop();
 

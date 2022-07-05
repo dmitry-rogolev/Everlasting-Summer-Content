@@ -106,7 +106,7 @@ class FolderController extends Controller
                 "type" => $file->getClientMimeType(), 
                 "path" => $path ?: null, 
                 "visibility" => $request->visibility === "true" || $request->visibility === "1", 
-                "tags" => $title . " " . $folders->implode(" "), 
+                "tags" => $title . ", " . $folders->implode(", "), 
                 "folder_id" => $path ? $parent->id : 0, 
                 "user_id" => $request->user()->id, 
             ]);

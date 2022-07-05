@@ -52,7 +52,7 @@
                         </section>
                     </x-element.flex>
                 </header>
-                <main class="col-12 max-width-xl">
+                <main class="col-12 max-width-xl pb-3">
                     <x-element.flex flex="flex-column align-items-center">
                         <x-auth.session-status />
                         <x-auth.error />
@@ -90,6 +90,47 @@
                             @endif
                             @if ($can)
                                 <div class="m-2">
+                                    <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $tags->get('id') }}">
+                                        {{ __("page.content.tags") }}
+                                    </x-element.modal.button>
+                                    <x-element.modal id="{{ $tags->get('id') }}" labelledby="{{ $tags->get('labelledby') }}">
+                                        <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/tags') }}" method="POST">
+                                            @csrf
+                                            <x-element.modal.header class="border-bottom-0">
+                                                <x-element.modal.title id="{{ $tags->get('labelledby') }}">
+                                                    {{ __("page.content.tags") }}
+                                                </x-element.modal.title>
+                                                <x-element.modal.quit />
+                                            </x-element.modal.header>
+                                            <x-element.modal.body>
+                                                <x-element.form.group>
+                                                    <x-element.form.textarea name="tags" style="height: 150px;" placeholder="{{ __('page.content.tags') }}" label="{{ __('page.content.tags-text') }}" autocomplete="off" spellcheck>{{ $content->tags }}</x-element.form.textarea>
+                                                </x-element.form.group>
+                                            </x-element.modal.body>
+                                            <x-element.modal.footer class="border-top-0">
+                                                <x-element.modal.close>
+                                                    {{ __('element.modal.close') }}
+                                                </x-element.modal.close>
+                                                <x-element.modal.save type="submit">
+                                                    {{ __("element.modal.save") }}
+                                                </x-element.modal.save>
+                                            </x-element.modal.footer>
+                                        </form>
+                                    </x-element.modal>
+                                </div>
+                            @endif
+                            @if ($can)
+                                <div class="m-2">
+                                    <form action="{{ url($user->id . '/' . ($path ? $path . '/' : '') . $content->title . '/visibility') }}" method="POST">
+                                        @csrf 
+                                        <x-element.form.button type="submit" class="btn-{{ $theme }}" title="{{ $visibility->get('title') }}">
+                                            {{ $visibility->get("header") }}
+                                        </x-element.form.button>
+                                    </form>
+                                </div>
+                            @endif
+                            @if ($can)
+                                <div class="m-2">
                                     <x-element.modal.button class="btn-danger" target="#{{ $remove->get('id') }}">
                                         {{ __("page.content.remove") }}
                                     </x-element.modal.button>
@@ -119,22 +160,33 @@
                                     </x-element.modal>
                                 </div>
                             @endif
-                            @if ($can)
-                                <div class="m-2">
-                                    <form action="{{ url($user->id . '/' . ($path ? $path . '/' : '') . $content->title . '/visibility') }}" method="POST">
-                                        @csrf 
-                                        <x-element.form.button type="submit" class="btn-{{ $theme }}" title="{{ $visibility->get('title') }}">
-                                            {{ $visibility->get("header") }}
-                                        </x-element.form.button>
-                                    </form>
-                                </div>
-                            @endif
                         </x-element.flex>
                         <x-element.flex flex="justify-content-center">
                             <div class="m-2">
                                 <x-element.ticket.link href="{{ url($content->user_id . '/' . ($content->path ? $content->path . '/' : '') . $content->name) }}">
                                     <x-element.image src="/storage/contents/{{ $content->user_id }}/{{ ($content->path ? $content->path . '/' : $path) . $content->name }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
                                 </x-element.ticket.link>
+                            </div>
+                        </x-element.flex>
+                        <x-element.flex flex="justify-content-center align-items-center">
+                            <div class="m-2">
+                                <a href="{{ url($user->id . '/profile') }}">
+                                    <x-element.form.button class="btn-{{ $theme }}">
+                                        <x-element.flex flex="align-items-center">
+                                            @if ($user->avatar)
+                                                <img src="/storage/avatars/{{ $user->id }}/{{ $user->avatar->title }}.{{ $user->avatar->extension }}" class="img-fluid rounded-circle mr-3" width="50" />
+                                            @endif
+                                            <div>
+                                                {{ $user->name }}
+                                            </div>
+                                        </x-element.flex>
+                                    </x-element.form.button>
+                                </a>
+                            </div>
+                            <div class="m-2">
+                                <x-element.header3>
+                                    {{ Str::limit($content->title, 40) }}
+                                </x-element.header3>
                             </div>
                         </x-element.flex>
                     </x-element.flex>

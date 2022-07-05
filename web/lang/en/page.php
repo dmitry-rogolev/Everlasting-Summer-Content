@@ -20,6 +20,8 @@ return [
         "delete-text" => "Are you sure you want to delete your account? It will be impossible to cancel this action!", 
         "email-visibility" => "Hide email from other users", 
         "email-hidden" => "Hidden", 
+        "tags" => "Tags", 
+        "tags-text" => "Enter the tags separated by commas or spaces.", 
 
     ], 
 

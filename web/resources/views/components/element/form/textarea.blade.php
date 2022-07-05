@@ -3,6 +3,4 @@
         {!! $label !!}
     </label>
 @endif
-<textarea class="form-control {{ $class }}" id="{{ $id }}" {{ $attributes }}>
-    {{ $slot }}
-</textarea>
+<textarea class="form-control {{ $class }}" id="{{ $id }}" {{ $attributes }}>{{ $slot }}</textarea>

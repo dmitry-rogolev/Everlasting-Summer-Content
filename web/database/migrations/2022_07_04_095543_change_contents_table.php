@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table("contents", function(Blueprint $table)
         {
-            $table->string("tags")->nullable()->after("visibility");
+            $table->text("tags")->nullable()->after("visibility");
         });
     }
 

@@ -50,6 +50,11 @@ class ContentController extends Controller
                 "labelledby" => id(), 
             ]), 
 
+            "tags" => new Collection([
+                "id" => id(), 
+                "labelledby" => id(), 
+            ]),
+
             "remove" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
@@ -89,6 +94,20 @@ class ContentController extends Controller
         $content->save();
 
         return redirect(url($request->user()->id . "/" . ($path ? $path . "/" : $path) . $request->title));
+    }
+
+    public function tags(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
+    {
+        if (!$this->can($content)) abort(404);
+
+        $request->validate([
+            "tags" => [ "string", "max:65535" ], 
+        ]);
+
+        $content->tags = $request->tags;
+        $content->save();
+
+        return back();
     }
 
     public function remove(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
@@ -136,33 +155,50 @@ class ContentController extends Controller
 
     protected function breadcrumbs(Collection $folders)
     {
-        $breadcrumbs = new Collection([
-            new Collection([
-                "name" => __("page.welcome"), 
-                "url" => route("welcome"), 
-                __("page.welcome"), 
-                route("welcome"), 
-            ]), 
-            new Collection([
-                "name" => $this->can ? __("page.my.header") : $this->user->name, 
-                "url" => route("my", [ "user" => $this->user->id ]), 
-                $this->can ? __("page.my.header") : $this->user->name, 
-                route("my", [ "user" => $this->user->id ]), 
-            ]),
-        ]);
-
-        $path = "";
-        $f = $this->user;
-        foreach ($folders->reverse()->skip(1)->reverse() as $folder)
+        if ($this->can)
         {
-            $f = $f->folders()->whereTitle($folder)->first();
-            $path .= $f->title . "/";
-            $breadcrumbs->push(new Collection([
-                "name" => $f->title, 
-                "url" => url($this->user->id . "/" . $path), 
-                $f->title, 
-                url($this->user->id . "/" . $path), 
-            ]));
+            $breadcrumbs = new Collection([
+                new Collection([
+                    "name" => __("page.welcome"), 
+                    "url" => route("welcome"), 
+                    __("page.welcome"), 
+                    route("welcome"), 
+                ]), 
+                new Collection([
+                    "name" => $this->can ? __("page.my.header") : $this->user->name, 
+                    "url" => route("my", [ "user" => $this->user->id ]), 
+                    $this->can ? __("page.my.header") : $this->user->name, 
+                    route("my", [ "user" => $this->user->id ]), 
+                ]),
+            ]);
+        }
+        else 
+        {
+            $breadcrumbs = new Collection([
+                new Collection([
+                    "name" => __("page.welcome"), 
+                    "url" => route("welcome"), 
+                    __("page.welcome"), 
+                    route("welcome"), 
+                ]), 
+            ]);
+        }
+        
+        $path = "";
+        if ($this->can)
+        {
+            $f = $this->user;
+            foreach ($folders->reverse()->skip(1)->reverse() as $folder)
+            {
+                $f = $f->folders()->whereTitle($folder)->first();
+                $path .= $f->title . "/";
+                $breadcrumbs->push(new Collection([
+                    "name" => $f->title, 
+                    "url" => url($this->user->id . "/" . $path), 
+                    $f->title, 
+                    url($this->user->id . "/" . $path), 
+                ]));
+            }
         }
         $breadcrumbs->push(new Collection([
             "name" => $this->content->title, 
