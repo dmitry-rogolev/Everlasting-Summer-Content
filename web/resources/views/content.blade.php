@@ -188,6 +188,27 @@
                                     {{ Str::limit($content->title, 40) }}
                                 </x-element.header3>
                             </div>
+                            @auth
+                            <div class="m-2">
+                                <form action="{{ url($content->user_id . '/' . ($path ? $path . '/' : $path) . $content->title . '/like') }}" method="POST">
+                                    @csrf
+                                    <x-element.form.button type="submit" title="{{ __('page.content.like') }}">
+                                        <x-element.flex flex="align-items-center">
+                                            <div class="{{ $like ? 'like active' : 'like' }}" style="height: 50px; width: 50px;"></div>
+                                            <div class="badge badge-{{ $theme }}" style="font-size: 100%;">{{ $content->likes()->count() }}</div>
+                                        </x-element.flex>
+                                    </x-element.form.button>
+                                </form>
+                            </div>
+                            @endauth
+                            @auth
+                            <div class="m-2">
+                                <form action="{{ url($content->user_id . '/' . ($path ? $path . '/' : $path) . $content->title . '/dislike') }}" method="POST">
+                                    @csrf
+                                    <x-element.form.button type="submit" class="{{ $dislike ? 'dislike active' : 'dislike' }}" style="height: 50px; width: 50px;" title="{{ __('page.content.dislike') }}"></x-element.form.button>
+                                </form>
+                            </div>
+                            @endauth
                         </x-element.flex>
                     </x-element.flex>
                 </main>

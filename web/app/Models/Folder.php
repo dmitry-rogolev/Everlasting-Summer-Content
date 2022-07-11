@@ -49,7 +49,10 @@ class Folder extends Model
             $folder->remove();
         }
 
-        $this->contents()->delete();
+        foreach ($this->contents as $content)
+        {
+            $content->delete();
+        }
 
         return $this->delete();
     }

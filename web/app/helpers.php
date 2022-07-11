@@ -55,7 +55,9 @@ if (!function_exists("path"))
             $path->last() === "remove" || 
             $path->last() === "download" || 
             $path->last() === "visibility" || 
-            $path->last() === "tags"
+            $path->last() === "tags" || 
+            $path->last() === "like" || 
+            $path->last() === "dislike"
         )
         $path->pop();
 

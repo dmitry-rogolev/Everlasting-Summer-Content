@@ -79,6 +79,9 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         Storage::disk("public")->deleteDirectory("contents/" . $this->id);
         $this->remove();
 
+        $this->likes()->delete();
+        $this->dislikes()->delete();
+
         return $this->parentForceDelete();
     }
 
@@ -95,5 +98,15 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
     public function scopeVisibles($query)
     {
         return $query->whereVisibility(true);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function dislikes()
+    {
+        return $this->hasMany(Dislike::class);
     }
 }

@@ -58,6 +58,8 @@ return [
         "remove-text" => "Are you sure you want to delete this content? It will be impossible to cancel this action!", 
         "exists" => "Content with the title :title already exists.", 
         "no-exists" => "Content with the title :title does not exist.", 
+        "like" => "Like", 
+        "dislike" => "Don't like it", 
 
     ], 
 

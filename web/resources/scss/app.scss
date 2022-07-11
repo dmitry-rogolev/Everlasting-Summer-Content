@@ -40,14 +40,16 @@ body {
     max-width: 1200px;
 }
 
-.dropzone {
-    background: #e3e6ff;
-    border-radius: 13px;
-    max-width: 550px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px dotted #1833FF;
-    margin-top: 50px;
+.search-icon {
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.like, .dislike {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 140%;
 }
 
 @media (min-width: 0px)

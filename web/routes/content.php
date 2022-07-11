@@ -104,6 +104,18 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
                 return App::make(ContentController::class)
                     ->callAction("download", [ $request, $user, $parent, $folders, $content ]);
             });
+
+            Route::post("like", function(Request $request, User $user) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("like", [ $request, $user, $parent, $folders, $content ]);
+            })->middleware(["auth", "auth.session"]);
+
+            Route::post("dislike", function(Request $request, User $user) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("dislike", [ $request, $user, $parent, $folders, $content ]);
+            })->middleware(["auth", "auth.session"]);
         });
     }
 

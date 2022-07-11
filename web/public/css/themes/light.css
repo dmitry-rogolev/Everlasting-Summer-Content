@@ -60,9 +60,22 @@
 
 .search-icon {
   background-image: url(/images/search.light.theme.png?1c91abcd2c2e69b15dbcb5b21809f72c);
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
+}
+
+.like {
+  background-image: url(/images/like.light.theme.png?a69d51e9798f9275107aa0102277064c);
+}
+
+.like.active {
+  background-image: url(/images/like.active.light.theme.png?a9f07efd8eae8738ff3c4cc3aeb30530);
+}
+
+.dislike {
+  background-image: url(/images/dislike.light.theme.png?afad215f800393615d9c58c1d718f74d);
+}
+
+.dislike.active {
+  background-image: url(/images/dislike.active.light.theme.png?a550f12ac11443698a73dc310879f91f);
 }
 
 .ticket:hover .name-hover {

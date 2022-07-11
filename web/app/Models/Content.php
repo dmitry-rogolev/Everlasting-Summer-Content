@@ -43,4 +43,22 @@ class Content extends Model
             "tags" => $this->tags, 
         ];
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function dislikes()
+    {
+        return $this->hasMany(Dislike::class);
+    }
+
+    public function delete()
+    {
+        $this->likes()->delete();
+        $this->dislikes()->delete();
+
+        return $this->delete();
+    }
 }

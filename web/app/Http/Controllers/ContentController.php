@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\Dislike;
 use App\Models\Folder;
+use App\Models\Like;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -64,6 +66,10 @@ class ContentController extends Controller
                 "header" => $content->visibility ? __("page.my.public") : __("page.my.private"),
                 "title" => $content->visibility ? __("page.my.private-text") : __("page.my.public-text"), 
             ]),
+
+            "like" => boolval($user->likes()->whereContentId($content->id)->count()), 
+
+            "dislike" => boolval($user->dislikes()->whereContentId($content->id)->count()), 
 
         ])
         ->all()
@@ -137,6 +143,53 @@ class ContentController extends Controller
 
         $content->visibility = $content->visibility ? false : true;
         $content->save();
+
+        return back();
+    }
+
+    public function like(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
+    {
+        $likes = $user->likes()->whereContentId($content->id);
+
+        if ($likes->count())
+        {
+            $likes->delete();
+        }
+        else 
+        {
+            $dislikes = $user->dislikes()->whereContentId($content->id);
+
+            if ($dislikes->count())
+                $dislikes->delete();
+
+            Like::create([
+                "user_id" => $user->id, 
+                "content_id" => $content->id, 
+            ]);
+        }
+
+        return back();
+    }
+
+    public function dislike(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
+    {
+        $dislikes = $user->dislikes()->whereContentId($content->id);
+        if ($dislikes->count())
+        {
+            $dislikes->delete();
+        }
+        else 
+        {
+            $likes = $user->likes()->whereContentId($content->id);
+
+            if ($likes->count())
+                $likes->delete();
+            
+            Dislike::create([
+                "user_id" => $user->id, 
+                "content_id" => $content->id, 
+            ]);
+        }
 
         return back();
     }
