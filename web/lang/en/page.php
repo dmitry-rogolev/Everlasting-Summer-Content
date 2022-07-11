@@ -61,6 +61,7 @@ return [
         "like" => "Like", 
         "dislike" => "Don't like it", 
         "views" => "views", 
+        "downloads" => "downloads", 
 
     ], 
 

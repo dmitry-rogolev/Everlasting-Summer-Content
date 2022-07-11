@@ -67,6 +67,11 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         return $this->hasMany(Content::class)->whereFolderId(0);
     }
 
+    public function downloads()
+    {
+        return $this->hasMany(Download::class);
+    }
+
     public function delete()
     {
         $avatar = $this->avatar;
@@ -86,6 +91,7 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         $this->likes()->delete();
         $this->dislikes()->delete();
         $this->views()->delete();
+        $this->downloads()->delete();
 
         return parent::delete();
     }
@@ -113,6 +119,7 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         $this->likes()->forceDelete();
         $this->dislikes()->forceDelete();
         $this->views()->forceDelete();
+        $this->downloads()->forceDelete();
 
         return $this->parentForceDelete();
     }

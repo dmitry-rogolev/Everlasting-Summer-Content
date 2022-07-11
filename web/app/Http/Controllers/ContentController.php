@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Dislike;
+use App\Models\Download;
 use App\Models\Folder;
 use App\Models\Like;
 use App\Models\User;
@@ -136,6 +137,14 @@ class ContentController extends Controller
 
     public function download(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
     {
+        if (Auth::check() && !$request->user()->downloads()->whereContentId($content->id)->count())
+        {
+            Download::create([
+                "user_id" => $request->user()->id, 
+                "content_id" => $content->id, 
+            ]);
+        }
+        
         $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
         return Storage::download("public/contents/" . $user->id . "/" . ($path ? $path . "/" : "") . $content->title . "." . $content->extension);

@@ -221,6 +221,11 @@
                                     {{ $content->views()->count() . " " . __("page.content.views") }}
                                 </div>
                             </div>
+                            <div class="m-2">
+                                <div class="badge badge-{{ $theme }}" style="font-size: 100%;">
+                                    {{ $content->downloads()->count() . " " . __("page.content.downloads") }}
+                                </div>
+                            </div>
                         </x-element.flex>
                     </x-element.flex>
                 </main>

@@ -63,10 +63,17 @@ class Content extends Model
         return $this->hasMany(View::class);
     }
 
+    public function downloads()
+    {
+        return $this->hasMany(Download::class);
+    }
+
     public function delete()
     {
         $this->likes()->delete();
         $this->dislikes()->delete();
+        $this->views()->delete();
+        $this->downloads()->delete();
 
         return $this->delete();
     }
@@ -75,6 +82,8 @@ class Content extends Model
     {
         $this->likes()->forceDelete();
         $this->dislikes()->forceDelete();
+        $this->views()->forceDelete();
+        $this->downloads()->forceDelete();
 
         return $this->parentForceDelete();
     }
