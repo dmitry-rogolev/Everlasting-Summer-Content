@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Folder extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes
+    {
+        SoftDeletes::forceDelete as parentForceDelete;
+    }
 
     protected $fillable = [
         "title", 
@@ -60,5 +64,22 @@ class Folder extends Model
     public function scopeVisibles($query)
     {
         return $query->whereVisibility(true);
+    }
+
+    public function forceDelete()
+    {
+        $folders = $this->folders()->onlyTrashed()->get();
+
+        foreach ($folders as $folder)
+        {
+            $folder->forceDelete();
+        }
+
+        foreach ($this->contents as $content)
+        {
+            $content->forceDelete();
+        }
+
+        return $this->parentForceDelete();
     }
 }

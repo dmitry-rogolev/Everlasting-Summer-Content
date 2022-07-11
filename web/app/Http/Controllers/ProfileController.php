@@ -174,10 +174,6 @@ class ProfileController extends Controller
 
     public function emailVisibility(Request $request)
     {
-        // $request->validate([
-        //     "email_visibility" => [ "null" ], 
-        // ]);
-
         $request->user()->email_visibility = !boolval($request->email_visibility);
         $request->user()->save();
 

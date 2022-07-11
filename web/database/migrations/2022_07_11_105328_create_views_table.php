@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id")->nullable();
             $table->unsignedBigInteger("content_id")->nullable();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('views');
     }
 };

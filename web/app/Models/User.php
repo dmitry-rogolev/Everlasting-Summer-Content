@@ -67,20 +67,52 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         return $this->hasMany(Content::class)->whereFolderId(0);
     }
 
-    public function forceDelete()
+    public function delete()
     {
         $avatar = $this->avatar;
         if ($avatar)
         {
-            Storage::disk("public")->delete("avatars/" . $this->id . "_" . $avatar->hash . "." . $avatar->extension);
+            Storage::disk("public")
+                ->move("avatars/" . $this->id . "_" . $avatar->hash . "." . $avatar->extension, 
+                       "../deletes/avatars/" . $this->id . "_" . $avatar->hash . "." . $avatar->extension);
             $this->avatar()->delete();
         }
 
-        Storage::disk("public")->deleteDirectory("contents/" . $this->id);
+        Storage::disk("public")
+            ->move("contents/" . $this->id, 
+                   "../deletes/contents/" . $this->id);
         $this->remove();
 
         $this->likes()->delete();
         $this->dislikes()->delete();
+        $this->views()->delete();
+
+        return parent::delete();
+    }
+
+    public function forceDelete()
+    {
+        $avatar = $this->avatar;
+
+        if ($avatar)
+        {
+            Storage::disk("local")
+                ->delete("deletes/avatars/" . $this->id . "_" . $avatar->hash . "." . $avatar->extension);
+            $this->avatar()->forceDelete();
+        }
+
+        Storage::disk("local")->deleteDirectory("deletes/contents/" . $this->id);
+        
+        foreach ($this->folders as $folder)
+        {
+            $folder->forceDelete();
+        }
+
+        $this->contents()->forceDelete();
+
+        $this->likes()->forceDelete();
+        $this->dislikes()->forceDelete();
+        $this->views()->forceDelete();
 
         return $this->parentForceDelete();
     }
@@ -108,5 +140,10 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
     public function dislikes()
     {
         return $this->hasMany(Dislike::class);
+    }
+
+    public function views()
+    {
+        return $this->hasMany(View::class);
     }
 }

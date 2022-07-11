@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger("user_id")->nullable();
-            $table->unsignedBigInteger("content_id")->nullable();
-            $table->timestamps();
+        Schema::table("avatars", function(Blueprint $table)
+        {
             $table->softDeletes();
         });
     }
@@ -29,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::table("avatars", function(Blueprint $table)
+        {
+            $table->dropSoftDeletes();
+        });
     }
 };

@@ -60,6 +60,7 @@ return [
         "no-exists" => "Content with the title :title does not exist.", 
         "like" => "Like", 
         "dislike" => "Don't like it", 
+        "views" => "views", 
 
     ], 
 

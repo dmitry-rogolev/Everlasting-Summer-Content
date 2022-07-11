@@ -180,14 +180,15 @@ class FolderController extends Controller
         return redirect(url($request->user()->id . "/" . $new_path . $request->title));
     }
 
-    public function remove(Request $request, $id, Folder|User $parent, Collection $folders)
+    public function remove(Request $request, User $user, Folder|User $parent, Collection $folders)
     {
         if (!$this->can($parent)) abort(404);
 
         $path = $folders->implode("/");
         
         Storage::disk("public")
-            ->deleteDirectory("contents/" . $request->user()->id . "/" . $path);
+            ->move("contents/" . $request->user()->id . "/" . $path, 
+                   "../deletes/contents/" . $request->user()->id . "/" . $path);
 
         $parent->remove();
 

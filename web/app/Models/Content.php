@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Content extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, SoftDeletes
+    {
+        SoftDeletes::forceDelete as parentForceDelete;
+    }
 
     protected $fillable = [
         "name", 
@@ -54,11 +58,24 @@ class Content extends Model
         return $this->hasMany(Dislike::class);
     }
 
+    public function views()
+    {
+        return $this->hasMany(View::class);
+    }
+
     public function delete()
     {
         $this->likes()->delete();
         $this->dislikes()->delete();
 
         return $this->delete();
+    }
+
+    public function forceDelete()
+    {
+        $this->likes()->forceDelete();
+        $this->dislikes()->forceDelete();
+
+        return $this->parentForceDelete();
     }
 }

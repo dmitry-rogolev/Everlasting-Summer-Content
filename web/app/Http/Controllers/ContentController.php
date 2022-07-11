@@ -7,6 +7,7 @@ use App\Models\Dislike;
 use App\Models\Folder;
 use App\Models\Like;
 use App\Models\User;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,8 @@ class ContentController extends Controller
         $breadcrumbs = $this->breadcrumbs($folders);
 
         $path = $folders->reverse()->skip(1)->reverse()->implode("/");
+
+        $this->view();
 
         return view("content", $this->data->merge([
 
@@ -123,7 +126,8 @@ class ContentController extends Controller
         $path = $folders->reverse()->skip(1)->reverse()->implode("/");
 
         Storage::disk("public")
-            ->delete("contents/" . $request->user()->id . "/" . ($path ? $path . "/" : $path) . $content->title . "." . $content->extension);
+            ->move("contents/" . $request->user()->id . "/" . ($path ? $path . "/" : $path) . $content->title . "." . $content->extension, 
+                   "../deletes/contents/" . $request->user()->id . "/" . ($path ? $path . "/" : $path) . $content->title . "." . $content->extension);
 
         $content->delete();
 
@@ -149,7 +153,7 @@ class ContentController extends Controller
 
     public function like(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
     {
-        $likes = $user->likes()->whereContentId($content->id);
+        $likes = $request->user()->likes()->whereContentId($content->id);
 
         if ($likes->count())
         {
@@ -157,13 +161,13 @@ class ContentController extends Controller
         }
         else 
         {
-            $dislikes = $user->dislikes()->whereContentId($content->id);
+            $dislikes = $request->user()->dislikes()->whereContentId($content->id);
 
             if ($dislikes->count())
                 $dislikes->delete();
 
             Like::create([
-                "user_id" => $user->id, 
+                "user_id" => $request->user()->id, 
                 "content_id" => $content->id, 
             ]);
         }
@@ -173,25 +177,44 @@ class ContentController extends Controller
 
     public function dislike(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
     {
-        $dislikes = $user->dislikes()->whereContentId($content->id);
+        $dislikes = $request->user()->dislikes()->whereContentId($content->id);
         if ($dislikes->count())
         {
             $dislikes->delete();
         }
         else 
         {
-            $likes = $user->likes()->whereContentId($content->id);
+            $likes = $request->user()->likes()->whereContentId($content->id);
 
             if ($likes->count())
                 $likes->delete();
             
             Dislike::create([
-                "user_id" => $user->id, 
+                "user_id" => $request->user()->id, 
                 "content_id" => $content->id, 
             ]);
         }
 
         return back();
+    }
+
+    protected function view()
+    {
+        if (Auth::check())
+        {
+            $user = request()->user();
+            $content = $this->content;
+            
+            $views = $user->views()->whereContentId($content->id);
+
+            if (!$views->count())
+            {
+                View::create([
+                    "user_id" => $user->id, 
+                    "content_id" => $content->id, 
+                ]);
+            }
+        }
     }
 
     protected function can(Content $content)
