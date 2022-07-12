@@ -78,6 +78,14 @@
   background-image: url(/images/dislike.active.light.theme.png?a550f12ac11443698a73dc310879f91f);
 }
 
+.favorite {
+  background-image: url(/images/favorite.light.theme.png?bb9edda88aa64e8c49a7eaf3ccaf0a94);
+}
+
+.favorite.active {
+  background-image: url(/images/favorite.active.light.theme.png?0cc380a7d2e092cd21430d71ae009a38);
+}
+
 .ticket:hover .name-hover {
   background-color: #cbd3da !important;
 }

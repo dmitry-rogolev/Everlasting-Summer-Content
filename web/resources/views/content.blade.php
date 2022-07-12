@@ -216,6 +216,14 @@
                                     </form>
                                 </div>
                             @endauth
+                            @auth 
+                                <div class="m-2">
+                                    <form action="{{ url($content->user_id . '/' . ($path ? $path . '/' : $path) . $content->title . '/favorite') }}" method="POST">
+                                        @csrf 
+                                        <x-element.form.button type="submit" class="{{ $favorite ? 'favorite active' : 'favorite' }}" style="height: 50px; width: 50px;" title="{{ $favorite ? __('page.favorite.out') : __('page.favorite.in') }}"></x-element.form.button>
+                                    </form>
+                                </div>
+                            @endauth
                             <div class="m-2">
                                 <div class="badge badge-{{ $theme }}" style="font-size: 100%;">
                                     {{ $content->views()->count() . " " . __("page.content.views") }}

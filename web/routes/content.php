@@ -116,6 +116,12 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
                 return App::make(ContentController::class)
                     ->callAction("dislike", [ $request, $user, $parent, $folders, $content ]);
             })->middleware(["auth", "auth.session"]);
+
+            Route::post("favorite", function(Request $request, User $user) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("favorite", [ $request, $user, $parent, $folders, $content ]);
+            })->middleware(["auth", "auth.session"]);
         });
     }
 

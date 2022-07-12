@@ -72,4 +72,12 @@ return [
 
     ],
 
+    "favorite" => [
+
+        "favorite" => "Favourites", 
+        "in" => "Add to Favorites", 
+        "out" => "Remove from favorites", 
+
+    ], 
+
 ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use App\Models\Dislike;
 use App\Models\Download;
+use App\Models\Favorite;
 use App\Models\Folder;
 use App\Models\Like;
 use App\Models\User;
@@ -74,6 +75,8 @@ class ContentController extends Controller
             "like" => boolval($user->likes()->whereContentId($content->id)->count()), 
 
             "dislike" => boolval($user->dislikes()->whereContentId($content->id)->count()), 
+
+            "favorite" => boolval($user->favorites()->whereContentId($content->id)->count()), 
 
         ])
         ->all()
@@ -199,6 +202,25 @@ class ContentController extends Controller
                 $likes->delete();
             
             Dislike::create([
+                "user_id" => $request->user()->id, 
+                "content_id" => $content->id, 
+            ]);
+        }
+
+        return back();
+    }
+
+    public function favorite(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
+    {
+        $favorites = $request->user()->favorites()->whereContentId($content->id);
+
+        if ($favorites->count())
+        {
+            $favorites->delete();
+        }
+        else 
+        {
+            Favorite::create([
                 "user_id" => $request->user()->id, 
                 "content_id" => $content->id, 
             ]);

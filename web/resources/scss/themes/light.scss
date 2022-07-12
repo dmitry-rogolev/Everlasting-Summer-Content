@@ -63,6 +63,12 @@ $theme: "light";
 .dislike.active {
     background-image: img("../../images/dislike.active", $theme);
 }
+.favorite {
+    background-image: img("../../images/favorite", $theme);
+}
+.favorite.active {
+    background-image: img("../../images/favorite.active", $theme);
+}
 
 .ticket:hover .name-hover {
     background-color: darken($light, 15%) !important;

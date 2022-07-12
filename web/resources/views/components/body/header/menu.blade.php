@@ -48,6 +48,9 @@
                         <x-element.dropdown-item url="{{ route('my', [ 'user' => request()->user()->id ]) }}">
                             {!! __("page.my.header") !!}
                         </x-element.dropdown-item>
+                        <x-element.dropdown-item url="{{ route('favorite') }}">
+                            {!! __("page.favorite.favorite") !!}
+                        </x-element.dropdown-item>
                         <div class="dropdown-item cursor-pointer">
                             <x-element.form.logout />
                         </div>

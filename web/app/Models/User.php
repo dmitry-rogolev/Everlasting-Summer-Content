@@ -92,6 +92,7 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         $this->dislikes()->delete();
         $this->views()->delete();
         $this->downloads()->delete();
+        $this->favorites()->delete();
 
         return parent::delete();
     }
@@ -120,6 +121,7 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         $this->dislikes()->forceDelete();
         $this->views()->forceDelete();
         $this->downloads()->forceDelete();
+        $this->favorites()->forceDelete();
 
         return $this->parentForceDelete();
     }
@@ -152,5 +154,10 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
     public function views()
     {
         return $this->hasMany(View::class);
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }
