@@ -61,6 +61,8 @@ return [
         "dislike" => "Не нравится", 
         "views" => "просмотров", 
         "downloads" => "загрузок", 
+        "description" => "Описание", 
+        "change-description" => "Изменить описание", 
 
     ], 
 

@@ -62,6 +62,8 @@ return [
         "dislike" => "Don't like it", 
         "views" => "views", 
         "downloads" => "downloads", 
+        "description" => "Description", 
+        "change-description" => "Change the description", 
 
     ], 
 

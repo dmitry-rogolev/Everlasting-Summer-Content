@@ -58,7 +58,8 @@ if (!function_exists("path"))
             $path->last() === "tags" || 
             $path->last() === "like" || 
             $path->last() === "dislike" || 
-            $path->last() === "favorite"
+            $path->last() === "favorite" || 
+            $path->last() === "description"
         )
         $path->pop();
 

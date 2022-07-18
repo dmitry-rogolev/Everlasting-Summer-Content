@@ -81,6 +81,12 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
                     ->callAction("rename", [ $request, $user, $parent, $folders, $content ]);
             })->middleware(["auth", "auth.session"]);
 
+            Route::post("description", function(Request $request, User $user) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("description", [ $request, $user, $parent, $folders, $content ]);
+            })->middleware(["auth", "auth.session"]);
+
             Route::post("tags", function(Request $request, User $user) use ($parent, $folders, $content)
             {
                 return App::make(ContentController::class)

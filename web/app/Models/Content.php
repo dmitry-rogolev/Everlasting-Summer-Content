@@ -45,6 +45,8 @@ class Content extends Model
     {
         return [
             "tags" => $this->tags, 
+            "path" => $this->path, 
+            "description" => $this->description, 
         ];
     }
 

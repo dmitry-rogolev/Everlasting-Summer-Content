@@ -61,6 +61,8 @@ return [
         "dislike" => "Ұнамайды", 
         "views" => "Көрулер", 
         "downloads" => "жүктеулер", 
+        "description" => "Сипаттамасы", 
+        "change-description" => "Сипаттаманы өзгерту", 
 
     ], 
 

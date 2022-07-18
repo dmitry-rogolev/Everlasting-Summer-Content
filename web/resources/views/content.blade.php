@@ -90,6 +90,37 @@
                             @endif
                             @if ($can)
                                 <div class="m-2">
+                                    <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $description->get('id') }}">
+                                        {{ __("page.content.description") }}
+                                    </x-element.modal.button>
+                                    <x-element.modal id="{{ $description->get('id') }}" labelledby="{{ $description->get('labelledby') }}">
+                                        <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/description') }}" method="POST">
+                                            @csrf
+                                            <x-element.modal.header class="border-bottom-0">
+                                                <x-element.modal.title id="{{ $description->get('labelledby') }}">
+                                                    {{ __("page.content.change-description") }}
+                                                </x-element.modal.title>
+                                                <x-element.modal.quit />
+                                            </x-element.modal.header>
+                                            <x-element.modal.body>
+                                                <x-element.form.group>
+                                                    <x-element.form.textarea label="{{ __('page.content.description') }}" placeholder="{{ __('page.content.description') }}" name="description" spellcheck autocomplete="off" style="height: 100px;"></x-element.form.textarea>
+                                                </x-element.form.group>
+                                            </x-element.modal.body>
+                                            <x-element.modal.footer class="border-top-0">
+                                                <x-element.modal.close>
+                                                    {{ __('element.modal.close') }}
+                                                </x-element.modal.close>
+                                                <x-element.modal.save type="submit">
+                                                    {{ __("element.modal.save") }}
+                                                </x-element.modal.save>
+                                            </x-element.modal.footer>
+                                        </form>
+                                    </x-element.modal>
+                                </div>
+                            @endif
+                            @if ($can)
+                                <div class="m-2">
                                     <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $tags->get('id') }}">
                                         {{ __("page.content.tags") }}
                                     </x-element.modal.button>
@@ -235,6 +266,12 @@
                                 </div>
                             </div>
                         </x-element.flex>
+                        @if ($content->description)
+                            <div class="bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }} shadow-lg p-3" style="border-radius: 15px;">
+                                <h5>{{ __("page.content.description") }}</h5>
+                                <p>{{ $content->description }}</p>
+                            </div>
+                        @endif
                     </x-element.flex>
                 </main>
             </x-element.flex>

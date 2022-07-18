@@ -62,6 +62,8 @@ return [
         "dislike" => "Не падабаецца", 
         "views" => "прагляд", 
         "downloads" => "загрузка", 
+        "description" => "Апісанне", 
+        "change-description" => "Змяніць апісанне", 
 
     ], 
 

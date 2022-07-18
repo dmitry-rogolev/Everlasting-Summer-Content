@@ -57,6 +57,11 @@ class ContentController extends Controller
                 "labelledby" => id(), 
             ]), 
 
+            "description" => new Collection([
+                "id" => id(), 
+                "labelledby" => id(), 
+            ]),
+
             "tags" => new Collection([
                 "id" => id(), 
                 "labelledby" => id(), 
@@ -107,6 +112,20 @@ class ContentController extends Controller
         $content->save();
 
         return redirect(url($request->user()->id . "/" . ($path ? $path . "/" : $path) . $request->title));
+    }
+
+    public function description(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)
+    {
+        if (!$this->can($content)) abort(404);
+
+        $request->validate([
+            "description" => [ "string", "max:65535" ], 
+        ]);
+
+        $content->description = $request->description;
+        $content->save();
+
+        return back();
     }
 
     public function tags(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content)

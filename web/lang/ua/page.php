@@ -61,6 +61,8 @@ return [
         "dislike" => "Не подобається", 
         "views" => "перегляд", 
         "downloads" => "завантаження", 
+        "description" => "Опис", 
+        "change-description" => "Змінити опис", 
 
     ], 
 
