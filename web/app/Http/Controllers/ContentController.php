@@ -295,6 +295,54 @@ class ContentController extends Controller
         return back();
     }
 
+    public function likeComment(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content, Comment $comment)
+    {
+        $likes = $request->user()->likes()->whereCommentId($comment->id);
+
+        if ($likes->count())
+        {
+            $likes->delete();
+        }
+        else 
+        {
+            $dislikes = $request->user()->dislikes()->whereCommentId($comment->id);
+
+            if ($dislikes->count())
+                $dislikes->delete();
+
+            Like::create([
+                "user_id" => $request->user()->id, 
+                "comment_id" => $comment->id, 
+            ]);
+        }
+
+        return back();
+    }
+
+    public function dislikeComment(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content, Comment $comment)
+    {
+        $dislikes = $request->user()->dislikes()->whereCommentId($comment->id);
+        
+        if ($dislikes->count())
+        {
+            $dislikes->delete();
+        }
+        else 
+        {
+            $likes = $request->user()->likes()->whereCommentId($comment->id);
+
+            if ($likes->count())
+                $likes->delete();
+            
+            Dislike::create([
+                "user_id" => $request->user()->id, 
+                "comment_id" => $comment->id, 
+            ]);
+        }
+
+        return back();
+    }
+
     protected function view()
     {
         if (Auth::check())

@@ -13,6 +13,7 @@ class Dislike extends Model
     protected $fillable = [
         "user_id", 
         "content_id", 
+        "comment_id", 
     ];
 
     public function user()
@@ -23,5 +24,10 @@ class Dislike extends Model
     public function content()
     {
         return $this->belongsTo(Content::class);
+    }
+
+    public function comment()
+    {
+        return $this->belongsTo(Comment::class);
     }
 }

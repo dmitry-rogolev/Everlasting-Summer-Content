@@ -2,6 +2,7 @@
 @import "../variables";
 
 $theme: "dark";
+$inversion: "light";
 
 .background {
     background-image: img("../../images/background", $theme);
@@ -62,6 +63,18 @@ $theme: "dark";
 }
 .dislike.active {
     background-image: img("../../images/dislike.active", $theme);
+}
+.like-inversion {
+    background-image: img("../../images/like", $inversion);
+}
+.like-inversion.active {
+    background-image: img("../../images/like.active", $inversion);
+}
+.dislike-inversion {
+    background-image: img("../../images/dislike", $inversion);
+}
+.dislike-inversion.active {
+    background-image: img("../../images/dislike.active", $inversion);
 }
 .favorite {
     background-image: img("../../images/favorite", $theme);

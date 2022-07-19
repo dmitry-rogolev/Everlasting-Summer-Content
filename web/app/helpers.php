@@ -50,7 +50,7 @@ if (!function_exists("path"))
 
         $comment = false;
 
-        if ($path->last() === "change-comment" || $path->last() === "remove-comment" || ($path->last() === "comment" && intval($path->reverse()->skip(1)->first())))
+        if ($path->last() === "change-comment" || $path->last() === "remove-comment" || $path->last() === "like-comment" || $path->last() === "dislike-comment" || ($path->last() === "comment" && intval($path->reverse()->skip(1)->first())))
             $comment = true;
 
         if 
@@ -68,7 +68,9 @@ if (!function_exists("path"))
             $path->last() === "description" || 
             $path->last() === "comment" || 
             $path->last() === "change-comment" || 
-            $path->last() === "remove-comment" 
+            $path->last() === "remove-comment" || 
+            $path->last() === "like-comment" || 
+            $path->last() === "dislike-comment"
         )
         $path->pop();
 

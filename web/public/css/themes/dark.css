@@ -78,6 +78,22 @@
   background-image: url(/images/dislike.active.dark.theme.png?d8d7b39a128923199cdc3b31a036ac1a);
 }
 
+.like-inversion {
+  background-image: url(/images/like.light.theme.png?a69d51e9798f9275107aa0102277064c);
+}
+
+.like-inversion.active {
+  background-image: url(/images/like.active.light.theme.png?a9f07efd8eae8738ff3c4cc3aeb30530);
+}
+
+.dislike-inversion {
+  background-image: url(/images/dislike.light.theme.png?afad215f800393615d9c58c1d718f74d);
+}
+
+.dislike-inversion.active {
+  background-image: url(/images/dislike.active.light.theme.png?a550f12ac11443698a73dc310879f91f);
+}
+
 .favorite {
   background-image: url(/images/favorite.dark.theme.png?8ebbc8474d9a2ab0b1ec46f000b4dea4);
 }

@@ -28,6 +28,10 @@ class Comment extends Component
 
     protected string $id;
 
+    protected bool $like;
+
+    protected bool $dislike;
+
     /**
      * Create a new component instance.
      *
@@ -50,6 +54,9 @@ class Comment extends Component
         $this->comment = $comment ?? new ModelsComment();
         $this->path = $path ?? "";
         $this->content = $content ?? new Content();
+
+        $this->like = boolval($user->likes()->whereCommentId($comment->id)->count());
+        $this->dislike = boolval($user->dislikes()->whereCommentId($comment->id)->count());
 
         $this->id = id();
 
@@ -85,6 +92,8 @@ class Comment extends Component
             "content" => $this->content, 
             "remove" => $this->remove, 
             "id" => $this->id, 
+            "like" => $this->like, 
+            "dislike" => $this->dislike, 
         ]);
     }
 }

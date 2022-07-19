@@ -153,6 +153,18 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
                 return App::make(ContentController::class)
                     ->callAction("removeComment", [ $request, $user, $parent, $folders, $content, $comment ]);
             })->middleware(["auth", "auth.session"]);
+
+            Route::post("{comment}/like-comment", function(Request $request, User $user, Comment $comment) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("likeComment", [ $request, $user, $parent, $folders, $content, $comment ]);
+            })->middleware(["auth", "auth.session"]);
+
+            Route::post("{comment}/dislike-comment", function(Request $request, User $user, Comment $comment) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("dislikeComment", [ $request, $user, $parent, $folders, $content, $comment ]);
+            })->middleware(["auth", "auth.session"]);
         });
     }
 

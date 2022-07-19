@@ -30,6 +30,16 @@ class Comment extends Model
         return $this->belongsTo(Content::class);
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function dislikes()
+    {
+        return $this->hasMany(Dislike::class);
+    }
+
     public function scopeComment($query)
     {
         return $query->whereId($this->comment_id);
