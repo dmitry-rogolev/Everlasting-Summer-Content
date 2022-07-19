@@ -88,6 +88,11 @@
   content: "Завантажити файл";
 }
 
+.toast {
+  max-width: none;
+  flex-basis: auto;
+}
+
 .bg-primary {
   background-color: #007bffe5 !important;
 }
@@ -508,6 +513,14 @@ body {
   background-position: center center;
   background-size: 90%;
   background-repeat: no-repeat;
+}
+
+.drop::after {
+  content: "▼";
+}
+
+.drop.active::after {
+  content: "▲";
 }
 
 @media (min-width: 0px) {

@@ -64,6 +64,18 @@ return [
         "downloads" => "downloads", 
         "description" => "Description", 
         "change-description" => "Change the description", 
+        "comment" => "Comment", 
+        "comments" => "Comments", 
+        "add-comment" => "Add a comment", 
+        "remove-comment" => "Delete a comment", 
+        "change-comment" => "Edit a comment", 
+        "add" => "Add", 
+        "change" => "To change", 
+        "created" => "Created", 
+        "changed" => "Changed", 
+        "remove-comment-text" => "Are you sure you want to delete this comment? It will be impossible to cancel this action!",
+        "to-comment" => "Comment", 
+        "comments-count" => "comments", 
 
     ], 
 

@@ -265,13 +265,55 @@
                                     {{ $content->downloads()->count() . " " . __("page.content.downloads") }}
                                 </div>
                             </div>
+                            <div class="m-2">
+                                <div class="badge badge-{{ $theme }}" style="font-size: 100%;">
+                                    {{ $content->comments()->count() . " " . __("page.content.comments-count") }}
+                                </div>
+                            </div>
                         </x-element.flex>
                         @if ($content->description)
-                            <div class="bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }} shadow-lg p-3" style="border-radius: 15px;">
+                            <div class="bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }} shadow-lg p-3 my-2" style="border-radius: 15px;">
                                 <h5>{{ __("page.content.description") }}</h5>
                                 <p>{{ $content->description }}</p>
                             </div>
                         @endif
+                        <x-element.header3 class="m-2">{{ __("page.content.comments") }}</x-element.header3>
+                        @auth
+                            <div class="m-2">
+                                <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $add_comment->get('id') }}">
+                                    {{ __("page.content.add-comment") }}
+                                </x-element.modal.button>
+                                <x-element.modal id="{{ $add_comment->get('id') }}" labelledby="{{ $add_comment->get('labelledby') }}">
+                                    <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/comment') }}" method="POST">
+                                        @csrf
+                                        <x-element.modal.header class="border-bottom-0">
+                                            <x-element.modal.title id="{{ $add_comment->get('labelledby') }}">
+                                                {{ __("page.content.add-comment") }}
+                                            </x-element.modal.title>
+                                            <x-element.modal.quit />
+                                        </x-element.modal.header>
+                                        <x-element.modal.body>
+                                            <x-element.form.group>
+                                                <x-element.form.textarea name="comment" class="bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" style="height: 100px;" placeholder="{{ __('page.content.comment') }}" label="{{ __('page.content.comment') }}" autocomplete="off" spellcheck required></x-element.form.textarea>
+                                            </x-element.form.group>
+                                        </x-element.modal.body>
+                                        <x-element.modal.footer class="border-top-0">
+                                            <x-element.modal.close>
+                                                {{ __('element.modal.close') }}
+                                            </x-element.modal.close>
+                                            <x-element.modal.save type="submit">
+                                                {{ __("element.modal.save") }}
+                                            </x-element.modal.save>
+                                        </x-element.modal.footer>
+                                    </form>
+                                </x-element.modal>
+                            </div>
+                        @endauth
+                        <x-element.flex flex="flex-column">
+                            @foreach ($comments as $comment)
+                                <x-element.comment :user="$user" :comment="$comment" :content="$content" class="col-12 py-2 my-2" path="{{ $path }}" />
+                            @endforeach
+                        </x-element.flex>
                     </x-element.flex>
                 </main>
             </x-element.flex>

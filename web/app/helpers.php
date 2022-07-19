@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -47,6 +48,11 @@ if (!function_exists("path"))
 
         $path = Str::of($path)->explode("/");
 
+        $comment = false;
+
+        if ($path->last() === "change-comment" || $path->last() === "remove-comment" || ($path->last() === "comment" && intval($path->reverse()->skip(1)->first())))
+            $comment = true;
+
         if 
         (
             $path->last() === "add-content" || 
@@ -59,9 +65,15 @@ if (!function_exists("path"))
             $path->last() === "like" || 
             $path->last() === "dislike" || 
             $path->last() === "favorite" || 
-            $path->last() === "description"
+            $path->last() === "description" || 
+            $path->last() === "comment" || 
+            $path->last() === "change-comment" || 
+            $path->last() === "remove-comment" 
         )
         $path->pop();
+
+        if ($comment && intval($path->last()) && Comment::find($path->last()))
+            $path->pop();
 
         return $path->implode("/");
     }

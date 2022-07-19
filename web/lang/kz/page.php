@@ -63,6 +63,18 @@ return [
         "downloads" => "жүктеулер", 
         "description" => "Сипаттамасы", 
         "change-description" => "Сипаттаманы өзгерту", 
+        "comment" => "Пікір", 
+        "comments" => "Comments", 
+        "add-comment" => "Добавить комментарий", 
+        "remove-comment" => "Пікір жою", 
+        "change-comment" => "Пікірді өзгерту", 
+        "add" => "Қосу", 
+        "change" => "Өзгерту", 
+        "created" => "Құрылды", 
+        "changed" => "Өзгертілген", 
+        "remove-comment-text" => "Сіз бұл түсініктемені жойғыңыз келе ме? Бұл әрекетті болдырмау мүмкін болмайды!",
+        "to-comment" => "Түсініктеме", 
+        "comments-count" => "комментариев", 
 
     ], 
 

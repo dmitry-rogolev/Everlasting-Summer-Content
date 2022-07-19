@@ -63,6 +63,18 @@ return [
         "downloads" => "завантаження", 
         "description" => "Опис", 
         "change-description" => "Змінити опис", 
+        "comment" => "Коментар", 
+        "comments" => "Коментар", 
+        "add-comment" => "Додати коментар", 
+        "remove-comment" => "Вилучити коментар", 
+        "change-comment" => "Змінити коментар", 
+        "add" => "Додавши", 
+        "change" => "Змінивши", 
+        "created" => "Створений", 
+        "changed" => "Змінений", 
+        "remove-comment-text" => "Ви точно хочете видалити цей коментар? Скасувати дану дію буде неможливо!",
+        "to-comment" => "Коментувати", 
+        "comments-count" => "коментар", 
 
     ], 
 

@@ -64,6 +64,18 @@ return [
         "downloads" => "загрузка", 
         "description" => "Апісанне", 
         "change-description" => "Змяніць апісанне", 
+        "comment" => "Каментар", 
+        "comments" => "Каментар", 
+        "add-comment" => "Дадаць каментар", 
+        "remove-comment" => "Выдаліць каментар", 
+        "change-comment" => "Змяніць каментар", 
+        "add" => "Дадаць", 
+        "change" => "Змяніць", 
+        "created" => "Створаны", 
+        "changed" => "Зменены", 
+        "remove-comment-text" => "Вы сапраўды хочаце выдаліць гэты каментар? Адмяніць дадзенае дзеянне будзе немагчыма!",
+        "to-comment" => "Каментаваць", 
+        "comments-count" => "каментар", 
 
     ], 
 

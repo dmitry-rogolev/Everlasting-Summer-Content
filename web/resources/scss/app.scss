@@ -6,6 +6,7 @@
 @import "root";
 @import "buttons";
 @import "custom-forms";
+@import "toasts";
 @import "utilities";
 
 html {
@@ -56,6 +57,13 @@ body {
     background-position: center center;
     background-size: 90%;
     background-repeat: no-repeat;
+}
+
+.drop::after {
+    content: "\25BC";
+}
+.drop.active::after {
+    content: "\25B2";
 }
 
 @media (min-width: 0px)

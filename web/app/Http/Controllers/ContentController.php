@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Content;
 use App\Models\Dislike;
 use App\Models\Download;
@@ -72,6 +73,11 @@ class ContentController extends Controller
                 "labelledby" => id(), 
             ]),
 
+            "add_comment" => new Collection([
+                "id" => id(), 
+                "labelledby" => id(), 
+            ]), 
+
             "visibility" => new Collection([
                 "header" => $content->visibility ? __("page.my.public") : __("page.my.private"),
                 "title" => $content->visibility ? __("page.my.private-text") : __("page.my.public-text"), 
@@ -82,6 +88,8 @@ class ContentController extends Controller
             "dislike" => boolval($user->dislikes()->whereContentId($content->id)->count()), 
 
             "favorite" => boolval($user->favorites()->whereContentId($content->id)->count()), 
+
+            "comments" => $content->comments()->whereCommentId(null)->get(), 
 
         ])
         ->all()
@@ -244,6 +252,45 @@ class ContentController extends Controller
                 "content_id" => $content->id, 
             ]);
         }
+
+        return back();
+    }
+
+    public function comment(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content, Comment $comment = null)
+    {
+        $request->validate([
+            "comment" => [ "string", "required", "max:65535" ], 
+        ]);
+
+        Comment::create([
+            "comment" => $request->comment, 
+            "user_id" => $request->user()->id, 
+            "content_id" => $content->id, 
+            "comment_id" => $comment ? $comment->id : null, 
+        ]);
+
+        return back();
+    }
+
+    public function changeComment(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content, Comment $comment)
+    {
+        $this->authorize("show", $comment);
+
+        $request->validate([
+            "comment" => [ "required", "string", "max:65535" ], 
+        ]);
+
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        return back();
+    }
+
+    public function removeComment(Request $request, User $user, Folder|User $parent, Collection $folders, Content $content, Comment $comment)
+    {
+        $this->authorize("show", $comment);
+
+        $comment->delete();
 
         return back();
     }

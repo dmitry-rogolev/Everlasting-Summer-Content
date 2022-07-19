@@ -75,6 +75,11 @@ class Content extends Model
         return $this->hasMany(Favorite::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function delete()
     {
         $this->likes()->delete();
@@ -82,8 +87,9 @@ class Content extends Model
         $this->views()->delete();
         $this->downloads()->delete();
         $this->favorites()->delete();
+        $this->comments()->delete();
 
-        return $this->delete();
+        return parent::delete();
     }
 
     public function forceDelete()
@@ -93,6 +99,7 @@ class Content extends Model
         $this->views()->forceDelete();
         $this->downloads()->forceDelete();
         $this->favorites()->forceDelete();
+        $this->comments()->forceDelete();
 
         return $this->parentForceDelete();
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FolderController;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -127,6 +128,30 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
             {
                 return App::make(ContentController::class)
                     ->callAction("favorite", [ $request, $user, $parent, $folders, $content ]);
+            })->middleware(["auth", "auth.session"]);
+
+            Route::post("comment", function(Request $request, User $user) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("comment", [ $request, $user, $parent, $folders, $content ]);
+            })->middleware(["auth", "auth.session"]);
+
+            Route::post("{comment}/comment", function(Request $request, User $user, Comment $comment) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("comment", [ $request, $user, $parent, $folders, $content, $comment ]);
+            })->middleware(["auth", "auth.session"]);
+
+            Route::post("{comment}/change-comment", function(Request $request, User $user, Comment $comment) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("changeComment", [ $request, $user, $parent, $folders, $content, $comment ]);
+            })->middleware(["auth", "auth.session"]);
+
+            Route::post("{comment}/remove-comment", function(Request $request, User $user, Comment $comment) use ($parent, $folders, $content)
+            {
+                return App::make(ContentController::class)
+                    ->callAction("removeComment", [ $request, $user, $parent, $folders, $content, $comment ]);
             })->middleware(["auth", "auth.session"]);
         });
     }
