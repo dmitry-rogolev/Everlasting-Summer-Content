@@ -28,6 +28,13 @@ class FolderController extends Controller
 
         $breadcrumbs = $this->breadcrumbs($folders);
 
+        $sort = [ "title", "asc" ];
+
+        if ($request->has("sort") && ($request->sort == "asc" || $request->sort == "desc"))
+        {
+            $sort = [ "title", $request->sort ];
+        }
+
         return view("folder", $this->data->merge([
 
             "header" => $breadcrumbs->last()->get("name"), 
@@ -35,6 +42,7 @@ class FolderController extends Controller
             "path" => $folders->implode("/"), 
             "can" => $this->can, 
             "user" => $this->user, 
+            "sort" => $sort[1], 
 
             "create_folder" => new Collection([
                 "id" => id(), 
@@ -63,11 +71,11 @@ class FolderController extends Controller
             ]), 
 
             "contents" => $this->can 
-                            ? $parent->folders()->orderBy("title")->get()->merge(
-                                $parent->contents()->orderBy("title")->get()->all()
+                            ? $parent->folders()->orderBy(...$sort)->get()->merge(
+                                $parent->contents()->orderBy(...$sort)->get()->all()
                             )
-                            : $parent->folders()->visibles()->orderBy("title")->get()->merge(
-                                $parent->contents()->visibles()->orderBy("title")->get()
+                            : $parent->folders()->visibles()->orderBy(...$sort)->get()->merge(
+                                $parent->contents()->visibles()->orderBy(...$sort)->get()
                             ), 
 
         ])

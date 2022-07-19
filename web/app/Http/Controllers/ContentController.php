@@ -43,6 +43,13 @@ class ContentController extends Controller
 
         $this->view();
 
+        $sort = [ "updated_at", "asc" ];
+
+        if ($request->has("sort") && ($request->sort == "asc" || $request->sort == "desc"))
+        {
+            $sort = [ "updated_at", $request->sort ];
+        }
+
         return view("content", $this->data->merge([
 
             "header" => $content->title, 
@@ -50,6 +57,7 @@ class ContentController extends Controller
             "path" => $path, 
             "can" => $this->can, 
             "user" => $this->user, 
+            "sort" => $sort[1], 
 
             "content" => $content, 
 
@@ -89,7 +97,7 @@ class ContentController extends Controller
 
             "favorite" => boolval($user->favorites()->whereContentId($content->id)->count()), 
 
-            "comments" => $content->comments()->whereCommentId(null)->get(), 
+            "comments" => $content->comments()->whereCommentId(null)->orderBy(...$sort)->get(), 
 
         ])
         ->all()

@@ -23,12 +23,20 @@ class WelcomeController extends Controller
 
         $this->breadcrumbs($breadcrumbs);
 
+        $sort = [ "title", "asc" ];
+
+        if ($request->has("sort") && ($request->sort == "asc" || $request->sort == "desc"))
+        {
+            $sort = [ "title", $request->sort ];
+        }
+
         return view("welcome", $this->data->merge([
 
             "header" => __("page.welcome"), 
             "referer" => "", 
+            "sort" => $sort[1], 
 
-            "contents" => Content::visibles()->paginate(20), 
+            "contents" => Content::visibles()->orderBy(...$sort)->paginate(20), 
 
         ])
         ->all()

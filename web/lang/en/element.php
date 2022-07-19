@@ -25,4 +25,12 @@ return [
 
     ], 
 
+    "sort" => [
+
+        "sort" => "Sorting", 
+        "up" => "Sort in ascending order", 
+        "down" => "Sort in descending order", 
+
+    ], 
+
 ];

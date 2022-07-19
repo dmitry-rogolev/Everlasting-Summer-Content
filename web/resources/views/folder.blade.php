@@ -210,6 +210,11 @@
                                 </div>
                             @endif
                         </x-element.flex>
+                        <x-element.flex class="mb-3" flex="justify-content-end">
+                            <a href="{{ url()->current() . '/?sort=' . ($sort == 'asc' ? 'desc' : 'asc') }}">
+                                <x-element.form.button class="btn-{{ $theme }} drop {{ $sort == 'asc' ? 'active' : '' }}" title="{{ $sort == 'asc' ? __('element.sort.up') : __('element.sort.down') }}"></x-element.form.button>
+                            </a>
+                        </x-element.flex>
                         <x-element.flex flex="justify-content-center">
                             @foreach ($contents as $content)
                                 @if ($content instanceof App\Models\Folder)
