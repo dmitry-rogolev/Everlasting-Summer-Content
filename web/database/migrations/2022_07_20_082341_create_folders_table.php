@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Folder;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +15,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('folders', function (Blueprint $table) {
             $table->id();
-            $table->text("comment")->nullable();
-            $table->unsignedBigInteger("user_id")->nullable();
-            $table->unsignedBigInteger("content_id")->nullable();
-            $table->unsignedBigInteger("comment_id")->nullable();
+            $table->string("title", 255)->collation("utf8mb4_bin")->nullable();
+            $table->text("path")->collation("utf8mb4_bin")->nullable();
+            $table->boolean("visibility")->nullable();
+            $table->foreignIdFor(Folder::class)->nullable();
+            $table->foreignIdFor(User::class);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('folders');
     }
 };

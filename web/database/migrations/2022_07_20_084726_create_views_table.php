@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Content;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +15,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table("themes", function(Blueprint $table)
-        {
-            $table->dropColumn("name");
+        Schema::create('views', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Content::class)->nullable();
+            $table->foreignIdFor(User::class)->nullbale();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,9 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table("themes", function(Blueprint $table)
-        {
-            $table->string("name")->after("id");
-        });
+        Schema::dropIfExists('views');
     }
 };

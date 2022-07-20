@@ -18,9 +18,9 @@ class Navigation extends Model
 
     public $timestamps = false;
 
-    public function sub()
+    public function scopeNavigations($query)
     {
-        return $this->hasMany(SubNavigation::class);
+        return $query->whereNavigationId($this->id);
     }
 
     public static function cache()

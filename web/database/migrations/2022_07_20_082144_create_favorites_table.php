@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Content;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +15,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('navigations', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->nullable();
-            $table->string("path")->nullable();
-            $table->string("uri")->nullable();
+            $table->foreignIdFor(Content::class)->nullable();
+            $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('navigations');
+        Schema::dropIfExists('favorites');
     }
 };

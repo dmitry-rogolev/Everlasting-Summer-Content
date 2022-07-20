@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Theme;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +14,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table("folders", function(Blueprint $table)
-        {
-            $table->string("title", 255)->collation("utf8mb4_bin")->change();
+        Schema::create('themes', function (Blueprint $table) {
+            $table->id();
+            $table->string("name", 255)->nullable();
+            $table->foreignId("inversion_id")->nullable();
         });
     }
 
@@ -26,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table("folders", function(Blueprint $table)
-        {
-            $table->string("title", 255)->collation("utf8mb4_unicode_ci")->change();
-        });
+        Schema::dropIfExists('themes');
     }
 };

@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Comment;
+use App\Models\Content;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +16,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table("contents", function(Blueprint $table)
-        {
+        Schema::create('likes', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Comment::class)->nullable();
+            $table->foreignIdFor(Content::class)->nullable();
+            $table->foreignIdFor(User::class)->nullable();
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -26,9 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table("contents", function(Blueprint $table)
-        {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('likes');
     }
 };

@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table("folders", function(Blueprint $table)
-        {
-            $table->boolean("visibility")->nullable()->after("path");
+        Schema::create('langs', function (Blueprint $table) {
+            $table->id();
+            $table->string("name", 255)->nullable();
         });
     }
 
@@ -26,9 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table("folders", function(Blueprint $table)
-        {
-            $table->dropColumn("visibility");
-        });
+        Schema::dropIfExists('langs');
     }
 };

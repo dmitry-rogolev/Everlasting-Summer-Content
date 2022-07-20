@@ -18,11 +18,11 @@ class ThemeSeeder extends Seeder
         DB::table("themes")->insert([
             [
                 "name" => "light",
-                "inversion" => 2,  
+                "inversion_id" => 2,  
             ], 
             [
                 "name" => "dark", 
-                "inversion" => 1, 
+                "inversion_id" => 1, 
             ], 
         ]);
     }

@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ThemeSeeder::class, 
             LangSeeder::class, 
+            NavigationSeeder::class, 
+            RoleSeeder::class, 
         ]);
     }
 }
