@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\DeleteProfileController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("{user}/profile", [ ProfileController::class, "show" ]);
+
+Route::get("user/{user}", [ UserController::class, "show" ])
+    ->name("user");
 
 Route::middleware(["auth", "auth.session"])->group(function()
 {
@@ -33,7 +37,6 @@ Route::middleware(["auth", "auth.session"])->group(function()
             ->name("delete");
 
         Route::post("delete", [ DeleteProfileController::class, "destroy" ])
-            ->middleware(["password.confirm"])
-            ->name("delete");
+            ->middleware(["password.confirm"]);
     });
 });

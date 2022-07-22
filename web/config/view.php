@@ -76,6 +76,12 @@ return [
     // Имя JS всего приложения
     "js_app" => env("HEAD_JS_DIRECTORY", "js") . "/" . env("HEAD_JS_APP", "app") . ".js", 
 
+    "bs_css" => env("HEAD_BS_CSS", "https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"), 
+
+    "bs_js" => env("HEAD_BS_JS", "https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"), 
+
+    "jquery" => env("HEAD_JQUERY", "https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"), 
+
     #############################################
     #   КОНФИГУРАЦИЯ ИДЕНТИФИКАТОРОВ ШАБЛОНА    #
     #############################################

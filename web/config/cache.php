@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Lang;
+use App\Models\Theme;
 use Illuminate\Support\Str;
 
 return [
@@ -108,5 +110,12 @@ return [
     'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache_'),
 
     "keep" => env("CACHE_KEEP", 600), 
+
+    "cached" => [
+
+        Lang::class, 
+        Theme::class, 
+
+    ], 
 
 ];

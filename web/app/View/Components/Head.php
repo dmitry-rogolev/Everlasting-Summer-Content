@@ -26,6 +26,12 @@ class Head extends Component
 
     protected string $themeLink;
 
+    protected string $bs_css;
+
+    protected string $bs_js;
+
+    protected string $jquery;
+
     /**
      * Create a new component instance.
      * 
@@ -47,6 +53,9 @@ class Head extends Component
         $this->favicon = url(config("view.favicon"));
         $this->cssApp = url(config("view.css_app"));
         $this->jsApp = url(config("view.js_app"));
+        $this->bs_css = config("view.bs_css");
+        $this->bs_js = config("view.bs_js");
+        $this->jquery = config("view.jquery");
 
         $this->themeLink = url(config("theme.directory") . "/" . $this->theme . ".css");
     }
@@ -70,6 +79,9 @@ class Head extends Component
             "favicon" => $this->favicon, 
             "css_app" => $this->cssApp, 
             "js_app" => $this->jsApp, 
+            "bs_css" => $this->bs_css, 
+            "bs_js" => $this->bs_js, 
+            "jquery" => $this->jquery, 
             "theme" => $this->themeLink, 
         ]);
     }

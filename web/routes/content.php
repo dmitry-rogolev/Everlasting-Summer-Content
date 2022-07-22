@@ -63,7 +63,7 @@ Route::prefix("{user}")->name("my.")->group(function() use ($path, $folders, $pa
         return App::make(FolderController::class)
             ->callAction("visibility", [ $request, $user, $parent, $folders ]);
     })
-    ->name("download")
+    ->name("visibility")
     ->middleware(["auth", "auth.session"]);
 
     if ($content)
