@@ -30,13 +30,9 @@ class Button extends Component
      */
     public function render()
     {
-        return view('components.element.modal.button', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.modal.button', $this->data->merge([
             "class" => $this->class, 
             "target" => $this->target, 
-        ]);
+        ])->all());
     }
 }

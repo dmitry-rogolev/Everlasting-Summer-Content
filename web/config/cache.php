@@ -113,8 +113,17 @@ return [
 
     "cached" => [
 
-        Lang::class, 
-        Theme::class, 
+        Lang::class => function($lang)
+        {
+            return [ __("lang." . $lang->name), $lang->name ];
+        }, 
+
+        Theme::class => function($theme)
+        {
+            $theme->cacheInversions();
+
+            return [ __("theme." . $theme->name), $theme->name ];
+        }, 
 
     ], 
 

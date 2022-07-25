@@ -25,6 +25,11 @@ class ContentPolicy
         return optional($user)->id === $content->user_id;
     }
 
+    public function remove(?User $user, Content $content)
+    {
+        return optional($user)->id === $content->user_id;
+    }
+
     public function visible(?User $user, Content $content)
     {
         if (optional($user)->id === $content->user_id) return true;

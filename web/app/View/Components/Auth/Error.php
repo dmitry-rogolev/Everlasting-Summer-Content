@@ -23,11 +23,6 @@ class Error extends Component
      */
     public function render()
     {
-        return view('components.auth.error', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
-        ]);
+        return view('components.auth.error');
     }
 }

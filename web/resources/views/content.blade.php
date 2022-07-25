@@ -1,6 +1,8 @@
 <x-layout>
     <x-slot:lang>{{ $lang }}</x-slot:lang>
     <x-slot:title>{{ $title }}</x-slot:title>
+    <x-slot:description>{{ $description }}</x-slot:description>
+    <x-slot:keywords>{{ $keywords }}</x-slot:keywords>
     <x-body>
         <x-element.background>
             <x-element.flex flex="flex-column align-items-center">
@@ -12,7 +14,7 @@
                                     <x-body.header.menu login="true" />
                                 </div>
                                 <div class="col-12 mb-2 px-0">
-                                    <x-body.header.breadcrumbs />
+                                    <x-body.header.breadcrumbs :breadcrumbs="$breadcrumbs" />
                                 </div>
                             </x-element.flex>
                         </nav>
@@ -22,7 +24,7 @@
                                     @if ($referer)
                                         <x-element.flex>
                                             <a href="{{ $referer }}">
-                                                <x-element.form.button class="btn-lg btn-{{ $theme }}" title="{{ __('header.back') }}">
+                                                <x-element.form.button class="btn-lg btn-{{ $theme }}" title="{{ __('element.back') }}">
                                                     &lt;
                                                 </x-element.form.button>
                                             </a>
@@ -40,9 +42,9 @@
                                 </div>
                                 <div class="col-2 p-0">
                                     <x-element.flex flex="justify-content-end">
-                                        <form action="{{ url()->current() . '/download' }}" method="POST">
+                                        <form action="{{ route('content.download', [ 'content' => $content->id ]) }}" method="POST">
                                             @csrf
-                                            <x-element.form.button type="submit" class="btn-lg btn-{{ $theme }}" title="{{ __('header.download') }}">
+                                            <x-element.form.button type="submit" class="btn-lg btn-{{ $theme }}" title="{{ __('element.download') }}">
                                                 &#10515;
                                             </x-element.form.button>
                                         </form>
@@ -56,282 +58,16 @@
                     <x-element.flex flex="flex-column align-items-center">
                         <x-auth.session-status />
                         <x-auth.error />
-                        <x-element.flex flex="justify-content-center">
-                            @if ($can)
-                                <div class="m-2">
-                                    <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $rename->get('id') }}">
-                                        {{ __("page.content.rename") }}
-                                    </x-element.modal.button>
-                                    <x-element.modal id="{{ $rename->get('id') }}" labelledby="{{ $rename->get('labelledby') }}">
-                                        <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/rename') }}" method="POST">
-                                            @csrf
-                                            <x-element.modal.header class="border-bottom-0">
-                                                <x-element.modal.title id="{{ $rename->get('labelledby') }}">
-                                                    {{ __("page.content.rename") }}
-                                                </x-element.modal.title>
-                                                <x-element.modal.quit />
-                                            </x-element.modal.header>
-                                            <x-element.modal.body>
-                                                <x-element.form.group>
-                                                    <x-element.form.input name="title" label="{{ __('page.my.name') }}" placeholder="{{ __('page.my.name') }}" value="{{ old('name') }}" autocomplete="off" />
-                                                </x-element.form.group>
-                                            </x-element.modal.body>
-                                            <x-element.modal.footer class="border-top-0">
-                                                <x-element.modal.close>
-                                                    {{ __('element.modal.close') }}
-                                                </x-element.modal.close>
-                                                <x-element.modal.save type="submit">
-                                                    {{ __('element.modal.save') }}
-                                                </x-element.modal.save>
-                                            </x-element.modal.footer>
-                                        </form>
-                                    </x-element.modal>
-                                </div>
-                            @endif
-                            @if ($can)
-                                <div class="m-2">
-                                    <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $description->get('id') }}">
-                                        {{ __("page.content.description") }}
-                                    </x-element.modal.button>
-                                    <x-element.modal id="{{ $description->get('id') }}" labelledby="{{ $description->get('labelledby') }}">
-                                        <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/description') }}" method="POST">
-                                            @csrf
-                                            <x-element.modal.header class="border-bottom-0">
-                                                <x-element.modal.title id="{{ $description->get('labelledby') }}">
-                                                    {{ __("page.content.change-description") }}
-                                                </x-element.modal.title>
-                                                <x-element.modal.quit />
-                                            </x-element.modal.header>
-                                            <x-element.modal.body>
-                                                <x-element.form.group>
-                                                    <x-element.form.textarea label="{{ __('page.content.description') }}" placeholder="{{ __('page.content.description') }}" name="description" spellcheck autocomplete="off" style="height: 100px;"></x-element.form.textarea>
-                                                </x-element.form.group>
-                                            </x-element.modal.body>
-                                            <x-element.modal.footer class="border-top-0">
-                                                <x-element.modal.close>
-                                                    {{ __('element.modal.close') }}
-                                                </x-element.modal.close>
-                                                <x-element.modal.save type="submit">
-                                                    {{ __("element.modal.save") }}
-                                                </x-element.modal.save>
-                                            </x-element.modal.footer>
-                                        </form>
-                                    </x-element.modal>
-                                </div>
-                            @endif
-                            @if ($can)
-                                <div class="m-2">
-                                    <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $tags->get('id') }}">
-                                        {{ __("page.content.tags") }}
-                                    </x-element.modal.button>
-                                    <x-element.modal id="{{ $tags->get('id') }}" labelledby="{{ $tags->get('labelledby') }}">
-                                        <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/tags') }}" method="POST">
-                                            @csrf
-                                            <x-element.modal.header class="border-bottom-0">
-                                                <x-element.modal.title id="{{ $tags->get('labelledby') }}">
-                                                    {{ __("page.content.tags") }}
-                                                </x-element.modal.title>
-                                                <x-element.modal.quit />
-                                            </x-element.modal.header>
-                                            <x-element.modal.body>
-                                                <x-element.form.group>
-                                                    <x-element.form.textarea name="tags" style="height: 150px;" placeholder="{{ __('page.content.tags') }}" label="{{ __('page.content.tags-text') }}" autocomplete="off" spellcheck>{{ $content->tags }}</x-element.form.textarea>
-                                                </x-element.form.group>
-                                            </x-element.modal.body>
-                                            <x-element.modal.footer class="border-top-0">
-                                                <x-element.modal.close>
-                                                    {{ __('element.modal.close') }}
-                                                </x-element.modal.close>
-                                                <x-element.modal.save type="submit">
-                                                    {{ __("element.modal.save") }}
-                                                </x-element.modal.save>
-                                            </x-element.modal.footer>
-                                        </form>
-                                    </x-element.modal>
-                                </div>
-                            @endif
-                            @if ($can)
-                                <div class="m-2">
-                                    <form action="{{ url($user->id . '/' . ($path ? $path . '/' : '') . $content->title . '/visibility') }}" method="POST">
-                                        @csrf 
-                                        <x-element.form.button type="submit" class="btn-{{ $theme }}" title="{{ $visibility->get('title') }}">
-                                            {{ $visibility->get("header") }}
-                                        </x-element.form.button>
-                                    </form>
-                                </div>
-                            @endif
-                            @if ($can)
-                                <div class="m-2">
-                                    <x-element.modal.button class="btn-danger" target="#{{ $remove->get('id') }}">
-                                        {{ __("page.content.remove") }}
-                                    </x-element.modal.button>
-                                    <x-element.modal id="{{ $remove->get('id') }}" labelledby="{{ $remove->get('labelledby') }}">
-                                        <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/remove') }}" method="POST">
-                                            @csrf
-                                            <x-element.modal.header class="border-bottom-0">
-                                                <x-element.modal.title id="{{ $remove->get('labelledby') }}">
-                                                    {{ __("page.content.remove") }}
-                                                </x-element.modal.title>
-                                                <x-element.modal.quit />
-                                            </x-element.modal.header>
-                                            <x-element.modal.body>
-                                                <p>
-                                                    {{ __("page.content.remove-text") }}
-                                                </p>
-                                            </x-element.modal.body>
-                                            <x-element.modal.footer class="border-top-0">
-                                                <x-element.modal.close>
-                                                    {{ __('element.modal.close') }}
-                                                </x-element.modal.close>
-                                                <x-element.modal.save type="submit" class="btn-danger">
-                                                    {{ __("page.content.remove") }}
-                                                </x-element.modal.save>
-                                            </x-element.modal.footer>
-                                        </form>
-                                    </x-element.modal>
-                                </div>
-                            @endif
-                        </x-element.flex>
+                        <x-body.main.content.control-panel :content="$content" :can="$can" />
                         <x-element.flex flex="justify-content-center">
                             <div class="m-2">
-                                <x-element.ticket.link href="{{ url($content->user_id . '/' . ($content->path ? $content->path . '/' : '') . $content->name) }}">
-                                    <x-element.image src="/storage/contents/{{ $content->user_id }}/{{ ($content->path ? $content->path . '/' : $path) . $content->name }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
+                                <x-element.ticket.link href="{{ route('content.only', [ 'content' => $content->id ]) }}">
+                                    <x-element.image src="/storage/contents/{{ $content->user_id }}/{{ $content->path ? $content->path . '/' : '' }}{{ $content->name }}" style="border-radius: 10.5px;" title="{{ $content->title }}" />
                                 </x-element.ticket.link>
                             </div>
                         </x-element.flex>
-                        <x-element.flex flex="justify-content-center align-items-center">
-                            <div class="m-2">
-                                <a href="{{ url($user->id . '/profile') }}">
-                                    <x-element.form.button class="btn-{{ $theme }}">
-                                        <x-element.flex flex="align-items-center">
-                                            @if ($user->avatar)
-                                                <img src="/storage/avatars/{{ $user->id }}/{{ $user->avatar->title }}.{{ $user->avatar->extension }}" class="img-fluid rounded-circle mr-3" width="50" />
-                                            @endif
-                                            <div>
-                                                {{ $user->name }}
-                                            </div>
-                                        </x-element.flex>
-                                    </x-element.form.button>
-                                </a>
-                            </div>
-                            <div class="m-2">
-                                <x-element.header3>
-                                    {{ Str::limit($content->title, 40) }}
-                                </x-element.header3>
-                            </div>
-                            @auth
-                                <div class="m-2">
-                                    <form action="{{ url($content->user_id . '/' . ($path ? $path . '/' : $path) . $content->title . '/like') }}" method="POST">
-                                        @csrf
-                                        <x-element.form.button type="submit" title="{{ __('page.content.like') }}">
-                                            <x-element.flex flex="align-items-center">
-                                                <div class="{{ $like ? 'like active' : 'like' }}" style="height: 50px; width: 50px;"></div>
-                                                <div class="badge badge-{{ $theme }}" style="font-size: 100%;">{{ $content->likes()->count() }}</div>
-                                            </x-element.flex>
-                                        </x-element.form.button>
-                                    </form>
-                                </div>
-                            @elseauth
-                                <div class="m-2">
-                                    <x-element.flex flex="align-items-center">
-                                        <div class="{{ $like ? 'like active' : 'like' }}" style="height: 50px; width: 50px;"></div>
-                                        <div class="badge badge-{{ $theme }}" style="font-size: 100%;">{{ $content->likes()->count() }}</div>
-                                    </x-element.flex>
-                                </div>
-                            @endauth
-                            @auth
-                                <div class="m-2">
-                                    <form action="{{ url($content->user_id . '/' . ($path ? $path . '/' : $path) . $content->title . '/dislike') }}" method="POST">
-                                        @csrf
-                                        <x-element.form.button type="submit" class="{{ $dislike ? 'dislike active' : 'dislike' }}" style="height: 50px; width: 50px;" title="{{ __('page.content.dislike') }}"></x-element.form.button>
-                                    </form>
-                                </div>
-                            @endauth
-                            @auth 
-                                <div class="m-2">
-                                    <form action="{{ url($content->user_id . '/' . ($path ? $path . '/' : $path) . $content->title . '/favorite') }}" method="POST">
-                                        @csrf 
-                                        <x-element.form.button type="submit" class="{{ $favorite ? 'favorite active' : 'favorite' }}" style="height: 50px; width: 50px;" title="{{ $favorite ? __('page.favorite.out') : __('page.favorite.in') }}"></x-element.form.button>
-                                    </form>
-                                </div>
-                            @endauth
-                            <div class="m-2">
-                                <div class="badge badge-{{ $theme }}" style="font-size: 100%;">
-                                    {{ $content->views()->count() . " " . __("page.content.views") }}
-                                </div>
-                            </div>
-                            <div class="m-2">
-                                <div class="badge badge-{{ $theme }}" style="font-size: 100%;">
-                                    {{ $content->downloads()->count() . " " . __("page.content.downloads") }}
-                                </div>
-                            </div>
-                            <div class="m-2">
-                                <div class="badge badge-{{ $theme }}" style="font-size: 100%;">
-                                    {{ $content->comments()->count() . " " . __("page.content.comments-count") }}
-                                </div>
-                            </div>
-                        </x-element.flex>
-                        @if ($content->description)
-                            <div class="col-12 bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }} shadow-lg p-3 my-2" style="border-radius: 15px;">
-                                <h5>{{ __("page.content.description") }}</h5>
-                                <p>{{ $content->description }}</p>
-                            </div>
-                        @endif
-                        <x-element.flex flex="justify-content-between">
-                            <div class="col-2 m-2 px-0">
-
-                            </div>
-                            <div class="col-2 m-2 px-0">
-                                <x-element.flex flex="justify-content-center">
-                                    <x-element.header3>{{ __("page.content.comments") }}</x-element.header3>
-                                </x-element.flex>
-                            </div>
-                            <div class="col-2 m-2 px-0">
-                                <x-element.flex flex="justify-content-end">
-                                    <a href="{{ url()->current() . '/?sort=' . ($sort == 'asc' ? 'desc' : 'asc') }}">
-                                        <x-element.form.button class="btn-{{ $theme }} drop {{ $sort == 'asc' ? 'active' : '' }}" title="{{ $sort == 'asc' ? __('element.sort.up') : __('element.sort.down') }}"></x-element.form.button>
-                                    </a>
-                                </x-element.flex>
-                            </div>
-                        </x-element.flex>
-                        @auth
-                            <x-element.flex flex="justify-content-center">
-                                <div class="m-2">
-                                    <x-element.modal.button class="btn-{{ $theme }}" target="#{{ $add_comment->get('id') }}">
-                                        {{ __("page.content.add-comment") }}
-                                    </x-element.modal.button>
-                                    <x-element.modal id="{{ $add_comment->get('id') }}" labelledby="{{ $add_comment->get('labelledby') }}">
-                                        <form action="{{ url($user->id . '/' . ($path ? $path . '/' : $path) . $header . '/comment') }}" method="POST">
-                                            @csrf
-                                            <x-element.modal.header class="border-bottom-0">
-                                                <x-element.modal.title id="{{ $add_comment->get('labelledby') }}">
-                                                    {{ __("page.content.add-comment") }}
-                                                </x-element.modal.title>
-                                                <x-element.modal.quit />
-                                            </x-element.modal.header>
-                                            <x-element.modal.body>
-                                                <x-element.form.group>
-                                                    <x-element.form.textarea name="comment" class="bg-{{ $theme }} text-{{ $inversion_themes->get($theme) }}" style="height: 100px;" placeholder="{{ __('page.content.comment') }}" label="{{ __('page.content.comment') }}" autocomplete="off" spellcheck required></x-element.form.textarea>
-                                                </x-element.form.group>
-                                            </x-element.modal.body>
-                                            <x-element.modal.footer class="border-top-0">
-                                                <x-element.modal.close>
-                                                    {{ __('element.modal.close') }}
-                                                </x-element.modal.close>
-                                                <x-element.modal.save type="submit">
-                                                    {{ __("element.modal.save") }}
-                                                </x-element.modal.save>
-                                            </x-element.modal.footer>
-                                        </form>
-                                    </x-element.modal>
-                                </div>
-                            </x-element.flex>
-                        @endauth
-                        <x-element.flex flex="flex-column">
-                            @foreach ($comments as $comment)
-                                <x-element.comment :user="$user" :comment="$comment" :content="$content" class="col-12 py-2 my-2" path="{{ $path }}" />
-                            @endforeach
-                        </x-element.flex>
+                        <x-body.main.content.info-panel :user="$user" :content="$content" />
+                        <x-body.main.content.comment-panel :sort="$sort" :comments="$comments" :content="$content" />
                     </x-element.flex>
                 </main>
             </x-element.flex>

@@ -27,12 +27,8 @@ class Header3 extends Component
      */
     public function render()
     {
-        return view('components.element.header3', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.header3', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

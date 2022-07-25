@@ -23,11 +23,6 @@ class SessionStatus extends Component
      */
     public function render()
     {
-        return view('components.auth.session-status', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
-        ]);
+        return view('components.auth.session-status');
     }
 }

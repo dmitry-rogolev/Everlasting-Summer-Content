@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WelcomeController;
@@ -22,12 +23,20 @@ Route::get("/", [ WelcomeController::class, "show" ])
 Route::get("search", [ SearchController::class, "show" ])
     ->name("search");
 
-Route::get("favorites", [ FavoriteController::class, "show" ])
+Route::get("favorite", [ FavoriteController::class, "show" ])
     ->middleware(["auth", "auth.session"])
     ->name("favorite");
 
+Route::post("favorite/download", [ DownloadController::class, "download" ])
+    ->middleware(["auth", "auth.session"])
+    ->name("favorite.download");
+
 require_once __DIR__ . "/auth.php";
 
-require_once __DIR__ . "/profile.php";
+require_once __DIR__ . "/user.php";
 
 require_once __DIR__ . "/content.php";
+
+require_once __DIR__ . "/folder.php";
+
+require_once __DIR__ . "/comment.php";

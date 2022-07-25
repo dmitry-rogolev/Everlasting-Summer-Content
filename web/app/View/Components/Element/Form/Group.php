@@ -27,12 +27,8 @@ class Group extends Component
      */
     public function render()
     {
-        return view('components.element.form.group', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.form.group', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

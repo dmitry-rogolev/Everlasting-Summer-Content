@@ -4,9 +4,9 @@ namespace App\View\Components\Element;
 
 use App\Models\Comment as ModelsComment;
 use App\Models\Content;
-use App\Models\User;
 use App\View\Components\Component;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Carbon;
 
 class Comment extends Component
 {
@@ -14,13 +14,11 @@ class Comment extends Component
 
     protected string $style;
 
-    protected User $user;
-
     protected ModelsComment $comment;
 
     protected Collection $add;
 
-    protected string $path;
+    protected Collection $change;
 
     protected Content $content;
 
@@ -28,9 +26,7 @@ class Comment extends Component
 
     protected string $id;
 
-    protected bool $like;
-
-    protected bool $dislike;
+    protected string $date;
 
     /**
      * Create a new component instance.
@@ -40,9 +36,7 @@ class Comment extends Component
     public function __construct(
         ?string $class = null, 
         ?string $style = null, 
-        ?User $user = null, 
         ?ModelsComment $comment = null, 
-        ?string $path = null, 
         ?Content $content = null, 
     )
     {
@@ -50,17 +44,19 @@ class Comment extends Component
 
         $this->class = $class ?? ""; 
         $this->style = $style ?? "";
-        $this->user = $user ?? new User();
         $this->comment = $comment ?? new ModelsComment();
-        $this->path = $path ?? "";
         $this->content = $content ?? new Content();
-
-        $this->like = boolval($user->likes()->whereCommentId($comment->id)->count());
-        $this->dislike = boolval($user->dislikes()->whereCommentId($comment->id)->count());
 
         $this->id = id();
 
+        $this->date = $this->date($comment);
+
         $this->add = new Collection([
+            "id" => id(), 
+            "labelledby" => id(), 
+        ]);
+
+        $this->change = new Collection([
             "id" => id(), 
             "labelledby" => id(), 
         ]);
@@ -78,22 +74,40 @@ class Comment extends Component
      */
     public function render()
     {
-        return view('components.element.comment', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.comment', $this->data->merge([
             "class" => $this->class, 
             "style" => $this->style, 
-            "user" => $this->user, 
             "comment" => $this->comment, 
             "add" => $this->add, 
-            "path" => $this->path, 
+            "change" => $this->change, 
             "content" => $this->content, 
             "remove" => $this->remove, 
             "id" => $this->id, 
-            "like" => $this->like, 
-            "dislike" => $this->dislike, 
-        ]);
+            "date" => $this->date, 
+            "like" => boolval(request()->user() ? request()->user()->likes()->whereCommentId($this->comment->id)->count() : null), 
+            "dislike" => boolval(request()->user() ? request()->user()->dislikes()->whereCommentId($this->comment->id)->count() : null), 
+        ])->all());
+    }
+
+    private function date(ModelsComment $comment) : string
+    {
+        $date = new Carbon($comment->updated_at);
+
+        $seconds = $date->diffInSeconds(now(), false);
+
+        if ($seconds <= 60)
+            return trans_choice("page.seconds", $seconds);
+            
+        else if ($seconds > 60 && $seconds <= 60 * 60)
+            return trans_choice("page.minutes", $date->diffInMinutes(now(), false));
+
+        else if ($seconds > 60 * 60 && $seconds <= 60 * 60 * 24)
+            return trans_choice("page.hours", $date->diffInHours(now(), false));
+
+        else if ($seconds > 60 * 60 * 24 && $seconds <= 60 * 60 * 24 * 31)
+            return trans_choice("page.months", $date->diffInMonths(now(), false));
+
+        else 
+            return trans_choice("page.years", $date->diffInYears(now(), false));
     }
 }

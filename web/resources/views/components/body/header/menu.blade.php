@@ -1,52 +1,39 @@
-<section class="navbar {{ 'navbar-' . $theme }} {{ 'bg-' . $theme }} navbar-expand-md rounded shadow-lg {{ $class }}" {{ $attributes }}>
+<section class="navbar navbar-{{ $theme }} bg-{{ $theme }} navbar-expand-md rounded shadow-lg {{ $class }}" {{ $attributes }}>
     <a class="navbar-brand" href="{{ $url }}">{{ $name }}</a>
     <button 
         class="navbar-toggler" 
         type="button" 
         data-toggle="collapse" 
-        data-target="#navbarSupportedContent" 
-        aria-controls="navbarSupportedContent" 
+        data-target="#{{ $id }}" 
+        aria-controls="{{ $id }}" 
         aria-expanded="false" 
-        aria-label="Toogle navigation">
+        aria-label="{{ __('element.menu.menu') }}">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="{{ $id }}">
         <ul class="navbar-nav w-100">
-            @foreach ($navigations as $navigation)
-                @if ($navigation->sub->isEmpty())
-                    <x-element.nav-item name="{{ $navigation->name }}" url="{{ url($navigation->path) }}" />    
-                @else 
-                    <x-element.dropdown name="{{ $navigation->name }}">
-                        @foreach ($navigation->sub as $sub)
-                            <x-element.dropdown-item url="{{ url($sub->path) }}">
-                                {!! $sub->name !!}
-                            </x-element.dropdown-item>
-                        @endforeach
-                    </x-element.dropdown>
-                @endif
-            @endforeach
-            <x-element.dropdown name="{{ __('header.menu.theme') }}">
+            <x-element.dropdown name="{{ __('element.menu.theme') }}">
                 @foreach ($themes as $name => $theme)
-                    <x-element.dropdown-item url="{{ url()->current() . '/?theme=' . $theme }}">
+                    <x-element.dropdown-item url="{{ url()->current() }}/?theme={{ $theme }}">
                         {!! $name !!}
                     </x-element.dropdown-item>
                 @endforeach
             </x-element.dropdown>
             <x-element.dropdown name="{{ __('lang.lang') }}">
                 @foreach ($langs as $name => $lang)
-                    <x-element.dropdown-item url="{{ url()->current() . '/?lang=' . $lang }}">
+                    <x-element.dropdown-item url="{{ url()->current() }}/?lang={{ $lang }}">
                         {!! $name !!}
                     </x-element.dropdown-item>
                 @endforeach
             </x-element.dropdown>
             @if ($login && Route::has("login"))
                 @auth
-                    <x-element.dropdown name="{{ Auth::user()->name }}">
-                        <x-element.dropdown-item url="{{ route('profile') }}">
-                            {!! __("page.profile.header") !!}
+                    <x-element.dropdown name="{{ request()->user()->name }}">
+                        <x-element.dropdown-item url="{{ route('user', [ 'user' => request()->user()->id ]) }}">
+                            {!! __("page.user.header") !!}
                         </x-element.dropdown-item>
-                        <x-element.dropdown-item url="{{ route('my', [ 'user' => request()->user()->id ]) }}">
-                            {!! __("page.my.header") !!}
+                        <x-element.dropdown-item url="{{ route('folder', [ 'folder' => request()->user()->folder()->first()->id ]) }}">
+                            {!! __("page.folder.header") !!}
                         </x-element.dropdown-item>
                         <x-element.dropdown-item url="{{ route('favorite') }}">
                             {!! __("page.favorite.favorite") !!}
@@ -56,7 +43,7 @@
                         </div>
                     </x-element.dropdown>
                 @else 
-                    <x-element.dropdown name="{{ __('header.menu.profile') }}">
+                    <x-element.dropdown name="{{ __('element.menu.user') }}">
                         <x-element.dropdown-item url="{{ route('login') }}">
                             {!! __('auth.login.login') !!}
                         </x-element.dropdown-item>

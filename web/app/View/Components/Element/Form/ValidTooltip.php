@@ -27,12 +27,8 @@ class Valid extends Component
      */
     public function render()
     {
-        return view('components.element.form.valid-tooltip', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.form.valid-tooltip', $this->data->merge([
             "class" => $this->class,
-        ]);
+        ])->all());
     }
 }

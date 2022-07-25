@@ -27,12 +27,8 @@ class Background extends Component
      */
     public function render()
     {
-        return view('components.element.background', 
-        [
-            "theme" => $this->theme,
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.background', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

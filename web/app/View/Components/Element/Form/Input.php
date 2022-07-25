@@ -39,16 +39,12 @@ class Input extends Component
      */
     public function render()
     {
-        return view('components.element.form.input', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.form.input', $this->data->merge([
             "id" => $this->id, 
             "aria" => $this->aria, 
             "label" => $this->label, 
             "small" => $this->small, 
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

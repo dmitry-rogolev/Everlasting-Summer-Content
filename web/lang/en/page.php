@@ -4,10 +4,11 @@ return [
 
     "welcome" => "Main", 
     
-    "profile" => [
+    "user" => [
 
         "header" => "Profile", 
         "avatar" => "Avatar", 
+        "remove-avatar" => "Delete Avatar", 
         "name" => "Name", 
         "email" => "Email", 
         "password" => "Password", 
@@ -20,18 +21,15 @@ return [
         "delete-text" => "Are you sure you want to delete your account? It will be impossible to cancel this action!", 
         "email-visibility" => "Hide email from other users", 
         "email-hidden" => "Hidden", 
-        "tags" => "Tags", 
-        "tags-text" => "Enter the tags separated by commas or spaces.", 
 
     ], 
 
-    "my" => [
+    "folder" => [
 
         "header" => "My Content", 
         "add" => "Add Content", 
         "name" => "Title", 
         "create-folder" => "Create a folder", 
-        "creating-folder" => "Creating a folder", 
         "folder" => "Folder", 
         "exists" => "The directory with the name :title already exists.", 
         "no-exists" => "The directory with the name :title does not exist.", 
@@ -58,6 +56,8 @@ return [
         "remove-text" => "Are you sure you want to delete this content? It will be impossible to cancel this action!", 
         "exists" => "Content with the title :title already exists.", 
         "no-exists" => "Content with the title :title does not exist.", 
+        "tags" => "Tags", 
+        "tags-text" => "Enter the tags separated by commas or spaces.", 
         "like" => "Like", 
         "dislike" => "Don't like it", 
         "views" => "views", 
@@ -71,7 +71,6 @@ return [
         "change-comment" => "Edit a comment", 
         "add" => "Add", 
         "change" => "To change", 
-        "created" => "Created", 
         "changed" => "Changed", 
         "remove-comment-text" => "Are you sure you want to delete this comment? It will be impossible to cancel this action!",
         "to-comment" => "Comment", 
@@ -93,5 +92,11 @@ return [
         "out" => "Remove from favorites", 
 
     ], 
+
+    "seconds" => "{1} :count second ago|[2,*] :count seconds ago", 
+    "minutes" => "{1} :count minute ago|[2,*] :count minutes ago", 
+    "hours" => "{1} :count hour ago|[2,*] :count hours ago", 
+    "months" => "{1} :count month ago|[2,*] :count months ago", 
+    "years" => "{1} :count year ago|[2,*] :count years ago", 
 
 ];

@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Str;
 use App\Models\Comment;
+use App\Models\Content;
+use App\Models\Folder;
 use App\Models\User;
+use Illuminate\Support\Collection;
 
 /**
  * Глобальные помощники
@@ -27,71 +30,40 @@ if (!function_exists("id"))
     }
 }
 
-if (!function_exists("parent"))
+if (!function_exists("pathOfContent"))
 {
-    function parent()
+    function pathOfContent(Content $content) : string
     {
-        $path = Str::of(path())->explode("/");
+        $path = new Collection();
 
-        if (intval($path->first()))
+        $current = $content->folder;
+
+        while ($current->title)
         {
-            $parent = User::find($path->first());
-            
-            $folders = $path->skip(1);
-            $folders->pop();
+            $path->push($current->title);
 
-            foreach ($folders as $folder)
-            {
-                if (!$parent) return null;
-                $parent = $parent->folders()->whereTitle($folder)->first();
-            }
-
-            return $parent;
+            $current = $current->folder()->first();
         }
 
-        return null;
+        return $path->reverse()->implode("/");
     }
 }
 
-if (!function_exists("path"))
+if (!function_exists("pathOfFolder"))
 {
-    function path()
+    function pathOfFolder(Folder $folder) : string
     {
-        $path = urldecode(request()->path());
+        $path = new Collection();
 
-        if ($path === "/") return "";
+        $current = $folder;
 
-        $path = Str::of($path)->explode("/");
+        while ($current->title)
+        {
+            $path->push($current->title);
 
-        $comment = false;
+            $current = $current->folder()->first();
+        }
 
-        if ($path->last() === "change-comment" || $path->last() === "remove-comment" || $path->last() === "like-comment" || $path->last() === "dislike-comment" || ($path->last() === "comment" && intval($path->reverse()->skip(1)->first())))
-            $comment = true;
-
-        if 
-        (
-            $path->last() === "add-content" || 
-            $path->last() === "create-folder" || 
-            $path->last() === "rename" || 
-            $path->last() === "remove" || 
-            $path->last() === "download" || 
-            $path->last() === "visibility" || 
-            $path->last() === "tags" || 
-            $path->last() === "like" || 
-            $path->last() === "dislike" || 
-            $path->last() === "favorite" || 
-            $path->last() === "description" || 
-            $path->last() === "comment" || 
-            $path->last() === "change-comment" || 
-            $path->last() === "remove-comment" || 
-            $path->last() === "like-comment" || 
-            $path->last() === "dislike-comment"
-        )
-        $path->pop();
-
-        if ($comment && intval($path->last()) && Comment::find($path->last()))
-            $path->pop();
-
-        return $path->implode("/");
+        return $path->reverse()->implode("/");
     }
 }

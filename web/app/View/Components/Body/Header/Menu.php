@@ -3,7 +3,6 @@
 namespace App\View\Components\Body\Header;
 
 use App\Models\Lang;
-use App\Models\Navigation;
 use App\View\Components\Component;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -14,13 +13,15 @@ class Menu extends Component
 
     protected string $url;
 
-    protected Collection $navigations;
-
     protected bool $login;
 
     protected string $class;
 
     protected Collection $langs;
+
+    protected Collection $themes;
+
+    protected string $id;
 
     /**
      * Create a new component instance.
@@ -41,11 +42,13 @@ class Menu extends Component
         parent::__construct();
 
         $this->name = $name ? $name : config("app.name");
-        $this->url = $url ? $url : url("/");
+        $this->url = $url ? $url : route("welcome");
         $this->login = $login && $login === "true";
         $this->class = $class ?? "";
-        $this->navigations = Cache::get("navigations");
         $this->langs = Cache::get("langs");
+        $this->themes = Cache::get("themes");
+
+        $this->id = id();
     }
 
     /**
@@ -55,17 +58,14 @@ class Menu extends Component
      */
     public function render()
     {
-        return view('components.body.header.menu', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.body.header.menu', $this->data->merge([
             "name" => $this->name, 
             "url" => $this->url, 
-            "navigations" => $this->navigations, 
             "login" => $this->login, 
             "class" => $this->class, 
             "langs" => $this->langs, 
-        ]);
+            "themes" => $this->themes, 
+            "id" => $this->id, 
+        ])->all());
     }
 }

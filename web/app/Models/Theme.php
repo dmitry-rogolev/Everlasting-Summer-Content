@@ -22,4 +22,19 @@ class Theme extends Model
     {
         return $this->whereId($this->inversion_id);
     }
+
+    public function cacheInversions()
+    {
+        if (!Cache::has("inversion_themes"))
+        {
+            $inversions = new Collection();
+
+            foreach ($this->all() as $theme)
+            {
+                $inversions->put($theme->name, $theme->inversion()->first()->name);
+            }
+            
+            Cache::add("inversion_themes", $inversions, config("cache.keep"));
+        }
+    }
 }

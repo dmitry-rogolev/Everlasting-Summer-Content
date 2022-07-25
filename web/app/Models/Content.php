@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Content extends Model
 {
-    use HasFactory, Searchable, SoftDeletes
-    {
-        SoftDeletes::forceDelete as parentForceDelete;
-    }
+    use HasFactory, Searchable, SoftDeletes;
 
     protected $fillable = [
         "name", 
@@ -80,27 +78,50 @@ class Content extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function delete()
+    public function remove() : ?bool
     {
+        $path = $this->path;
+
+        $path = $path ? $path . "/" : "";
+
+        Storage::disk("local")
+            ->move("public/contents/" . $this->user_id . "/" . $path . $this->name, 
+                   "deletes/contents/" . $this->user_id . "/" . $path . $this->name);
+
         $this->likes()->delete();
         $this->dislikes()->delete();
         $this->views()->delete();
         $this->downloads()->delete();
         $this->favorites()->delete();
-        $this->comments()->delete();
 
-        return parent::delete();
+        foreach ($this->comments as $comment)
+        {
+            $comment->remove();
+        }
+
+        return $this->delete();
     }
 
-    public function forceDelete()
+    public function forceRemove() : ?bool
     {
+        $path = $this->path;
+
+        $path = $path ? $path . "/" : "";
+
+        Storage::disk("local")
+            ->delete("deletes/contents/" . $this->user_id . "/" . $path . $this->name);
+
         $this->likes()->forceDelete();
         $this->dislikes()->forceDelete();
         $this->views()->forceDelete();
         $this->downloads()->forceDelete();
         $this->favorites()->forceDelete();
-        $this->comments()->forceDelete();
+        
+        foreach ($this->comments as $comment)
+        {
+            $comment->forceRemove();
+        }
 
-        return $this->parentForceDelete();
+        return $this->forceDelete();
     }
 }

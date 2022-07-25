@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('views', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Content::class)->nullable();
-            $table->foreignIdFor(User::class)->nullbale();
+            $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

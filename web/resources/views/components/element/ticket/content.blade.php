@@ -1,5 +1,5 @@
 @if ($image)
-    <x-element.ticket class="{{ $class }}" image="{{ $image }}" style="background-size: contain; background-position: center top; {{ $style }}" href="{{ $href }}" {{ $attributes }}>
+    <x-element.ticket class="{{ $class }}" image="{{ $image }}" style="background-size: cover; background-position: center top; {{ $style }}" href="{{ $href }}" {{ $attributes }}>
         {{ $slot }}
     </x-element.ticket>
 @else 

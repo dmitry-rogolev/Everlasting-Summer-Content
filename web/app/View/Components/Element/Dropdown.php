@@ -9,9 +9,9 @@ class Dropdown extends Component
 {
     protected string $name;
 
-    protected string $id;
-
     protected string $class;
+
+    protected string $id;
 
     /**
      * Create a new component instance.
@@ -23,8 +23,8 @@ class Dropdown extends Component
         parent::__construct();
 
         $this->name = $name ?? "";
-        $this->id = id();
         $this->class = $class ?? "";
+        $this->id = id();
     }
 
     /**
@@ -34,14 +34,10 @@ class Dropdown extends Component
      */
     public function render()
     {
-        return view('components.element.dropdown', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.dropdown', $this->data->merge([
             "name" => $this->name, 
-            "id" => $this->id, 
             "class" => $this->class, 
-        ]);
+            "id" => $this->id, 
+        ])->all());
     }
 }

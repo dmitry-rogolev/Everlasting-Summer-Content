@@ -27,12 +27,8 @@ class Search extends Component
      */
     public function render()
     {
-        return view('components.element.form.search', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.form.search', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

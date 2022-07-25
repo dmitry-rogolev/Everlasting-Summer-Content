@@ -3,40 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Traits\TSort;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 class WelcomeController extends Controller
 {
+    use TSort;
+
     public function show(Request $request)
     {
-        $this->settings(null, true);
+        $this->settings();
 
-        $breadcrumbs = new Collection([
-            new Collection([
-                "name" => __("page.welcome"), 
-                "url" => route("welcome"), 
-                __("page.welcome"), 
-                route("welcome"), 
-            ]), 
+        $breadcrumbs = $this->breadcrumbs([
+            __("page.welcome") => route("welcome"), 
         ]);
 
-        $this->breadcrumbs($breadcrumbs);
+        $this->setBreadcrumbs($breadcrumbs);
 
-        $sort = [ "title", "asc" ];
+        $sort = $this->sort("title");
 
-        if ($request->has("sort") && ($request->sort == "asc" || $request->sort == "desc"))
-        {
-            $sort = [ "title", $request->sort ];
-        }
+        $contents = Content::visibles()->orderBy(...$sort);
 
         return view("welcome", $this->data->merge([
 
-            "header" => __("page.welcome"), 
-            "referer" => "", 
-            "sort" => $sort[1], 
+            "header" => $breadcrumbs->last()->get("name"), 
+            "referer" => false, 
+            "sort" => $contents->count() ? $sort[1] : false, 
 
-            "contents" => Content::visibles()->orderBy(...$sort)->paginate(20), 
+            "contents" => $contents->paginate(20), 
 
         ])
         ->all()

@@ -27,12 +27,8 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.element.modal.header', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.modal.header', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

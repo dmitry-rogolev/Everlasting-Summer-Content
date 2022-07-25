@@ -30,13 +30,9 @@ class DropdownItem extends Component
      */
     public function render()
     {
-        return view('components.element.dropdown-item', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.dropdown-item', $this->data->merge([
             "url" => $this->url, 
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

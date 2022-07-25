@@ -27,12 +27,8 @@ class Image extends Component
      */
     public function render()
     {
-        return view('components.element.image', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.image', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

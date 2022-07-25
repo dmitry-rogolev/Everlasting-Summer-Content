@@ -34,14 +34,10 @@ class Range extends Component
      */
     public function render()
     {
-        return view('components.element.form.range', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.form.range', $this->data->merge([
             "id" => $this->id, 
             "label" => $this->label, 
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

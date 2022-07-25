@@ -27,12 +27,8 @@ class Alert extends Component
      */
     public function render()
     {
-        return view('components.element.alert', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.alert', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

@@ -20,8 +20,13 @@ class CommentPolicy
         //
     }
 
-    public function show(User $user, Comment $comment)
+    public function show(?User $user, Comment $comment)
     {
-        return $user->id == $comment->user_id;
+        return optional($user)->id == $comment->user_id;
+    }
+
+    public function remove(?User $user, Comment $comment)
+    {
+        return optional($user)->id == $comment->user_id;
     }
 }

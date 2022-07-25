@@ -39,15 +39,15 @@ class Head extends Component
      *
      * @return void
      */
-    public function __construct(?string $title = null)
+    public function __construct(?string $title = null, ?string $description = null, ?string $keywords = null)
     {
         parent::__construct();
         
         $this->title = $title ?? config("view.title");
         $this->charset = config("view.charset");
         $this->viewport = config("view.viewport");
-        $this->keywords = config("view.keywords");
-        $this->description = config("view.description");
+        $this->keywords = $keywords ?? config("view.keywords");
+        $this->description = $description ?? config("view.description");
         $this->author = config("view.author");
         $this->robots = config("view.robots");
         $this->favicon = url(config("view.favicon"));

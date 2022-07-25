@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lang;
-use App\Models\Theme;
+use App\Traits\TCached;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -14,11 +12,10 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Cache;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, TCached;
 
     protected string $title;
 
@@ -30,10 +27,6 @@ class Controller extends BaseController
 
     protected ?string $theme = null;
 
-    protected ?Collection $langs = null;
-
-    protected ?Collection $themes = null;
-
     protected ?Collection $inversionThemes = null;
 
     protected ?Collection $data = null;
@@ -42,19 +35,9 @@ class Controller extends BaseController
 
     protected bool $can = false;
 
-    public function __construct(
-        string $title = null, 
-        string $description = null, 
-        string $keywords = null, 
-        string $lang = null, 
-        string $theme = null, 
-        Collection $data = null, 
-        Collection $breadcrumbs = null, 
-    )
+    public function __construct()
     {
-        $this->setValues($title, $description, $keywords, $lang, $theme, $data, $breadcrumbs);
-
-        $this->cached();
+        cache()->flush();
     }
 
     protected function settings(
@@ -63,19 +46,17 @@ class Controller extends BaseController
         string $keywords = null, 
         string $lang = null, 
         string $theme = null, 
-        Collection $data = null, 
-        Collection $breadcrumbs = null, 
     ) : void
     {
-        $this->setValues($title, $description, $keywords, null, null, null, $breadcrumbs);
-        
-        $this->lang = $this->lang($this->lang ?: $lang);
-        $this->theme = $this->theme($this->theme ?: $theme);
-        $this->langs = $this->langs();
-        $this->themes = $this->themes();
-        $this->inversionThemes = $this->inversionThemes();
+        $this->setValues($title, $description, $keywords);
 
-        $this->data = $this->data($this->data ?: $data);
+        $this->cached();
+        
+        $this->lang = $this->lang($lang);
+        $this->theme = $this->theme($theme);
+        $this->inversionThemes = cache("inversion_themes");
+
+        $this->data = $this->data();
     }
 
     protected function title(string $title = null) : string
@@ -93,13 +74,11 @@ class Controller extends BaseController
         return $keywords ?: config("view.keywords");
     }
 
-    protected function data(Collection $data = null) : Collection
+    protected function data() : Collection
     {
-        return $data ?: new Collection([
+        return new Collection([
             "theme" => $this->theme, 
-            "langs" => $this->langs, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+            "inversion_themes" => cache("inversion_themes"), 
             "title" => $this->title, 
             "description" => $this->description, 
             "keywords" => $this->keywords, 
@@ -137,7 +116,7 @@ class Controller extends BaseController
         else if (request()->has("theme") && Storage::disk("theme")->exists(request()->get("theme") . ".css"))
             session()->put("theme", request()->get("theme"));
         
-        else 
+        else if (!session()->has("theme"))
             session()->put("theme", config("theme.default"));
 
         return session("theme");
@@ -146,7 +125,28 @@ class Controller extends BaseController
     protected function setBreadcrumbs(Collection $breadcrumbs) : void
     {
         $this->breadcrumbs = $breadcrumbs;
-        $this->data = $this->data($this->data);
+
+        if ($this->data)
+            $this->data->put("breadcrumbs", $breadcrumbs);
+        else 
+            $this->data = $this->data();
+    }
+
+    protected function breadcrumbs(Collection|array $breadcrumbs) : Collection
+    {
+        $crumbs = new Collection();
+
+        foreach ($breadcrumbs as $name => $url)
+        {
+            $crumbs->push(new Collection([
+                "name" => $name, 
+                "url" => $url, 
+                $name, 
+                $url, 
+            ]));
+        }
+
+        return $crumbs;
     }
 
     protected function can($ability, $arguments = []) : bool
@@ -159,32 +159,12 @@ class Controller extends BaseController
         }
     }
 
-    private function cached() : void
-    {
-        $cached = config("cache.cached");
-
-        foreach ($cached as $class)
-        {
-            if (is_string($class) && class_exists($class))
-            {
-                $class = new $class();
-
-                if ($class instanceof Model)
-                {
-                    Cache::add($class->getTable(), $class::all(), config("cache.keep"));
-                }
-            }
-        }
-    }
-
     private function setValues(
         string $title = null, 
         string $description = null, 
         string $keywords = null, 
         string $lang = null, 
         string $theme = null, 
-        Collection $data = null, 
-        Collection $breadcrumbs = null, 
     ) : void
     {
         $this->title = $this->title($title);
@@ -196,52 +176,5 @@ class Controller extends BaseController
         
         if ($theme)
             $this->theme = $theme;
-
-        if ($data)
-            $this->data = $data;
-
-        if ($breadcrumbs)
-            $this->breadcrumbs = $breadcrumbs;
-    }
-
-    private function langs() : Collection
-    {
-        return $this->getLocaleCollection("langs", Lang::class, function($lang)
-        {
-            return [ __("lang." . $lang->name), $lang->name ];
-        });
-    }
-
-    private function themes() : Collection
-    {
-        return $this->getLocaleCollection("themes", Theme::class, function($theme)
-        {
-            return [ __("theme." . $theme->name), $theme->name ];
-        });
-    }
-
-    private function inversionThemes() : Collection
-    {
-        return $this->getLocaleCollection("inversion_themes", Theme::class, function($theme)
-        {
-            return [ $theme->name, $theme->inversion()->first()->name ];
-        });
-    }
-
-    private function getLocaleCollection(string $tableName, string $modelName, callable $callback) : Collection
-    {
-        if (!Cache::has($tableName))
-            $this->cached();
-
-        $collection = new Collection();
-
-        foreach (Cache::get($tableName) ?? $modelName::all() as $model)
-        {
-            $collection->put(...$callback($model));
-        }
-
-        Cache::add($tableName, $collection, config("cache.keep"));
-
-        return $collection;
     }
 }

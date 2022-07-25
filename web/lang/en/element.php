@@ -17,8 +17,6 @@ return [
 
     ], 
 
-    "change" => "To change", 
-
     "form" => [
 
         "search" => "Search", 
@@ -32,5 +30,18 @@ return [
         "down" => "Sort in descending order", 
 
     ], 
+
+    "menu" => [
+
+        "menu" => "Menu", 
+        "theme" => "Theme", 
+        "user" => "Profile", 
+
+    ], 
+
+    "download" => "Download", 
+    "back" => "Back", 
+    "change" => "To change", 
+    "breadcrumbs" => "Bread crumbs", 
 
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Folder;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -60,6 +61,19 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        $this->createDefaultFolder($user);
+
+        return redirect(route("user", [ "user" => $user->id ]));
+    }
+
+    private function createDefaultFolder(User $user) : Folder
+    {
+        return Folder::create([
+            "title" => null, 
+            "path" => null, 
+            "visibility" => false, 
+            "folder_id" => null, 
+            "user_id" => $user->id, 
+        ]);
     }
 }

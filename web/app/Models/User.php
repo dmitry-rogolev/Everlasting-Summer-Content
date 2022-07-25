@@ -15,10 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail */
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles, CanResetPassword 
-    {
-        SoftDeletes::forceDelete as parentForceDelete;
-    }
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -57,14 +54,19 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         return $this->hasOne(Avatar::class);
     }
 
-    public function folders()
+    public function folder()
     {
         return $this->hasMany(Folder::class)->whereFolderId(null);
     }
 
+    public function folders()
+    {
+        return $this->hasMany(Folder::class);
+    }
+
     public function contents()
     {
-        return $this->hasMany(Content::class)->whereFolderId(0);
+        return $this->hasMany(Content::class);
     }
 
     public function downloads()
@@ -75,77 +77,6 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
     public function comments()
     {
         return $this->hasMany(Comment::class);
-    }
-
-    public function delete()
-    {
-        $avatar = $this->avatar;
-        if ($avatar)
-        {
-            Storage::disk("public")
-                ->move("avatars/" . $this->id . "_" . $avatar->hash . "." . $avatar->extension, 
-                       "../deletes/avatars/" . $this->id . "_" . $avatar->hash . "." . $avatar->extension);
-            $this->avatar()->delete();
-        }
-
-        Storage::disk("public")
-            ->move("contents/" . $this->id, 
-                   "../deletes/contents/" . $this->id);
-        $this->remove();
-
-        $this->likes()->delete();
-        $this->dislikes()->delete();
-        $this->views()->delete();
-        $this->downloads()->delete();
-        $this->favorites()->delete();
-        $this->comments()->delete();
-
-        return parent::delete();
-    }
-
-    public function forceDelete()
-    {
-        $avatar = $this->avatar;
-
-        if ($avatar)
-        {
-            Storage::disk("local")
-                ->delete("deletes/avatars/" . $this->id . "_" . $avatar->hash . "." . $avatar->extension);
-            $this->avatar()->forceDelete();
-        }
-
-        Storage::disk("local")->deleteDirectory("deletes/contents/" . $this->id);
-        
-        foreach ($this->folders as $folder)
-        {
-            $folder->forceDelete();
-        }
-
-        $this->contents()->forceDelete();
-
-        $this->likes()->forceDelete();
-        $this->dislikes()->forceDelete();
-        $this->views()->forceDelete();
-        $this->downloads()->forceDelete();
-        $this->favorites()->forceDelete();
-        $this->comments()->forceDelete();
-
-        return $this->parentForceDelete();
-    }
-
-    public function remove()
-    {
-        foreach ($this->folders as $folder)
-        {
-            $folder->remove();
-        }
-
-        return $this->contents()->delete();
-    }
-
-    public function scopeVisibles($query)
-    {
-        return $query->whereVisibility(true);
     }
 
     public function likes()
@@ -166,5 +97,32 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function scopeVisibles($query)
+    {
+        return $query->whereVisibility(true);
+    }
+
+    public function remove() : ?bool
+    {
+        if ($this->avatar) $this->avatar->remove();
+
+        $this->folder()->first()->remove();
+
+        $this->favorites()->delete();
+
+        return $this->delete();
+    }
+
+    public function forceRemove() : ?bool
+    {
+        if ($this->avatar) $this->avatar->forceRemove();
+
+        $this->folder()->first()->forceRemove();
+
+        $this->favorites()->forceDelete();
+
+        return $this->forceDelete();
     }
 }

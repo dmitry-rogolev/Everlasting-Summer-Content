@@ -23,11 +23,8 @@ class Logout extends Component
      */
     public function render()
     {
-        return view('components.element.form.logout', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
-        ]);
+        return view('components.element.form.logout', $this->data->merge([
+
+        ])->all());
     }
 }

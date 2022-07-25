@@ -34,14 +34,10 @@ class Radio extends Component
      */
     public function render()
     {
-        return view('components.element.form.custom.radio', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.form.custom.radio', $this->data->merge([
             "id" => $this->id, 
             "class" => $this->class, 
             "label" => $this->label,
-        ]);
+        ])->all());
     }
 }

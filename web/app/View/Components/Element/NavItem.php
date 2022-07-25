@@ -33,14 +33,10 @@ class NavItem extends Component
      */
     public function render()
     {
-        return view('components.element.nav-item', 
-        [
+        return view('components.element.nav-item', $this->data->merge([
             "name" => $this->name, 
             "url" => $this->url, 
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

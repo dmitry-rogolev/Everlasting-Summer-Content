@@ -27,12 +27,8 @@ class Name extends Component
      */
     public function render()
     {
-        return view('components.element.ticket.link.name', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.ticket.link.name', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

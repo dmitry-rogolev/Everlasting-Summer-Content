@@ -36,15 +36,11 @@ class Ticket extends Component
      */
     public function render()
     {
-        return view('components.element.ticket', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.ticket', $this->data->merge([
             "class" => $this->class, 
             "style" => $this->style, 
             "image" => $this->image, 
             "href" => $this->href, 
-        ]);
+        ])->all());
     }
 }

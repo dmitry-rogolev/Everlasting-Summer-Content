@@ -50,23 +50,29 @@ class Comment extends Model
         return $query->whereCommentId($this->id);
     }
 
-    public function delete()
+    public function remove() : ?bool
     {
         foreach ($this->comments()->get() as $comment)
         {
-            $comment->delete();
+            $comment->remove();
         }
 
-        return parent::delete();
+        $this->likes()->delete();
+        $this->dislikes()->delete();
+
+        return $this->delete();
     }
 
-    public function forceDelete()
+    public function forceRemove() : ?bool
     {
         foreach ($this->comments()->get() as $comment)
         {
-            $comment->forceDelete();
+            $comment->forceRemove();
         }
 
-        return $this->parentForceDelete();
+        $this->likes()->forceDelete();
+        $this->dislikes()->forceDelete();
+
+        return $this->forceDelete();
     }
 }

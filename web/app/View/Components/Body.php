@@ -25,12 +25,8 @@ class Body extends Component
      */
     public function render()
     {
-        return view('components.body', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.body', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

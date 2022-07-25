@@ -4,7 +4,6 @@ namespace App\View\Components\Body\Header;
 
 use App\View\Components\Component;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 
 class Breadcrumbs extends Component
 {
@@ -15,11 +14,11 @@ class Breadcrumbs extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(?Collection $breadcrumbs = null)
     {
         parent::__construct();
 
-        $this->breadcrumbs = Cache::pull("breadcrumbs");
+        $this->breadcrumbs = $breadcrumbs ?? new Collection();
     }
 
     /**
@@ -29,12 +28,8 @@ class Breadcrumbs extends Component
      */
     public function render()
     {
-        return view('components.body.header.breadcrumbs', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.body.header.breadcrumbs', $this->data->merge([
             "breadcrumbs" => $this->breadcrumbs, 
-        ]);
+        ])->all());
     }
 }

@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class DeleteProfileController extends Controller
+class DeleteUserController extends Controller
 {
-    public function show(Request $request)
+    public function show(Request $request, User $user)
     {
         $this->settings();
 
-        return view('profile.delete', $this->data->merge([
+        return view('user.delete', $this->data->merge([
 
             "header" => config("app.name"), 
+            "user" => $user, 
 
         ])
         ->all()
@@ -24,7 +26,7 @@ class DeleteProfileController extends Controller
         $theme = session("theme", config("theme.default"));
         $lang = session("lang", config("app.locale"));
 
-        $request->user()->delete();
+        $request->user()->remove();
 
         $request->session()->invalidate();
 
@@ -33,6 +35,6 @@ class DeleteProfileController extends Controller
         session()->put("theme", $theme);
         session()->put("lang", $lang);
 
-        return redirect('/');
+        return redirect(route("welcome"));
     }
 }

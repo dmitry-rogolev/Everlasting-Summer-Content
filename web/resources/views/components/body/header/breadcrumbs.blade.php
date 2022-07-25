@@ -1,5 +1,5 @@
-<section {{ $attributes }} aria-label="breadcrumb">
-    <ol class="breadcrumb mb-0 shadow-lg {{ 'bg-' . $theme }}">
+<section {{ $attributes }} aria-label="{{ __('element.breadcrumbs') }}">
+    <ol class="breadcrumb mb-0 shadow-lg bg-{{ $theme }}">
         @foreach($breadcrumbs as $key => $breadcrumb)
             @if ($key !== $breadcrumbs->count() - 1)
                 <li class="breadcrumb-item">

@@ -32,13 +32,9 @@ class Flex extends Component
      */
     public function render()
     {
-        return view('components.element.flex', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.flex', $this->data->merge([
             "flex" => $this->flex, 
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

@@ -27,12 +27,8 @@ class Close extends Component
      */
     public function render()
     {
-        return view('components.element.modal.close', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.modal.close', $this->data->merge([
             "class" => $this->class, 
-        ]);
+        ])->all());
     }
 }

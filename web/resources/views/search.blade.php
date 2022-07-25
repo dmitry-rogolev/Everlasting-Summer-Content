@@ -1,6 +1,8 @@
 <x-layout>
     <x-slot:lang>{{ $lang }}</x-slot:lang>
     <x-slot:title>{{ $title }}</x-slot:title>
+    <x-slot:description>{{ $description }}</x-slot:description>
+    <x-slot:keywords>{{ $keywords }}</x-slot:keywords>
     <x-body>
         <x-element.background>
             <x-element.flex flex="flex-column align-items-center">
@@ -12,7 +14,7 @@
                                     <x-body.header.menu login="true" />
                                 </div>
                                 <div class="col-12 mb-2 px-0">
-                                    <x-body.header.breadcrumbs />
+                                    <x-body.header.breadcrumbs :breadcrumbs="$breadcrumbs" />
                                 </div>
                             </x-element.flex>
                         </nav>
@@ -22,14 +24,14 @@
                                     @if ($referer)
                                         <x-element.flex>
                                             <a href="{{ $referer }}">
-                                                <x-element.form.button class="btn-lg btn-{{ $theme }}" title="{{ __('header.back') }}">
+                                                <x-element.form.button class="btn-lg btn-{{ $theme }}" title="{{ __('element.back') }}">
                                                     &lt;
                                                 </x-element.form.button>
                                             </a>
                                         </x-element.flex>
                                     @endif
                                 </div>
-                                <div class="col-2 p-0">
+                                <div class="col-8 p-0">
                                     @if ($header)
                                         <x-element.flex flex="justify-content-center">
                                             <x-element.header3>
@@ -51,6 +53,7 @@
                             {!! __("page.search.search-text") . ": &laquo;" . $search . "&raquo;." !!}
                         </div>
                     </x-element.flex>
+                    <x-element.sort sort="{{ $sort }}" />
                     <x-element.flex class="mt-4" flex="justify-content-center">
                         {{ $contents->links("components.element.pagination", [ "theme" => $theme, "inversion_themes" => $inversion_themes ]) }}
                     </x-element.flex>

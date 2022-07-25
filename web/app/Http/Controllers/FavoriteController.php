@@ -2,42 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use App\Models\Content;
+use App\Models\Favorite;
+use App\Traits\TSort;
+use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
+    use TSort;
+
     public function show(Request $request)
     {
-        $this->settings(null, true);
+        $this->settings();
 
-        $breadcrumbs = new Collection([
-            new Collection([
-                "name" => __("page.welcome"), 
-                "url" => route("welcome"), 
-                __("page.welcome"), 
-                route("welcome"), 
-            ]), 
-            new Collection([
-                "name" => __("page.favorite.favorite"), 
-                "url" => route("favorite"), 
-                __("page.favorite.favorite"), 
-                route("favorite"), 
-            ]), 
+        $breadcrumbs = $this->breadcrumbs([
+            __("page.welcome") => route("welcome"), 
+            __("page.favorite.favorite") => route("favorite"), 
         ]);
 
-        $this->breadcrumbs($breadcrumbs);
+        $this->setBreadcrumbs($breadcrumbs);
+
+        $sort = $this->sort("title");
+
+        $contents = $request->user()->favorites();
 
         return view("favorite", $this->data->merge([
 
-            "header" => __("page.favorite.favorite"), 
-            "referer" => route("welcome"), 
+            "header" => $breadcrumbs->last()->get("name"), 
+            "referer" => $breadcrumbs->reverse()->skip(1)->first()->get("url"), 
+            "sort" => $contents->count() ? $sort[1] : false, 
 
-            "contents" => $request->user()->favorites()->paginate(20), 
+            "contents" => $contents->paginate(20), 
 
         ])
         ->all()
         );
+    }
+
+    public function favorite(Request $request, Content $content)
+    {
+        $favorites = $request->user()->favorites()->whereContentId($content->id);
+
+        if ($favorites->count())
+            $favorites->delete();
+        else 
+        {
+            Favorite::create([
+                "user_id" => $request->user()->id, 
+                "content_id" => $content->id, 
+            ]);
+        }
+
+        return back();
     }
 }

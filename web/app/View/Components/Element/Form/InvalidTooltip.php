@@ -27,12 +27,8 @@ class Invalid extends Component
      */
     public function render()
     {
-        return view('components.element.form.invalid-tooltip', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.form.invalid-tooltip', $this->data->merge([
             "class" => $this->class,
-        ]);
+        ])->all());
     }
 }

@@ -36,15 +36,11 @@ class Link extends Component
      */
     public function render()
     {
-        return view('components.element.ticket.link', 
-        [
-            "theme" => $this->theme, 
-            "themes" => $this->themes, 
-            "inversion_themes" => $this->inversionThemes, 
+        return view('components.element.ticket.link', $this->data->merge([
             "class" => $this->class, 
             "style" => $this->style, 
             "image" => $this->image, 
             "href" => $this->href, 
-        ]);
+        ])->all());
     }
 }

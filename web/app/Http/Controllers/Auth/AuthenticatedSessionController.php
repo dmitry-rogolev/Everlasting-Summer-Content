@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect(route("user", [ "user" => $request->user()->id ]));
     }
 
     /**
@@ -63,6 +63,6 @@ class AuthenticatedSessionController extends Controller
         session()->put("theme", $theme);
         session()->put("lang", $lang);
 
-        return redirect('/');
+        return redirect(route("welcome"));
     }
 }
