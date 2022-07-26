@@ -30,7 +30,7 @@
                 </x-element.form.button>
             </form>
         </div>
-    @elseauth
+    @else
         <div class="m-2">
             <x-element.flex flex="align-items-center">
                 <div class="{{ $like ? 'like active' : 'like' }}" style="height: 50px; width: 50px;"></div>
