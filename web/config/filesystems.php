@@ -58,7 +58,7 @@ return [
 
         "theme" => [
             "driver" => "local", 
-            "root" => public_path("css/themes"), 
+            "root" => resource_path("scss/themes"), 
             "throw" => false, 
         ], 
 
@@ -70,7 +70,7 @@ return [
 
         "image" => [
             "driver" => "local", 
-            "root" => public_path("images"), 
+            "root" => resource_path("images"), 
             "url" => env("APP_URL") . "/images", 
             "visibility" => "public", 
             "throw" => false, 

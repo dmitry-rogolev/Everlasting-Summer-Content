@@ -1,0 +1,134 @@
+{
+  "resources/images/no-photo.hover.dark.theme.png": {
+    "file": "assets/no-photo.hover.dark.theme.c73ffd0e.png",
+    "src": "resources/images/no-photo.hover.dark.theme.png"
+  },
+  "resources/images/add.dark.theme.png": {
+    "file": "assets/add.dark.theme.ce9ad3b7.png",
+    "src": "resources/images/add.dark.theme.png"
+  },
+  "resources/images/no-photo.dark.theme.png": {
+    "file": "assets/no-photo.dark.theme.b1488490.png",
+    "src": "resources/images/no-photo.dark.theme.png"
+  },
+  "resources/images/add.hover.dark.theme.png": {
+    "file": "assets/add.hover.dark.theme.9c6853e7.png",
+    "src": "resources/images/add.hover.dark.theme.png"
+  },
+  "resources/images/create-folder.hover.dark.theme.png": {
+    "file": "assets/create-folder.hover.dark.theme.559379e9.png",
+    "src": "resources/images/create-folder.hover.dark.theme.png"
+  },
+  "resources/images/create-folder.dark.theme.png": {
+    "file": "assets/create-folder.dark.theme.bb54b1ae.png",
+    "src": "resources/images/create-folder.dark.theme.png"
+  },
+  "resources/images/folder.dark.theme.png": {
+    "file": "assets/folder.dark.theme.4cf832c5.png",
+    "src": "resources/images/folder.dark.theme.png"
+  },
+  "resources/images/folder.hover.dark.theme.png": {
+    "file": "assets/folder.hover.dark.theme.f9872b46.png",
+    "src": "resources/images/folder.hover.dark.theme.png"
+  },
+  "resources/images/search.dark.theme.png": {
+    "file": "assets/search.dark.theme.5aeb59d9.png",
+    "src": "resources/images/search.dark.theme.png"
+  },
+  "resources/images/like.dark.theme.png": {
+    "file": "assets/like.dark.theme.213a6af3.png",
+    "src": "resources/images/like.dark.theme.png"
+  },
+  "resources/images/like.light.theme.png": {
+    "file": "assets/like.light.theme.08703f47.png",
+    "src": "resources/images/like.light.theme.png"
+  },
+  "resources/images/dislike.dark.theme.png": {
+    "file": "assets/dislike.dark.theme.70d9c47a.png",
+    "src": "resources/images/dislike.dark.theme.png"
+  },
+  "resources/images/favorite.dark.theme.png": {
+    "file": "assets/favorite.dark.theme.a56c302b.png",
+    "src": "resources/images/favorite.dark.theme.png"
+  },
+  "resources/images/dislike.light.theme.png": {
+    "file": "assets/dislike.light.theme.0223cb61.png",
+    "src": "resources/images/dislike.light.theme.png"
+  },
+  "resources/images/previews/default.dark.theme.png": {
+    "file": "assets/default.dark.theme.94195d5d.png",
+    "src": "resources/images/previews/default.dark.theme.png"
+  },
+  "resources/images/no-photo.hover.light.theme.png": {
+    "file": "assets/no-photo.hover.light.theme.71571529.png",
+    "src": "resources/images/no-photo.hover.light.theme.png"
+  },
+  "resources/images/add.light.theme.png": {
+    "file": "assets/add.light.theme.2599abd0.png",
+    "src": "resources/images/add.light.theme.png"
+  },
+  "resources/images/add.hover.light.theme.png": {
+    "file": "assets/add.hover.light.theme.604cc5a6.png",
+    "src": "resources/images/add.hover.light.theme.png"
+  },
+  "resources/images/create-folder.hover.light.theme.png": {
+    "file": "assets/create-folder.hover.light.theme.7d3e0407.png",
+    "src": "resources/images/create-folder.hover.light.theme.png"
+  },
+  "resources/images/previews/default.light.theme.png": {
+    "file": "assets/default.light.theme.fe327f9a.png",
+    "src": "resources/images/previews/default.light.theme.png"
+  },
+  "resources/images/folder.hover.light.theme.png": {
+    "file": "assets/folder.hover.light.theme.a32edba1.png",
+    "src": "resources/images/folder.hover.light.theme.png"
+  },
+  "resources/images/search.light.theme.png": {
+    "file": "assets/search.light.theme.91878e8f.png",
+    "src": "resources/images/search.light.theme.png"
+  },
+  "resources/images/favorite.light.theme.png": {
+    "file": "assets/favorite.light.theme.8154006f.png",
+    "src": "resources/images/favorite.light.theme.png"
+  },
+  "resources/images/no-photo.light.theme.png": {
+    "file": "assets/no-photo.light.theme.0a943acd.png",
+    "src": "resources/images/no-photo.light.theme.png"
+  },
+  "resources/images/create-folder.light.theme.png": {
+    "file": "assets/create-folder.light.theme.54dcaad2.png",
+    "src": "resources/images/create-folder.light.theme.png"
+  },
+  "resources/images/folder.light.theme.png": {
+    "file": "assets/folder.light.theme.29e250ef.png",
+    "src": "resources/images/folder.light.theme.png"
+  },
+  "resources/images/background.dark.theme.png": {
+    "file": "assets/background.dark.theme.ca97b49f.png",
+    "src": "resources/images/background.dark.theme.png"
+  },
+  "resources/images/background.light.theme.png": {
+    "file": "assets/background.light.theme.f416530d.png",
+    "src": "resources/images/background.light.theme.png"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app.e5198d1b.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/scss/app.scss": {
+    "file": "assets/app.4ee68c31.css",
+    "src": "resources/scss/app.scss",
+    "isEntry": true
+  },
+  "resources/scss/themes/light.scss": {
+    "file": "assets/light.66ca8108.css",
+    "src": "resources/scss/themes/light.scss",
+    "isEntry": true
+  },
+  "resources/scss/themes/dark.scss": {
+    "file": "assets/dark.2ff2543b.css",
+    "src": "resources/scss/themes/dark.scss",
+    "isEntry": true
+  }
+}

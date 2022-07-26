@@ -27,7 +27,7 @@ Route::get("favorite", [ FavoriteController::class, "show" ])
     ->middleware(["auth", "auth.session"])
     ->name("favorite");
 
-Route::post("favorite/download", [ DownloadController::class, "download" ])
+Route::post("favorite/download", [ DownloadController::class, "downloadFavorites" ])
     ->middleware(["auth", "auth.session"])
     ->name("favorite.download");
 

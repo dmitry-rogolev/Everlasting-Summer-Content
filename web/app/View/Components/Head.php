@@ -51,13 +51,13 @@ class Head extends Component
         $this->author = config("view.author");
         $this->robots = config("view.robots");
         $this->favicon = url(config("view.favicon"));
-        $this->cssApp = url(config("view.css_app"));
-        $this->jsApp = url(config("view.js_app"));
+        $this->cssApp = config("view.css_app");
+        $this->jsApp = config("view.js_app");
         $this->bs_css = config("view.bs_css");
         $this->bs_js = config("view.bs_js");
         $this->jquery = config("view.jquery");
 
-        $this->themeLink = url(config("theme.directory") . "/" . $this->theme . ".css");
+        $this->themeLink = config("theme.directory") . "/" . $this->theme . config("view.css_extension");
     }
 
     /**

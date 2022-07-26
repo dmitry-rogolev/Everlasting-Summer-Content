@@ -64,13 +64,15 @@ return [
     // имя фавикона
     "favicon" => env("HEAD_FAVICON", "favicon.ico"), 
 
-    // Корневая папка для CSS (относительно public/)
-    "css_directory" => env("HEAD_CSS_DIRECTORY", "css"), 
+    "css_extension" => env("HEAD_CSS_EXTENSION", ".scss"), 
+
+    // Корневая папка для CSS (относительно resources/)
+    "css_directory" => env("HEAD_CSS_DIRECTORY", "scss"), 
 
     // Имя CSS всего приложения
-    "css_app" => env("HEAD_CSS_DIRECTORY", "css") . "/" . env("HEAD_CSS_APP", "app") . ".css", 
+    "css_app" => env("HEAD_CSS_DIRECTORY", "scss") . "/" . env("HEAD_CSS_APP", "app") . ".scss", 
 
-    // Корневая папка для JS (относительно public/)
+    // Корневая папка для JS (относительно resources/)
     "js_directory" => env("HEAD_JS_DIRECTORY", "js"), 
     
     // Имя JS всего приложения

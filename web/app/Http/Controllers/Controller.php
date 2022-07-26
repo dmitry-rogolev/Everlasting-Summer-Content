@@ -108,18 +108,18 @@ class Controller extends BaseController
 
     protected function theme(Request|string $requestOrTheme = null) : string
     {
-        if ($requestOrTheme instanceof Request && $requestOrTheme->has("theme") && Storage::disk("theme")->exists($requestOrTheme->get("theme") . ".css"))
+        if ($requestOrTheme instanceof Request && $requestOrTheme->has("theme") && Storage::disk("theme")->exists($requestOrTheme->get("theme") . config("view.css_extension")))
             session()->put("theme", $requestOrTheme->get("theme"));
         
-        else if (is_string($requestOrTheme) && Storage::disk("theme")->exists($requestOrTheme . ".css"))
+        else if (is_string($requestOrTheme) && Storage::disk("theme")->exists($requestOrTheme . config("view.css_extension")))
             session()->put("theme", $requestOrTheme);
 
-        else if (request()->has("theme") && Storage::disk("theme")->exists(request()->get("theme") . ".css"))
+        else if (request()->has("theme") && Storage::disk("theme")->exists(request()->get("theme") . config("view.css_extension")))
             session()->put("theme", request()->get("theme"));
         
         else if (!session()->has("theme"))
             session()->put("theme", config("theme.default"));
-
+        
         return session("theme");
     }
 
