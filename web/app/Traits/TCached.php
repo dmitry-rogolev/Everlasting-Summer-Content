@@ -2,42 +2,52 @@
 
 namespace App\Traits;
 
-use Closure;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Database\Eloquent\Model;
 
 trait TCached 
 {
     protected function cached() : void
     {
-        $cached = config("cache.cached");
-
-        foreach ($cached as $class => $toLocale)
-        {
-            if (is_string($class) && class_exists($class))
-            {
-                $class = new $class();
-                
-                if ($class instanceof Model && !Cache::has($class->getTable()))
-                {
-                    Cache::add($class->getTable(), 
-                        is_callable($toLocale) ? $this->getLocaleCollection($class::class, $toLocale) : $class::all(), 
-                        config("cache.keep"));
-                }
-            }
-        }
+        $this->cacheThemes();
+        $this->cacheInversionThemes();
+        $this->cacheLangs();
     }
 
-    private function getLocaleCollection(Model|string $model, callable $callback) : Collection
+    private function cacheThemes()
     {
-        $collection = new Collection();
+        if (Cache::has("themes")) return;
 
-        foreach ($model instanceof Model ? $model->all() : $model::all() as $model)
+        $themes = new Collection();
+
+        foreach (config("theme.themes") as $theme)
         {
-            $collection->put(...$callback($model));
+            $themes->put(__("theme." . $theme), $theme);
         }
 
-        return $collection;
+        Cache::add("themes", $themes, config("cache.keep"));
+    }
+
+    private function cacheInversionThemes()
+    {
+        if (Cache::has("inversion_themes")) return;
+
+        $inversions = new Collection(config("theme.inversion_themes"));
+
+        Cache::add("inversion_themes", $inversions, config("cache.keep"));
+    }
+    
+    private function cacheLangs()
+    {
+        if (Cache::has("langs")) return;
+        
+        $langs = new Collection();
+
+        foreach (config("lang.langs") as $lang)
+        {
+            $langs->put(__("lang." . $lang), $lang);
+        }
+
+        Cache::add("langs", $langs, config("cache.keep"));
     }
 }

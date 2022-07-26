@@ -49,11 +49,12 @@ class Controller extends BaseController
     ) : void
     {
         $this->setValues($title, $description, $keywords);
-
-        $this->cached();
         
         $this->lang = $this->lang($lang);
         $this->theme = $this->theme($theme);
+
+        $this->cached();
+
         $this->inversionThemes = cache("inversion_themes");
 
         $this->data = $this->data();

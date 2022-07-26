@@ -15,4 +15,18 @@ return [
     // Расширение темы
     "extension" => env("THEME_EXTENSION", ".theme.png"), 
 
+    "themes" => [
+
+        "light", 
+        "dark", 
+
+    ], 
+
+    "inversion_themes" => [
+
+        "light" => "dark", 
+        "dark" => "light", 
+
+    ], 
+
 ];
