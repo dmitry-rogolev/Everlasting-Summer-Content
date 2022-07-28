@@ -30,13 +30,3 @@ Route::get("favorite", [ FavoriteController::class, "show" ])
 Route::post("favorite/download", [ DownloadController::class, "downloadFavorites" ])
     ->middleware(["auth", "auth.session"])
     ->name("favorite.download");
-
-require_once __DIR__ . "/auth.php";
-
-require_once __DIR__ . "/user.php";
-
-require_once __DIR__ . "/content.php";
-
-require_once __DIR__ . "/folder.php";
-
-require_once __DIR__ . "/comment.php";

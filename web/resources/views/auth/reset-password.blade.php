@@ -26,7 +26,7 @@
                                     @csrf
                                 </x-element.form.group>
                                 <x-element.form.group>
-                                    <x-element.form.input type="hidden" name="token" value="{{ $request->route('token') }}" />
+                                    <x-element.form.input type="hidden" name="token" value="{{ request()->route('token') }}" />
                                 </x-element.form.group>
                                 <x-element.form.group>
                                     <x-element.form.input type="email" name="email" label="{{ __('auth.email') }}" placeholder="{{ __('auth.email') }}" :value="old('email')" required autocomplete="off" accesskey="e" tabindex="1" />
