@@ -52,7 +52,7 @@
                         </x-element.modal.header>
                         <x-element.modal.body>
                             <x-element.form.group>
-                                <x-element.form.custom.file name="files[]" label="{{ __('page.folder.add') }}" required multiple />
+                                <x-element.form.custom.file name="files[]" label="{{ __('page.folder.add') }}" required multiple accept="image/png, image/jpg, image/jpeg, image/gif" />
                             </x-element.form.group>
                             <x-element.form.group>
                                 <x-element.form.custom.checkbox name="visibility" label="{{ __('page.folder.public-text') }}" value="true" />

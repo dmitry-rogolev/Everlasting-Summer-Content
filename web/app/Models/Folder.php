@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\FolderFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,17 +45,20 @@ class Folder extends Model
         return $query->whereVisibility(true);
     }
 
+    public function scopeNotVisibles($query)
+    {
+        return $query->whereVisibility(false);
+    }
+
     public function remove() : ?bool
     {
         $path = $this->path;
         
-        Storage::disk("local")
+        Storage::disk(config("filesystems.remove"))
             ->move("public/contents/" . $this->user_id . "/" . $path, 
                    "deletes/contents/" . $this->user_id . "/" . $path);
 
-        $folders = $this->folders()->get();
-
-        foreach ($folders as $folder)
+        foreach ($this->folders()->get() as $folder)
         {
             $folder->remove();
         }
@@ -71,10 +75,10 @@ class Folder extends Model
     {
         $path = $this->path;
 
-        Storage::disk("local")
+        Storage::disk(config("filesystems.remove"))
             ->delete("deletes/contents/" . $this->user_id . "/" . $path);
 
-        $folders = $this->folders()->onlyTrashed()->get();
+        $folders = $this->folders()->withTrashed()->get();
 
         foreach ($folders as $folder)
         {
@@ -86,6 +90,11 @@ class Folder extends Model
             $content->forceRemove();
         }
 
-        return policy($this)->removeRootFolder($this->user, $this) ? $this->forceDelete() : true;
+        return $this->forceDelete();
+    }
+
+    public static function newFactory()
+    {
+        return FolderFactory::new();
     }
 }

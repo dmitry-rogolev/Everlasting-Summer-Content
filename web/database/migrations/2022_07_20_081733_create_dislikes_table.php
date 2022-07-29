@@ -20,7 +20,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Comment::class)->nullable();
             $table->foreignIdFor(Content::class)->nullable();
-            $table->foreignIdFor(User::class)->nullabel();
+            $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

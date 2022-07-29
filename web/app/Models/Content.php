@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\ContentFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -18,8 +19,8 @@ class Content extends Model
         "extension", 
         "type", 
         "path", 
-        "visibility",
         "tags",  
+        "visibility",
         "folder_id", 
         "user_id", 
     ];
@@ -39,13 +40,9 @@ class Content extends Model
         return $query->whereVisibility(true);
     }
 
-    public function toSearchableArray()
+    public function scopeNotVisibles($query)
     {
-        return [
-            "tags" => $this->tags, 
-            "path" => $this->path, 
-            "description" => $this->description, 
-        ];
+        return $query->whereVisibility(false);
     }
 
     public function likes()
@@ -84,7 +81,7 @@ class Content extends Model
 
         $path = $path ? $path . "/" : "";
 
-        Storage::disk("local")
+        Storage::disk(config("filesystems.remove"))
             ->move("public/contents/" . $this->user_id . "/" . $path . $this->name, 
                    "deletes/contents/" . $this->user_id . "/" . $path . $this->name);
 
@@ -108,14 +105,14 @@ class Content extends Model
 
         $path = $path ? $path . "/" : "";
 
-        Storage::disk("local")
+        Storage::disk(config("filesystems.remove"))
             ->delete("deletes/contents/" . $this->user_id . "/" . $path . $this->name);
 
-        $this->likes()->forceDelete();
-        $this->dislikes()->forceDelete();
-        $this->views()->forceDelete();
-        $this->downloads()->forceDelete();
-        $this->favorites()->forceDelete();
+        $this->likes()->withTrashed()->forceDelete();
+        $this->dislikes()->withTrashed()->forceDelete();
+        $this->views()->withTrashed()->forceDelete();
+        $this->downloads()->withTrashed()->forceDelete();
+        $this->favorites()->withTrashed()->forceDelete();
         
         foreach ($this->comments as $comment)
         {
@@ -123,5 +120,19 @@ class Content extends Model
         }
 
         return $this->forceDelete();
+    }
+
+    protected function toSearchableArray()
+    {
+        return [
+            "tags" => $this->tags, 
+            "path" => $this->path, 
+            "description" => $this->description, 
+        ];
+    }
+
+    protected static function newFactory()
+    {
+        return ContentFactory::new();
     }
 }

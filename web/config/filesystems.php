@@ -76,6 +76,18 @@ return [
             "throw" => false, 
         ], 
 
+        "delete" => [
+            "driver" => "local", 
+            "root" => storage_path("app/deletes"), 
+            "throw" => false, 
+        ], 
+
+        "tmp" => [
+            "driver" => "local", 
+            "root" => storage_path("app/tmp"), 
+            "throw" => false, 
+        ], 
+
     ],
 
     /*
@@ -92,5 +104,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+
+    "remove" => env("FILESYSTEM_DISK_REMOVE", "local"), 
 
 ];

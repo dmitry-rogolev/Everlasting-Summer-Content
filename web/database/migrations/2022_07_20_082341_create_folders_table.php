@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text("path")->collation("utf8mb4_bin")->nullable();
             $table->boolean("visibility")->nullable();
             $table->foreignIdFor(Folder::class)->nullable();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

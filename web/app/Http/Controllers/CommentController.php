@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Content;
-use App\Models\Dislike;
-use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

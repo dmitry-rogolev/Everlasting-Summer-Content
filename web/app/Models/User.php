@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -99,11 +100,6 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
         return $this->hasMany(Favorite::class);
     }
 
-    public function scopeVisibles($query)
-    {
-        return $query->whereVisibility(true);
-    }
-
     public function remove() : ?bool
     {
         if ($this->avatar) $this->avatar->remove();
@@ -121,8 +117,13 @@ class User extends Authenticatable implements ResetPassword/* , MustVerifyEmail 
 
         $this->folder()->first()->forceRemove();
 
-        $this->favorites()->forceDelete();
+        $this->favorites()->withTrashed()->forceDelete();
 
         return $this->forceDelete();
+    }
+
+    protected static function newFactory()
+    {
+        return UserFactory::new();
     }
 }

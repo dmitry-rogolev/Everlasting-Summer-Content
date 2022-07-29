@@ -26,7 +26,7 @@ class AvatarController extends Controller
             $old_avatar->name = $new_avatar->getClientOriginalName();
             $old_avatar->title = Str::of($new_avatar->getClientOriginalName())->beforeLast(".");
             $old_avatar->extension = $new_avatar->extension();
-            $old_avatar->type = $new_avatar->getClientMimeType();
+            $old_avatar->type = $new_avatar->getMimeType();
             $old_avatar->save();
         }
         else 

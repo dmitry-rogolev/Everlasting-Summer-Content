@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\CommentFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-    use HasFactory, SoftDeletes
-    {
-        SoftDeletes::forceDelete as parentForceDelete;
-    }
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         "comment", 
@@ -74,5 +72,10 @@ class Comment extends Model
         $this->dislikes()->forceDelete();
 
         return $this->forceDelete();
+    }
+
+    protected static function newFactory()
+    {
+        return CommentFactory::new();
     }
 }
